@@ -1,4 +1,4 @@
-/*
+                                       /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -22,8 +22,8 @@ public class Database {
     
     public Database(){
         try{
-//        Class.forName("com.mysql.jdbc.Driver"); 
-//        cn = DriverManager.getConnection(server,user,pass); 
+//        Class.forName("com.mysql.jdbc.Driver");
+//        cn = DriverManager.getConnection(server,user,pass);
             Class.forName("oracle.jdbc.driver.OracleDriver");
             cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","misofertas","misofertas");
         if (cn!=null){

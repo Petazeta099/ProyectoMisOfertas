@@ -42,6 +42,7 @@ public class vista_Admin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRADOR");
 
+        btnConsumidor.setBackground(new java.awt.Color(204, 204, 255));
         btnConsumidor.setText("Consumidores");
         btnConsumidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,6 +56,7 @@ public class vista_Admin extends javax.swing.JFrame {
         lblenunciao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblenunciao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btn_salir.setBackground(new java.awt.Color(204, 204, 255));
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +64,7 @@ public class vista_Admin extends javax.swing.JFrame {
             }
         });
 
+        btnEncargados.setBackground(new java.awt.Color(204, 204, 255));
         btnEncargados.setText("Encargados");
         btnEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +72,7 @@ public class vista_Admin extends javax.swing.JFrame {
             }
         });
 
+        btnProductos.setBackground(new java.awt.Color(204, 204, 255));
         btnProductos.setText("Productos");
         btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

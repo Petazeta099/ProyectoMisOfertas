@@ -95,6 +95,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnConsumidor">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Consumidores"/>
           </Properties>
           <Events>
@@ -116,6 +119,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_salir">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -124,6 +130,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEncargados">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Encargados"/>
           </Properties>
           <Events>
@@ -132,6 +141,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProductos">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Productos"/>
           </Properties>
           <Events>

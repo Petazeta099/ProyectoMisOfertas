@@ -63,8 +63,20 @@ public class Tabla_Consumidor {
                 fila[5] = cons.getEmail();
                 fila[6] = cons.getClave();
                 fila[7] = cons.getPuntaje();
-                fila[8] = cons.getActivo();
-                fila[9] = cons.getSuscrito();
+                String act = ""+cons.getActivo();
+                if(act.equals("1")){
+                    fila[8]="Si";
+                }else{
+                    fila[8]="No";
+                }
+                //fila[8] = cons.getActivo();
+                String sus = ""+cons.getSuscrito();
+                if(sus.equals("1")){
+                    fila[9]="Si";
+                }else{
+                    fila[9]="No";
+                }
+                //fila[9] = cons.getSuscrito();
                 fila[10] = cons.getComuna_id();
                 fila[11] = btn_modificar;
                 fila[12] = btn_eliminar;

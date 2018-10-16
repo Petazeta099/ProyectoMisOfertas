@@ -461,8 +461,22 @@ public class vista_Consumidores extends javax.swing.JFrame {
         String email = ""+tab_consumidores.getValueAt(clic_tabla, 5);
         String clave = ""+tab_consumidores.getValueAt(clic_tabla, 6);
         int puntaje = (int)tab_consumidores.getValueAt(clic_tabla, 7);
-        char activo = (char)tab_consumidores.getValueAt(clic_tabla, 8);
-        char suscrito = (char)tab_consumidores.getValueAt(clic_tabla, 9);
+        String activoStr = ""+tab_consumidores.getValueAt(clic_tabla, 8);
+        char activo;
+        if(activoStr.equals("Si")){
+            activo = '1';
+        }else{
+            activo = '0';
+        }
+       // char activo = (char)tab_consumidores.getValueAt(clic_tabla, 8);
+        String suscritoStr = ""+tab_consumidores.getValueAt(clic_tabla, 9);
+        char suscrito;
+        if(suscritoStr.equals("Si")){
+            suscrito = '1';
+        }else{
+            suscrito = '0';
+        }
+       // char suscrito = (char)tab_consumidores.getValueAt(clic_tabla, 9);
         int comuna_id = (int)tab_consumidores.getValueAt(clic_tabla, 10);
         
         txt_rut.setText(run);

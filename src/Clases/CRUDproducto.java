@@ -19,8 +19,11 @@ public class CRUDproducto {
     
     public ArrayList<Producto> Listar_Producto(){
         ArrayList<Producto> list = new ArrayList<Producto>();
+              //  ArrayList<Object> list2 = new ArrayList<Object>();
+
         Database cn = new Database();
-        String sql = "SELECT * FROM producto";
+        String sql = "select p.sku,p.nombre,p.descripcion,c.id,m.id,c.tipo,m.nombre from producto \n" +
+"p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN marca m ON m.id = p.marca_id";
         ResultSet lista = null;
         PreparedStatement ps = null;
         try{
@@ -33,7 +36,10 @@ public class CRUDproducto {
                 pro.setDescripcion(lista.getString(3));
                 pro.setCategoria_id(lista.getInt(4));
                 pro.setMarca_id(lista.getInt(5));
+                pro.setTipo_cat(lista.getString(6));
+                pro.setNombre_marca(lista.getString(7));
                 list.add(pro);
+               // list2.add(o);
             }
         }catch(SQLException ex){
             System.out.println(ex.getMessage());

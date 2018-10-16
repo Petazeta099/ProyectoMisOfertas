@@ -11,7 +11,10 @@ import Clases.Limpiar;
 import Clases.Producto;
 import Tablas.Tabla_Producto;
 import Tablas.Tabla_Producto;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,14 +31,19 @@ public class vista_Productos extends javax.swing.JFrame {
     CRUDproducto crud_pro;
     int clic_tabla = 0;
     
+    
+    
     /**
      * Creates new form listaProductos
      */
     public vista_Productos() {
         initComponents();
+        listaCategorias();
+        listaMarcas();
         tp.visualizar_Producto(tab_producto);
         //obtenerProductos();
-        activa_boton(true,false,false,true);
+        activa_boton(true,false,false,true); 
+       
     }
     
     public void agregar(){
@@ -45,8 +53,8 @@ public class vista_Productos extends javax.swing.JFrame {
         pro.setSku(txt_sku.getText());
         pro.setNombre(txt_nombre.getText());
         pro.setDescripcion(txt_descripcion.getText());
-        pro.setCategoria_id(Integer.parseInt(txt_categoria.getText()));
-        pro.setMarca_id(Integer.parseInt(txt_marca.getText()));
+        pro.setCategoria_id(txt_categoria.getSelectedIndex()+1);
+        pro.setMarca_id(txt_marca.getSelectedIndex()+1);
         
         crud_pro.Agregar_Producto(pro);
     }
@@ -58,8 +66,8 @@ public class vista_Productos extends javax.swing.JFrame {
         
         pro.setNombre(txt_nombre.getText());
         pro.setDescripcion(txt_descripcion.getText());
-        pro.setCategoria_id(Integer.parseInt(txt_categoria.getText()));
-        pro.setMarca_id(Integer.parseInt(txt_marca.getText()));
+        pro.setCategoria_id(txt_categoria.getSelectedIndex()+1);
+        pro.setMarca_id(txt_marca.getSelectedIndex()+1);
         pro.setSku(txt_sku.getText());
         
         crud_pro.Modificar_Producto(pro);
@@ -99,6 +107,68 @@ public class vista_Productos extends javax.swing.JFrame {
         }
     }
     
+    
+    public void listaCategorias(){
+         ArrayList<String> list = new ArrayList<String>();
+              //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+        Database cn = new Database();
+        String sql = "select tipo from categoria";
+        ResultSet lista = null;
+        PreparedStatement ps = null;
+        try{
+            ps = cn.getConnection().prepareStatement(sql);
+            lista = ps.executeQuery();
+            while(lista.next()){
+                list.add(lista.getString(1));
+                String n = lista.getString("tipo");
+                txt_categoria.addItem(lista.getString(1));
+               // list2.add(o);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            try{
+                ps.close();
+                lista.close();
+                cn.desconectar();
+            }catch(Exception ex){}
+        }       
+       
+    }
+    
+        public void listaMarcas(){
+         ArrayList<String> list = new ArrayList<String>();
+              //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+        Database cn = new Database();
+        String sql = "select nombre from marca";
+        ResultSet lista = null;
+        PreparedStatement ps = null;
+        try{
+            ps = cn.getConnection().prepareStatement(sql);
+            lista = ps.executeQuery();
+            while(lista.next()){
+                list.add(lista.getString(1));
+                String n = lista.getString("nombre");
+                txt_marca.addItem(lista.getString(1));
+               // list2.add(o);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            try{
+                ps.close();
+                lista.close();
+                cn.desconectar();
+            }catch(Exception ex){}
+        }       
+       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,7 +186,6 @@ public class vista_Productos extends javax.swing.JFrame {
         lbl_categoria = new javax.swing.JLabel();
         lbl_desc = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
-        txt_categoria = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
         txt_sku = new javax.swing.JTextField();
         lbl_sku = new javax.swing.JLabel();
@@ -125,7 +194,8 @@ public class vista_Productos extends javax.swing.JFrame {
         btn_eliminar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
         lbl_marca = new javax.swing.JLabel();
-        txt_marca = new javax.swing.JTextField();
+        txt_categoria = new javax.swing.JComboBox<>();
+        txt_marca = new javax.swing.JComboBox<>();
         btn_salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -232,9 +302,12 @@ public class vista_Productos extends javax.swing.JFrame {
                             .addComponent(lbl_marca))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_marca)
                             .addComponent(txt_descripcion)
-                            .addComponent(txt_categoria))))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -268,6 +341,8 @@ public class vista_Productos extends javax.swing.JFrame {
                     .addComponent(btn_limpiar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txt_categoria.getAccessibleContext().setAccessibleName("");
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -348,14 +423,14 @@ public class vista_Productos extends javax.swing.JFrame {
         String sku = ""+tab_producto.getValueAt(clic_tabla, 0);
         String nombre = ""+tab_producto.getValueAt(clic_tabla, 1);
         String descripcion = ""+tab_producto.getValueAt(clic_tabla, 2);
-        int categoria = (int)tab_producto.getValueAt(clic_tabla, 3);
-        int marca = (int)tab_producto.getValueAt(clic_tabla, 4);
+        String categoria = ""+txt_categoria.getSelectedIndex()+1;
+        String marca = ""+txt_marca.getSelectedIndex()+1;
         
         txt_sku.setText(sku);
         txt_nombre.setText(nombre);
         txt_descripcion.setText(descripcion);
-        txt_categoria.setText(String.valueOf(categoria));
-        txt_marca.setText(String.valueOf(marca));
+        txt_categoria.getSelectedIndex();
+        txt_marca.getSelectedIndex();
         
         int column = tab_producto.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY()/tab_producto.getRowHeight();
@@ -406,9 +481,9 @@ public class vista_Productos extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_sku;
     private javax.swing.JPanel panel;
     private javax.swing.JTable tab_producto;
-    private javax.swing.JTextField txt_categoria;
+    private javax.swing.JComboBox<String> txt_categoria;
     private javax.swing.JTextField txt_descripcion;
-    private javax.swing.JTextField txt_marca;
+    private javax.swing.JComboBox<String> txt_marca;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_sku;
     // End of variables declaration//GEN-END:variables

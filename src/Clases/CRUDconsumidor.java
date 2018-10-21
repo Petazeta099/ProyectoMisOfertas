@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class CRUDconsumidor {
     
     public ArrayList<Consumidor> Listar_Consumidor(){
-        ArrayList<Consumidor> list = new ArrayList<Consumidor>();
+       ArrayList<Consumidor> list = new ArrayList<Consumidor>();
         Database cn = new Database();
-        String sql = "SELECT * FROM consumidor";
+        String sql = "select * from consumidor c INNER JOIN comuna q ON c.comuna_id = q.id";
         ResultSet lista = null;
         PreparedStatement ps = null;
         try{
@@ -39,6 +40,7 @@ public class CRUDconsumidor {
                 cons.setActivo(lista.getString(9).charAt(0));
                 cons.setSuscrito(lista.getString(10).charAt(0));
                 cons.setComuna_id(lista.getInt(11));
+                cons.setNombreComuna(lista.getString(13)); //se obtiene el nombre de la comuna a traves del join, posicion 13
                 list.add(cons);
             }
         }catch(SQLException ex){
@@ -75,8 +77,10 @@ public class CRUDconsumidor {
             ps.setString(10, String.valueOf(cons.getSuscrito()));
             ps.setInt(11, cons.getComuna_id());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El consumidor se a agregado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Usuario ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }finally{
@@ -90,7 +94,7 @@ public class CRUDconsumidor {
 
 /*Metodo Modificar*/
     public void Modificar_Consumidor(Consumidor cons){
-        Database cn = new Database();
+       Database cn = new Database();
         String sql = "UPDATE consumidor SET p_nombre = ?, s_nombre = ?, apellido_p = ?, apellido_m = ?, email = ?, clave = ?, puntaje = ?, activo = ?, suscrito = ?, comuna_id = ? WHERE run = ?";
         PreparedStatement ps = null;
         try{
@@ -107,6 +111,7 @@ public class CRUDconsumidor {
             ps.setInt(10, cons.getComuna_id());
             ps.setString(11, cons.getRun());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El consumidor se a modificado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){
@@ -129,6 +134,7 @@ public class CRUDconsumidor {
             ps = cn.getConnection().prepareStatement(sql);
             ps.setString(1, cons.getRun());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El consumidor se a eliminado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){
@@ -140,5 +146,7 @@ public class CRUDconsumidor {
             }catch(Exception ex){}
         }
     }
+    
+    
     
 }

@@ -5,8 +5,8 @@
  */
 package Tablas;
 
-import Clases.CRUDproducto;
-import Clases.Producto;
+import Clases.CRUDsucursal;
+import Clases.Sucursal;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -16,11 +16,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Raul
  */
-public class Tabla_Producto {
+public class Tabla_Sucursal {
     
-    CRUDproducto crud_pro = null;
+    CRUDsucursal crud_sc = null;
 
-    public void visualizar_Producto(JTable tabla){
+    public void visualizar_Sucursal(JTable tabla){
         
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(){
@@ -28,11 +28,11 @@ public class Tabla_Producto {
                 return false;
             }
         };    
-        dt.addColumn("SKU");
+        dt.addColumn("ID");
         dt.addColumn("NOMBRE");
-        dt.addColumn("DESCRIPCION");
-        dt.addColumn("CATEGORIA");
-        dt.addColumn("MARCA");
+        dt.addColumn("DIRECCION");
+        dt.addColumn("COMUNA");
+        dt.addColumn("RETAIL");
         dt.addColumn("MODIFICAR");
         dt.addColumn("ELIMINAR");
         
@@ -41,22 +41,21 @@ public class Tabla_Producto {
         JButton btn_eliminar = new JButton("ELIMINAR");
         btn_eliminar.setName("eli");
 
-        crud_pro = new CRUDproducto();
-        Producto pro = new Producto();
-        ArrayList<Producto> list = crud_pro.Listar_Producto();
+        crud_sc = new CRUDsucursal();
+        Sucursal sc = new Sucursal();
+        ArrayList<Sucursal> list = crud_sc.Listar_Sucursal();
 
-        
         if(list.size() > 0){
             for(int i=0; i<list.size(); i++){
-              
                 Object fila[] = new Object[7];
-                pro = list.get(i);
-                fila[0] = pro.getSku();
-                fila[1] = pro.getNombre();
-                fila[2] = pro.getDescripcion();
-                fila[3] = pro.getTipo_cat();
-                fila[4] = pro.getNombre_marca();
-                //System.out.println(obtenerCategoria(i));
+                sc = list.get(i);
+                fila[0] = sc.getId();
+                fila[1] = sc.getNombre();
+                fila[2] = sc.getDireccion();
+                fila[3] = sc.getNombreComuna();
+                fila[4] = sc.getNombreRetail();
+                //fila[3] = sc.getComuna_id();
+                //fila[4] = sc.getRetail_rut();
                 fila[5] = btn_modificar;
                 fila[6] = btn_eliminar;
                 dt.addRow(fila);

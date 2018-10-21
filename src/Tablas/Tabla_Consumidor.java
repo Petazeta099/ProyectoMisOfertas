@@ -53,7 +53,7 @@ public class Tabla_Consumidor {
 
         if(list.size() > 0){
             for(int i=0; i<list.size(); i++){
-                Object fila[] = new Object[13];
+               Object fila[] = new Object[13];
                 cons = list.get(i);
                 fila[0] = cons.getRun();
                 fila[1] = cons.getP_nombre();
@@ -77,7 +77,8 @@ public class Tabla_Consumidor {
                     fila[9]="No";
                 }
                 //fila[9] = cons.getSuscrito();
-                fila[10] = cons.getComuna_id();
+                //fila[10] = cons.getComuna_id();
+                fila[10] = cons.getNombreComuna();   //solicita el nombre de la comuna
                 fila[11] = btn_modificar;
                 fila[12] = btn_eliminar;
                 dt.addRow(fila);

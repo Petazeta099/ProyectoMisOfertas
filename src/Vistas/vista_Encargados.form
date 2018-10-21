@@ -99,7 +99,11 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txt_nombre2" min="-2" pref="134" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txt_rut" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="txt_rut" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="cmbDigitoRut" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -120,9 +124,9 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="txt_password" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txt_apellido1" max="32767" attributes="0"/>
+                                      <Component id="txt_password" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -150,7 +154,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbl_rut" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_rut" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="txt_rut" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbDigitoRut" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -171,9 +178,9 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbl_clave" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_password" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbl_activo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="chk_activo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_password" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
@@ -227,15 +234,20 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_apellido2">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_password">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellido2KeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_nombre1">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_nombre1ActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombre1KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_rut">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_rutKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_rut">
           <Properties>
@@ -295,8 +307,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_nombre2">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombre2KeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_apellido1">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellido1KeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chk_activo">
           <Properties>
@@ -332,6 +350,29 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_rutRetail">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbDigitoRut">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txt_password">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_passwordKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

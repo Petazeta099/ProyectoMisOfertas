@@ -8,7 +8,18 @@ package Vistas;
 import Conexion.Database;
 import Clases.*;
 import Tablas.*;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,19 +41,21 @@ public class vista_Consumidores extends javax.swing.JFrame {
      */
     public vista_Consumidores() {
         initComponents();
+        txt_password.setText("");
+        cargarDatosComborut();
         tc.visualizar_Consumidor(tab_consumidores);
-        
         Comuna comuna = new Comuna();
         comuna.mostrarComuna(cb_comuna);
-        
-        activa_boton(true,false,false,true);
+        activa_boton(true,false,false,true,true);
     }
     
-    public void agregar(){
+    public void agregar() throws Exception{
+        
+        try{
         crud_cons = new CRUDconsumidor();
         Consumidor cons = new Consumidor();
         
-        cons.setRun(txt_rut.getText());
+        cons.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
         cons.setP_nombre(txt_nombre1.getText());
         cons.setS_nombre(txt_nombre2.getText());
         cons.setApellido_p(txt_apellido1.getText());
@@ -63,10 +76,29 @@ public class vista_Consumidores extends javax.swing.JFrame {
         cons.setComuna_id(Integer.parseInt(lbl_comuna_id.getText()));
         
         crud_cons.Agregar_Consumidor(cons);
+        JOptionPane.showMessageDialog(null, "El usuario "+txt_nombre1.getText()+" "+txt_apellido1.getText()+" se a agregado correctamente");
+        throw new SQLIntegrityConstraintViolationException("Consumidor con tal RUT ya existe!");
+        } catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("" + e);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
     
     //Metodo eliminar producto
     public void modificar(){
+        
+        int errores=0;
+        if(txt_rut.getText().equals("") || txt_puntaje.getText().equals("") || txt_nombre1.getText().equals("")
+                || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") || txt_apellido2.getText().equals("")
+                || txt_email.getText().equals("") || txt_password.getText().equals("")){
+            errores = errores+1;
+        }
+        
+        if(errores>=1){
+        JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
         crud_cons = new CRUDconsumidor();
         Consumidor cons = new Consumidor();
         
@@ -88,9 +120,14 @@ public class vista_Consumidores extends javax.swing.JFrame {
             cons.setSuscrito('0');
         }
         cons.setComuna_id(Integer.parseInt(lbl_comuna_id.getText()));
-        cons.setRun(txt_rut.getText());
-        
+        cons.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
         crud_cons.Modificar_Consumidor(cons);
+        txt_rut.setEnabled(true);
+        JOptionPane.showMessageDialog(null, "El usuario "+txt_nombre1.getText()+" "+txt_apellido1.getText()+" se a modificado correctamente");
+        }
+        
+        
+        
     }
     
     //Metodo eliminar producto
@@ -98,19 +135,62 @@ public class vista_Consumidores extends javax.swing.JFrame {
         crud_cons = new CRUDconsumidor();
         Consumidor cons = new Consumidor();
         
-        cons.setRun(txt_rut.getText());
+        cons.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
         
         crud_cons.Eliminar_Consumidor(cons);
+        JOptionPane.showMessageDialog(null, "El usuario "+txt_nombre1.getText()+" "+txt_apellido1.getText()+" se a eliminado correctamente");
     }
     
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4,boolean a5){
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
         txt_rut.setEnabled(a4);
+        cmbDigitoRut.setEnabled(a5);
+        
+        
     }
     
 
+    public int obtenerIdComunaConsumidor(String nombreComuna){
+         ArrayList<String> list = new ArrayList<String>();
+         int[] numCom = new int[1];
+              //  ArrayList<Object> list2 = new ArrayList<Object>();
+        
+        Database cn = new Database();
+        String sql = "select id from comuna where nombre like '" + nombreComuna + "'"; //scar numero
+        ResultSet lista = null;
+        PreparedStatement ps = null;
+        int idCom=0;
+        try{
+            ps = cn.getConnection().prepareStatement(sql);
+            lista = ps.executeQuery();
+            while(lista.next()){
+                numCom[0]=lista.getInt(1);
+                idCom = numCom[0];
+                list.add(lista.getString(1));
+                //idCom = lista.getInt(1);  //entrega el id
+                // System.out.println(idCom);
+                //cb_comuna.setSelectedIndex(idCom);
+               // list2.add(o);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            try{
+                ps.close();
+                lista.close();
+                cn.desconectar();
+            }catch(Exception ex){}
+        }       
+        System.out.println(idCom);
+       return idCom;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,7 +207,6 @@ public class vista_Consumidores extends javax.swing.JFrame {
         lbl_clave = new javax.swing.JLabel();
         lbl_apellidos = new javax.swing.JLabel();
         txt_apellido2 = new javax.swing.JTextField();
-        txt_password = new javax.swing.JTextField();
         txt_nombre1 = new javax.swing.JTextField();
         txt_rut = new javax.swing.JTextField();
         lbl_rut = new javax.swing.JLabel();
@@ -148,7 +227,9 @@ public class vista_Consumidores extends javax.swing.JFrame {
         txt_email = new javax.swing.JTextField();
         lbl_puntaje = new javax.swing.JLabel();
         txt_puntaje = new javax.swing.JTextField();
+        cmbDigitoRut = new javax.swing.JComboBox<>();
         btn_salir = new javax.swing.JButton();
+        txt_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consumidores");
@@ -185,9 +266,26 @@ public class vista_Consumidores extends javax.swing.JFrame {
         lbl_apellidos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_apellidos.setText("Apellidos:");
 
+        txt_apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellido2KeyTyped(evt);
+            }
+        });
+
         txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombre1ActionPerformed(evt);
+            }
+        });
+        txt_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombre1KeyTyped(evt);
+            }
+        });
+
+        txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rutKeyTyped(evt);
             }
         });
 
@@ -224,6 +322,18 @@ public class vista_Consumidores extends javax.swing.JFrame {
         lbl_activo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_activo.setText("Activo:");
 
+        txt_nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombre2KeyTyped(evt);
+            }
+        });
+
+        txt_apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellido1KeyTyped(evt);
+            }
+        });
+
         chk_activo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         chk_activo.setSelected(true);
         chk_activo.setText("SI/NO");
@@ -257,8 +367,41 @@ public class vista_Consumidores extends javax.swing.JFrame {
         lbl_email.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_email.setText("Email:");
 
+        txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_emailFocusLost(evt);
+            }
+        });
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
+            }
+        });
+
         lbl_puntaje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_puntaje.setText("Puntaje:");
+
+        txt_puntaje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_puntajeKeyTyped(evt);
+            }
+        });
+
+        cmbDigitoRut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+
+        txt_password.setText("jPasswordField1");
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -268,65 +411,75 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_limpiar))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_rut)
-                            .addComponent(lbl_nombres))
-                        .addGap(10, 10, 10)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txt_nombre1))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(lbl_puntaje)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_rut)
+                                    .addComponent(lbl_nombres))
+                                .addGap(10, 10, 10)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txt_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(lbl_puntaje)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txt_puntaje, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_nombre2))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_apellidos)
+                                    .addComponent(lbl_email))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_puntaje))
-                            .addComponent(txt_nombre2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_clave)
-                            .addComponent(lbl_comuna))
-                        .addGap(15, 15, 15)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_password)
-                            .addComponent(cb_comuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                                .addComponent(lbl_comuna_id)
+                                                .addGap(14, 14, 14))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                                .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txt_email)
+                                    .addComponent(txt_password))))
+                        .addGap(415, 415, 415))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(btn_agregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_modificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_eliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_limpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_salir))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_clave)
+                                    .addComponent(lbl_comuna))
+                                .addGap(15, 15, 15)
+                                .addComponent(cb_comuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(lbl_activo)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(chk_activo))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(lbl_suscrito)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chk_suscrito))))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_apellidos)
-                            .addComponent(lbl_email))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lbl_comuna_id)
-                                .addGap(14, 14, 14))
-                            .addComponent(txt_email)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(txt_apellido1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(chk_suscrito)))
+                        .addGap(291, 291, 291))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,18 +490,18 @@ public class vista_Consumidores extends javax.swing.JFrame {
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbl_puntaje)
-                        .addComponent(txt_puntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_puntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_nombres)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_nombres)
-                        .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_nombre1))
+                        .addComponent(txt_nombre1)
+                        .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_apellidos)
-                        .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_apellidos)
+                    .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -357,33 +510,25 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_clave)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_activo)
-                    .addComponent(chk_activo))
+                    .addComponent(chk_activo)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_comuna)
-                        .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_suscrito)
-                        .addComponent(chk_suscrito)))
-                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_comuna)
+                    .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_suscrito)
+                    .addComponent(chk_suscrito))
+                .addGap(19, 19, 19)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_agregar)
                     .addComponent(btn_modificar)
                     .addComponent(btn_eliminar)
-                    .addComponent(btn_limpiar))
+                    .addComponent(btn_limpiar)
+                    .addComponent(btn_salir))
                 .addGap(20, 20, 20)
                 .addComponent(lbl_comuna_id))
         );
-
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -395,8 +540,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_salir)))
+                        .addGap(71, 71, 71)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -405,10 +549,8 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_salir))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -416,10 +558,28 @@ public class vista_Consumidores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        agregar();
+        
+        int errores=0;
+        if(txt_rut.getText().equals("") || txt_puntaje.getText().equals("") || txt_nombre1.getText().equals("")
+                || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") || txt_apellido2.getText().equals("")
+                || txt_email.getText().equals("") || txt_password.getText().equals("")){
+            errores = errores+1;
+        }
+        
+        if(errores>=1){
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                agregar();
+            } catch (Exception ex) {
+                Logger.getLogger(vista_Consumidores.class.getName()).log(Level.SEVERE, null, ex);
+            }
         tc.visualizar_Consumidor(tab_consumidores);
-        activa_boton(true,false,false,true);
+        activa_boton(true,false,false,true,true);
         lim.limpiar_texto(panel);
+        }
+        
+        
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre1ActionPerformed
@@ -429,17 +589,17 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         modificar();
         tc.visualizar_Consumidor(tab_consumidores);
-        activa_boton(true,false,false,false);
+        activa_boton(true,false,false,true,false);
         lim.limpiar_texto(panel);
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-
+        
         int s = JOptionPane.showConfirmDialog(null, "Eliminar consumidor","Si/no",JOptionPane.YES_NO_OPTION);
         if(s == 0){
             eliminar();
             tc.visualizar_Consumidor(tab_consumidores);
-            activa_boton(true,false,false,true);
+            activa_boton(true,false,false,true,false);
             lim.limpiar_texto(panel);
         }
 
@@ -447,7 +607,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true);
+        activa_boton(true,false,false,true,true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void tab_consumidoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_consumidoresMouseClicked
@@ -477,9 +637,18 @@ public class vista_Consumidores extends javax.swing.JFrame {
             suscrito = '0';
         }
        // char suscrito = (char)tab_consumidores.getValueAt(clic_tabla, 9);
-        int comuna_id = (int)tab_consumidores.getValueAt(clic_tabla, 10);
+        String comuna_id = ""+tab_consumidores.getValueAt(clic_tabla, 10);
         
-        txt_rut.setText(run);
+        System.out.println(comuna_id);
+        String rutAcortado = run.substring( 0, run.indexOf("-"));
+        String digitoRut = run.substring(run.length() - 1);
+        
+        cmbDigitoRut.setSelectedItem(digitoRut);
+        
+       // int comuna = comuna_id;
+        
+        txt_rut.setText(rutAcortado);
+        cmbDigitoRut.setSelectedItem(digitoRut);
         txt_nombre1.setText(p_nombre);
         txt_nombre2.setText(s_nombre);
         txt_apellido1.setText(apellido_p);
@@ -498,7 +667,10 @@ public class vista_Consumidores extends javax.swing.JFrame {
         }else {
             chk_suscrito.setSelected(false);
         }
-        cb_comuna.setSelectedIndex(1);
+        
+        
+        ////////COMBOBOX REFERENCIADO
+        cb_comuna.setSelectedIndex(obtenerIdComunaConsumidor(comuna_id)-1);
         
         int column = tab_consumidores.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY()/tab_consumidores.getRowHeight();
@@ -512,17 +684,17 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 if(boton.getName().equals("mod")){
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false);
+                    activa_boton(true,true,false,false,false);
                 }
                 if(boton.getName().equals("eli")){
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,true);
+                    activa_boton(true,false,true,false,false);
                 }
             }
-
         }
+        
     }//GEN-LAST:event_tab_consumidoresMouseClicked
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
@@ -543,6 +715,124 @@ public class vista_Consumidores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chk_suscritoActionPerformed
 
+    private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
+        // TODO add your handling code here:
+        int maximorut=8;
+           int errores=0;
+           char validarCaracter=evt.getKeyChar();
+           ArrayList<Character> lista=retornarListaCaracteres();
+           
+           for (int i = 0; i < lista.size(); i++) {
+               char caracter = lista.get(i);
+               if(validarCaracter==caracter ){
+               errores= errores+1;
+               }
+           }
+           
+           if(Character.isLetter(validarCaracter) || txt_rut.getText().length()>=maximorut || errores > 0 ){
+               evt.consume();
+           }
+    }//GEN-LAST:event_txt_rutKeyTyped
+
+    private void txt_puntajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_puntajeKeyTyped
+        // TODO add your handling code here:
+        int maximoPuntaje = 9;
+        ArrayList<Character> lista=retornarListaCaracteres();
+        int errores=0;
+        char validarCaracter=evt.getKeyChar();
+        for (int i = 0; i < lista.size(); i++) {
+               char caracter = lista.get(i);
+               if(validarCaracter==caracter ){
+               errores= errores+1;
+               }
+           }
+        
+        if(Character.isLetter(validarCaracter) || errores > 0 || txt_puntaje.getText().length()>=maximoPuntaje){
+            evt.consume();
+        }
+        
+        
+    }//GEN-LAST:event_txt_puntajeKeyTyped
+
+    private void txt_nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre1KeyTyped
+        // TODO add your handling code here:
+        int maximoCaracter = 15;
+        char validarCaracter=evt.getKeyChar();
+        if((validarCaracter<'a' || validarCaracter>'z') && (validarCaracter<'A' || validarCaracter>'Z') || txt_nombre1.getText().length()>=maximoCaracter ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombre1KeyTyped
+
+    private void txt_nombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre2KeyTyped
+        int maximoCaracter = 15;
+        char validarCaracter=evt.getKeyChar();
+        if((validarCaracter<'a' || validarCaracter>'z') && (validarCaracter<'A' || validarCaracter>'Z') || txt_nombre2.getText().length()>=maximoCaracter ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombre2KeyTyped
+
+    private void txt_apellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellido1KeyTyped
+        // TODO add your handling code here:
+        int maximoCaracter = 15;
+        char validarCaracter=evt.getKeyChar();
+        if((validarCaracter<'a' || validarCaracter>'z') && (validarCaracter<'A' || validarCaracter>'Z') || txt_apellido1.getText().length()>=maximoCaracter ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_apellido1KeyTyped
+
+    private void txt_apellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellido2KeyTyped
+        // TODO add your handling code here:
+        int maximoCaracter = 15;
+        char validarCaracter=evt.getKeyChar();
+        if((validarCaracter<'a' || validarCaracter>'z') && (validarCaracter<'A' || validarCaracter>'Z') || txt_apellido2.getText().length()>=maximoCaracter ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_apellido2KeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        int maximoCaracter = 30;
+        char validarCaracter=evt.getKeyChar();
+        if(txt_email.getText().length()>=maximoCaracter ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void txt_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_emailFocusLost
+        // TODO add your handling code here:
+        if(isEmail(txt_email.getText())){
+        txt_email.setForeground(Color.black);
+        }else{
+        txt_email.setForeground(Color.red);
+        JOptionPane.showMessageDialog(null, "Correo con formato incorrecto", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_emailFocusLost
+
+    private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
+        // TODO add your handling code here:
+        int maximoCaracter = 25;
+        char validarCaracter=evt.getKeyChar();
+        if(txt_password.getText().length()>=maximoCaracter ){
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Contraseña maximo de 25 caracteres", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_passwordKeyTyped
+
+    public boolean isEmail(String correo){
+        
+        Pattern pat =null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\\\\\+]+(\\.[\\w\\\\]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+        if(mat.find()){
+            return true;
+        }else{
+            return false;
+        }
+        
+        
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -557,6 +847,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private javax.swing.JComboBox<Comuna> cb_comuna;
     private javax.swing.JCheckBox chk_activo;
     private javax.swing.JCheckBox chk_suscrito;
+    private javax.swing.JComboBox<String> cmbDigitoRut;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_activo;
     private javax.swing.JLabel lbl_apellidos;
@@ -575,8 +866,54 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nombre1;
     private javax.swing.JTextField txt_nombre2;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_puntaje;
     private javax.swing.JTextField txt_rut;
     // End of variables declaration//GEN-END:variables
+
+public void cargarDatosComborut(){
+    String[] estaciones={"1","2","3","4","5","6","7","8","9","k"};
+    DefaultComboBoxModel cmb = new DefaultComboBoxModel(estaciones);    
+    cmbDigitoRut.setModel(cmb);
+    
+    }
+
+    private ArrayList<Character> retornarListaCaracteres(){
+        ArrayList<Character> validaciones = new ArrayList<Character>();
+           validaciones.add('.');
+           validaciones.add('/');
+           validaciones.add('|');
+           validaciones.add('=');
+           validaciones.add('?');
+           validaciones.add('¿');
+           validaciones.add('´');
+           validaciones.add('¨');
+           validaciones.add('{');
+           validaciones.add('}');
+           validaciones.add(';');
+           validaciones.add(':');
+           validaciones.add('_');
+           validaciones.add('^');
+           validaciones.add('-');
+           validaciones.add('!');
+           validaciones.add('"');
+           validaciones.add('#');
+           validaciones.add('$');
+           validaciones.add('%');
+           validaciones.add('&');
+           validaciones.add('(');
+           validaciones.add(')');
+           validaciones.add('¡');
+           validaciones.add(']');
+           validaciones.add('*');
+           validaciones.add('[');
+           validaciones.add(',');
+           validaciones.add('°');
+           
+        return  validaciones;
+    }
+    
+
+    
 }
+

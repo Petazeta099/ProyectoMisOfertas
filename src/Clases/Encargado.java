@@ -19,6 +19,7 @@ public class Encargado {
     String clave;
     char activo;
     String retail_rut;
+    String nombre_retail;
     
 public void Encargado() {}
 
@@ -72,5 +73,12 @@ public void Encargado() {}
     public void setRetail_rut(String retail_rut) {
         this.retail_rut = retail_rut;
     }
-    
+ 
+    public String getNombre_retail() {
+        return nombre_retail;
+    }
+
+    public void setNombre_retail(String nombre_retail) {
+        this.nombre_retail = nombre_retail;
+    }   
 }

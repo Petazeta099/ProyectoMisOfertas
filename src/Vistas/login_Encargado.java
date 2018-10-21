@@ -7,6 +7,8 @@ package Vistas;
 
 import Conexion.Database;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Raul
  */
 public class login_Encargado extends javax.swing.JFrame {
-
+    static String rut_encargado;
     static home home = new home();
     static vista_crearOferta oferta = new vista_crearOferta();
     /**
@@ -22,6 +24,7 @@ public class login_Encargado extends javax.swing.JFrame {
      */
     public login_Encargado() {
         initComponents();
+        cargarDatosComborut();
     }
 
     /**
@@ -33,12 +36,19 @@ public class login_Encargado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtrut = new javax.swing.JTextField();
         btningresar = new javax.swing.JButton();
         lblenunciao = new javax.swing.JLabel();
         txtpass = new javax.swing.JPasswordField();
         btn_volver = new javax.swing.JButton();
+        lblRutEncargado = new javax.swing.JLabel();
+        lblGuionRut = new javax.swing.JLabel();
+        cmbDigitoRut = new javax.swing.JComboBox<>();
+        lbPass = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de sesion: ENCARGADO");
@@ -47,6 +57,11 @@ public class login_Encargado extends javax.swing.JFrame {
         txtrut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtrutActionPerformed(evt);
+            }
+        });
+        txtrut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrutKeyTyped(evt);
             }
         });
 
@@ -60,6 +75,12 @@ public class login_Encargado extends javax.swing.JFrame {
         lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         lblenunciao.setText("ENCARGADO");
 
+        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpassKeyTyped(evt);
+            }
+        });
+
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,41 +88,64 @@ public class login_Encargado extends javax.swing.JFrame {
             }
         });
 
+        lblRutEncargado.setText("Ingrese Rut:");
+
+        lblGuionRut.setText("-");
+
+        cmbDigitoRut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lbPass.setText("Contraseña");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 84, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtrut, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(txtpass))
-                .addGap(70, 70, 70))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btningresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btningresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 84, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbPass)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblRutEncargado)
+                        .addComponent(txtpass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtrut, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblGuionRut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(txtrut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblRutEncargado)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtrut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblGuionRut)
+                    .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbPass)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btningresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_volver)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,10 +175,20 @@ public class login_Encargado extends javax.swing.JFrame {
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
 
-        try {
+        String rut = txtrut.getText()+"-"+cmbDigitoRut.getSelectedItem();
+        rut_encargado = rut;
+        String clave = txtpass.getText();
+        
+        if(txtrut.getText().equals("") && clave.equals("")){
+            JOptionPane.showMessageDialog(null, "Ingrese Credenciales correctas", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else if(txtrut.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Ingrese Rut porfavor", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else if(clave.equals("")){
+            JOptionPane.showMessageDialog(null, "Ingrese Contraseña porfavor", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
 
-            String rut = txtrut.getText();
-            String clave = txtpass.getText();
+            
             int coincidencia = 0;
 
             ResultSet lista = Database.crearConsulta("SELECT * FROM encargado WHERE run='" + rut + "' and clave='" + clave + "'");
@@ -147,12 +201,16 @@ public class login_Encargado extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encuentra usuario", "Aviso", JOptionPane.ERROR_MESSAGE);
             } else if (coincidencia >= 1) {
                 JOptionPane.showMessageDialog(null, "Login exitoso");
-                this.dispose();
+                home.dispose();
                 oferta.setVisible(true);
+                this.dispose();
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+        }
+        
+        
 
     }//GEN-LAST:event_btningresarActionPerformed
 
@@ -161,6 +219,35 @@ public class login_Encargado extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_volverActionPerformed
 
+    private void txtrutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyTyped
+        // TODO add your handling code here:
+        int maximorut=8;
+           int errores=0;
+           char validarCaracter=evt.getKeyChar();
+           ArrayList<Character> lista=retornarListaCaracteres();
+           
+           for (int i = 0; i < lista.size(); i++) {
+               char caracter = lista.get(i);
+               if(validarCaracter==caracter ){
+               errores= errores+1;
+               }
+           }
+           
+           if(Character.isLetter(validarCaracter) || txtrut.getText().length()>=maximorut || errores > 0 ){
+               evt.consume();
+           }
+    }//GEN-LAST:event_txtrutKeyTyped
+
+    private void txtpassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpassKeyTyped
+        // TODO add your handling code here:
+        
+        int maximorut=20;
+        
+        if(txtpass.getText().length()>=maximorut){
+        evt.consume();
+        }
+    }//GEN-LAST:event_txtpassKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -168,9 +255,59 @@ public class login_Encargado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_volver;
     private javax.swing.JButton btningresar;
+    private javax.swing.JComboBox<String> cmbDigitoRut;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbPass;
+    private javax.swing.JLabel lblGuionRut;
+    private javax.swing.JLabel lblRutEncargado;
     private javax.swing.JLabel lblenunciao;
     private javax.swing.JPasswordField txtpass;
     private javax.swing.JTextField txtrut;
     // End of variables declaration//GEN-END:variables
+    private ArrayList<Character> retornarListaCaracteres(){
+        ArrayList<Character> validaciones = new ArrayList<Character>();
+           validaciones.add('.');
+           validaciones.add('/');
+           validaciones.add('|');
+           validaciones.add('=');
+           validaciones.add('?');
+           validaciones.add('¿');
+           validaciones.add('´');
+           validaciones.add('¨');
+           validaciones.add('{');
+           validaciones.add('}');
+           validaciones.add(';');
+           validaciones.add(':');
+           validaciones.add('_');
+           validaciones.add('^');
+           validaciones.add('-');
+           validaciones.add('!');
+           validaciones.add('"');
+           validaciones.add('#');
+           validaciones.add('$');
+           validaciones.add('%');
+           validaciones.add('&');
+           validaciones.add('(');
+           validaciones.add(')');
+           validaciones.add('¡');
+           validaciones.add(']');
+           validaciones.add('*');
+           validaciones.add('[');
+           validaciones.add(',');
+           validaciones.add('°');
+        return  validaciones;
+    }
+    
+    public void cargarDatosComborut(){
+    String[] estaciones={"1","2","3","4","5","6","7","8","9","k"};
+    DefaultComboBoxModel cmb = new DefaultComboBoxModel(estaciones);    
+    cmbDigitoRut.setModel(cmb);
+    
+    }
+
+
+
 }
+
+

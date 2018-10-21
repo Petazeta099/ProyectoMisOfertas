@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,7 @@ public class CRUDencargado {
     public ArrayList<Encargado> Listar_Encargado(){
         ArrayList<Encargado> list = new ArrayList<Encargado>();
         Database cn = new Database();
-        String sql = "SELECT * FROM encargado";
+        String sql = "SELECT * FROM encargado e INNER JOIN retail r ON e.retail_rut = r.rut";
         ResultSet lista = null;
         PreparedStatement ps = null;
         try{
@@ -36,6 +37,7 @@ public class CRUDencargado {
                 enc.setClave(lista.getString(6));
                 enc.setActivo(lista.getString(7).charAt(0));
                 enc.setRetail_rut(lista.getString(8));
+                enc.setNombre_retail(lista.getString(10));
                 list.add(enc);
             }
         }catch(SQLException ex){
@@ -69,8 +71,10 @@ public class CRUDencargado {
             ps.setString(7, String.valueOf(enc.getActivo()));
             ps.setString(8, enc.getRetail_rut());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El encargado se a agregado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Usuario ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }finally{
@@ -98,8 +102,10 @@ public class CRUDencargado {
             ps.setString(7, enc.getRetail_rut());
             ps.setString(8, enc.getRun());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El encargado se a modificado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Usuario ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }finally{
@@ -120,6 +126,7 @@ public class CRUDencargado {
             ps = cn.getConnection().prepareStatement(sql);
             ps.setString(1, enc.getRun());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El encargado se a eliminado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){

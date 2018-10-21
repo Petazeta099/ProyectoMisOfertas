@@ -38,11 +38,12 @@ public class vista_Admin extends javax.swing.JFrame {
         btn_salir = new javax.swing.JButton();
         btnEncargados = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
+        btnEmpresasRetail = new javax.swing.JButton();
+        btnEmpresasSucursal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRADOR");
 
-        btnConsumidor.setBackground(new java.awt.Color(204, 204, 255));
         btnConsumidor.setText("Consumidores");
         btnConsumidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +57,6 @@ public class vista_Admin extends javax.swing.JFrame {
         lblenunciao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblenunciao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        btn_salir.setBackground(new java.awt.Color(204, 204, 255));
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,7 +64,6 @@ public class vista_Admin extends javax.swing.JFrame {
             }
         });
 
-        btnEncargados.setBackground(new java.awt.Color(204, 204, 255));
         btnEncargados.setText("Encargados");
         btnEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,11 +71,24 @@ public class vista_Admin extends javax.swing.JFrame {
             }
         });
 
-        btnProductos.setBackground(new java.awt.Color(204, 204, 255));
         btnProductos.setText("Productos");
         btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductosActionPerformed(evt);
+            }
+        });
+
+        btnEmpresasRetail.setText("Empresas: Retail");
+        btnEmpresasRetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpresasRetailActionPerformed(evt);
+            }
+        });
+
+        btnEmpresasSucursal.setText("Empresas: Sucursal");
+        btnEmpresasSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpresasSucursalActionPerformed(evt);
             }
         });
 
@@ -94,15 +106,18 @@ public class vista_Admin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnConsumidor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConsumidor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEncargados, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnEncargados, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addComponent(btnEmpresasRetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEmpresasSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,7 +131,11 @@ public class vista_Admin extends javax.swing.JFrame {
                 .addComponent(btnEncargados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmpresasRetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmpresasSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btn_salir)
                 .addGap(5, 5, 5))
         );
@@ -135,7 +154,7 @@ public class vista_Admin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,12 +181,24 @@ public class vista_Admin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnProductosActionPerformed
 
+    private void btnEmpresasRetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresasRetailActionPerformed
+        new vista_EmpresasRetail().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEmpresasRetailActionPerformed
+
+    private void btnEmpresasSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresasSucursalActionPerformed
+        new vista_EmpresasSucursal().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEmpresasSucursalActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsumidor;
+    private javax.swing.JButton btnEmpresasRetail;
+    private javax.swing.JButton btnEmpresasSucursal;
     private javax.swing.JButton btnEncargados;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btn_salir;

@@ -22,6 +22,7 @@ public class Consumidor {
     char activo;
     char suscrito;
     int comuna_id;
+    String nombreComuna;
 
     public Consumidor() {
     }
@@ -106,7 +107,14 @@ public class Consumidor {
     public void setComuna_id(int comuna_id) {
         this.comuna_id = comuna_id;
     }
-    
+     
+    public String getNombreComuna() {
+        return nombreComuna;
+    }
+
+    public void setNombreComuna(String nombreComuna) {
+        this.nombreComuna = nombreComuna;
+    }
     
     
     

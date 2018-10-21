@@ -5,8 +5,16 @@
  */
 package Vistas;
 
+import Clases.CRUDoferta;
+import Clases.Oferta;
 import Conexion.Database;
+import Tablas.Tabla_Ofertas;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,22 +23,35 @@ import javax.swing.table.DefaultTableModel;
  * @author Raul
  */
 public class verOfertas extends javax.swing.JFrame {
-
+    
+    static home login = new home();
     /**
      * Creates new form verOfertas
      */
     public verOfertas() {
-        initComponents();
+        initComponents();        
         mostrarOfertas();
     }
 
     public void mostrarOfertas(){
+        String encargado = login_Encargado.rut_encargado;
         DefaultTableModel modelo = new DefaultTableModel();
-        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta");
+        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta where encargado_run = '" + encargado + "'");
+        
         modelo.setColumnIdentifiers(new Object[]{"ID","TITULO","DESCRIPCION","F. INICIO","F. TERMINO","P. NORMAL","P. OFERTA","C. MINIMA","C. MAXIMA","ACTIVA"});
+        
         try{
+            
             while(rs.next()){
-                modelo.addRow(new Object[]{rs.getString("id"),rs.getString("titulo"),rs.getString("descripcion"),rs.getString("fecha_inicio"),rs.getString("fecha_termino"),rs.getString("precio_normal"),rs.getString("precio_oferta"),rs.getString("compra_min"),rs.getString("compra_max"),rs.getString("activa")});
+                String act="";
+                if(rs.getString("activa").equals("1")){
+                    act="Si";
+                }else{
+                    act="No";
+                }
+                modelo.addRow(new Object[]{rs.getString("id"),rs.getString("titulo"),rs.getString("descripcion"),rs.getString("fecha_inicio"),rs.getString("fecha_termino"),
+                rs.getString("precio_normal"),rs.getString("precio_oferta"),rs.getString("compra_min"),rs.getString("compra_max"), act});
+                
             }
             tblOfertas.setModel(modelo);
             
@@ -38,7 +59,7 @@ public class verOfertas extends javax.swing.JFrame {
             System.out.println("Error: "+e);
         }
         
-    }    
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +73,7 @@ public class verOfertas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblOfertas = new javax.swing.JTable();
         btn_salir = new javax.swing.JButton();
+        btn_Publicar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +88,11 @@ public class verOfertas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblOfertas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOfertasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblOfertas);
 
         btn_salir.setText("Salir");
@@ -75,25 +102,38 @@ public class verOfertas extends javax.swing.JFrame {
             }
         });
 
+        btn_Publicar.setText("PUBLICAR");
+        btn_Publicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PublicarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(351, 351, 351)
-                .addComponent(btn_salir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(342, 342, 342)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_Publicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Publicar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(btn_salir)
                 .addGap(4, 4, 4))
         );
@@ -107,10 +147,55 @@ public class verOfertas extends javax.swing.JFrame {
         new vista_crearOferta().setVisible(true);
     }//GEN-LAST:event_btn_salirActionPerformed
 
+    private void tblOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOfertasMouseClicked
+        
+    }//GEN-LAST:event_tblOfertasMouseClicked
+
+    private void btn_PublicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PublicarActionPerformed
+        
+        int fila = tblOfertas.getSelectedRow();
+        int id = Integer.parseInt(tblOfertas.getValueAt(fila,0).toString());
+        String act = tblOfertas.getValueAt(fila, 9).toString();
+        char act2;
+        System.out.println("valor id: "+id+" valor de activo: "+act);
+        
+         if(act.equals("Si")){
+            act2 = '0';
+        }else{
+            act2 = '1';
+        }
+        
+                System.out.println("NUEVOS -> valor id: "+id+" valor de activo: "+act);
+        
+        Database cn = new Database();
+        String sql = "UPDATE oferta SET activa = ? WHERE id = ?";
+        PreparedStatement ps = null;
+        try{
+            ps = cn.getConnection().prepareStatement(sql);
+            ps.setString(1,String.valueOf(act2));
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            try{
+                ps.close();
+                cn = null;
+            }catch(Exception ex){}
+        }
+        
+        mostrarOfertas();
+        
+    }//GEN-LAST:event_btn_PublicarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Publicar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblOfertas;
     // End of variables declaration//GEN-END:variables
 }
+

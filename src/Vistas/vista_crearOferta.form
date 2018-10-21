@@ -35,7 +35,7 @@
                       <Component id="btn_salir" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -70,7 +70,7 @@
                                           <Component id="tfPrecioNor" min="-2" pref="148" max="-2" attributes="0"/>
                                           <Component id="tfPrecioOfer" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
                                           <Component id="tfTitulo" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                                          <Component id="tfDescrip" min="-2" pref="148" max="-2" attributes="0"/>
+                                          <Component id="tfDescrip" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="txtTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -202,16 +202,34 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTitulo">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfTituloKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDescrip">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfDescripKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfPrecioNor">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfPrecioNorKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfPrecioOfer">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfPrecioOferKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tdCantiMin">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tdCantiMinKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfCantMax">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfCantMaxKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCrearOferta">
       <Properties>

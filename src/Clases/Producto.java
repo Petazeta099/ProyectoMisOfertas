@@ -1,13 +1,9 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template the editor.
+ * and open the template in the editor.
  */
 package Clases;
-
-import Conexion.Database;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  *
@@ -23,9 +19,6 @@ public class Producto {
     String tipo_cat;
     String nombre_marca;
 
-    
-
- 
     
 public void Producto() {}
 
@@ -77,27 +70,5 @@ public void Producto() {}
     public void setMarca_id(int marca_id) {
         this.marca_id = marca_id;
     }
-    public Categoria obtenerCategoria(int idCat){
-    Database cn = new Database();
-        String sql = "SELECT * FROM categoria WHERE id='" + idCat + "' LIMIT 1";
-                        Categoria c = new Categoria();
-
-        ResultSet lista = null;
-        PreparedStatement ps = null;
-        try{
-            ps = cn.getConnection().prepareStatement(sql);
-            lista = ps.executeQuery();
-            
-                c.setId(lista.getInt(1));
-                c.setTipo(lista.getString(2));
-                
-            }catch(Exception ex){}finally{
-            try{
-                ps.close();
-                lista.close();
-                cn.desconectar();
-            }catch(Exception ex){}} System.out.println(c.tipo);
-        return c;
-        
-}
+    
 }

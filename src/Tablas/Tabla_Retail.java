@@ -5,8 +5,8 @@
  */
 package Tablas;
 
-import Clases.CRUDproducto;
-import Clases.Producto;
+import Clases.CRUDretail;
+import Clases.Retail;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -16,11 +16,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Raul
  */
-public class Tabla_Producto {
+public class Tabla_Retail {
     
-    CRUDproducto crud_pro = null;
+    CRUDretail crud_rt = null;
 
-    public void visualizar_Producto(JTable tabla){
+    public void visualizar_Retail(JTable tabla){
         
         tabla.setDefaultRenderer(Object.class, new Render());
         DefaultTableModel dt = new DefaultTableModel(){
@@ -28,11 +28,8 @@ public class Tabla_Producto {
                 return false;
             }
         };    
-        dt.addColumn("SKU");
-        dt.addColumn("NOMBRE");
-        dt.addColumn("DESCRIPCION");
-        dt.addColumn("CATEGORIA");
-        dt.addColumn("MARCA");
+        dt.addColumn("RUT");
+        dt.addColumn("RAZON SOCIAL");
         dt.addColumn("MODIFICAR");
         dt.addColumn("ELIMINAR");
         
@@ -41,24 +38,18 @@ public class Tabla_Producto {
         JButton btn_eliminar = new JButton("ELIMINAR");
         btn_eliminar.setName("eli");
 
-        crud_pro = new CRUDproducto();
-        Producto pro = new Producto();
-        ArrayList<Producto> list = crud_pro.Listar_Producto();
+        crud_rt = new CRUDretail();
+        Retail rt = new Retail();
+        ArrayList<Retail> list = crud_rt.Listar_Retail();
 
-        
         if(list.size() > 0){
             for(int i=0; i<list.size(); i++){
-              
-                Object fila[] = new Object[7];
-                pro = list.get(i);
-                fila[0] = pro.getSku();
-                fila[1] = pro.getNombre();
-                fila[2] = pro.getDescripcion();
-                fila[3] = pro.getTipo_cat();
-                fila[4] = pro.getNombre_marca();
-                //System.out.println(obtenerCategoria(i));
-                fila[5] = btn_modificar;
-                fila[6] = btn_eliminar;
+                Object fila[] = new Object[4];
+                rt = list.get(i);
+                fila[0] = rt.getRut();
+                fila[1] = rt.getRazon_social();
+                fila[2] = btn_modificar;
+                fila[3] = btn_eliminar;
                 dt.addRow(fila);
             }
             tabla.setModel(dt);

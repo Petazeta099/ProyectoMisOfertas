@@ -50,7 +50,7 @@ public class Tabla_Encargado {
 
         if(list.size() > 0){
             for(int i=0; i<list.size(); i++){
-                Object fila[] = new Object[10];
+               Object fila[] = new Object[10];
                 enc = list.get(i);
                 fila[0] = enc.getRun();
                 fila[1] = enc.getP_nombre();
@@ -58,8 +58,16 @@ public class Tabla_Encargado {
                 fila[3] = enc.getApellido_p();
                 fila[4] = enc.getApellido_m();
                 fila[5] = enc.getClave();
-                fila[6] = enc.getActivo();
-                fila[7] = enc.getRetail_rut();
+                //fila[6] = enc.getActivo();
+                
+                  String act = ""+enc.getActivo();
+                if(act.equals("1")){
+                    fila[6]="Si";
+                }else{
+                    fila[6]="No";
+                }
+                
+                fila[7] = enc.getNombre_retail();
                 fila[8] = btn_modificar;
                 fila[9] = btn_eliminar;
                 dt.addRow(fila);

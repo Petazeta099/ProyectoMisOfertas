@@ -31,19 +31,16 @@ public class vista_Productos extends javax.swing.JFrame {
     CRUDproducto crud_pro;
     int clic_tabla = 0;
     
-    
-    
     /**
      * Creates new form listaProductos
      */
     public vista_Productos() {
         initComponents();
-        listaCategorias();
+         listaCategorias();
         listaMarcas();
         tp.visualizar_Producto(tab_producto);
         //obtenerProductos();
-        activa_boton(true,false,false,true); 
-       
+        activa_boton(true,false,false,true);
     }
     
     public void agregar(){
@@ -57,10 +54,19 @@ public class vista_Productos extends javax.swing.JFrame {
         pro.setMarca_id(txt_marca.getSelectedIndex()+1);
         
         crud_pro.Agregar_Producto(pro);
+        JOptionPane.showMessageDialog(null, "El producto se a agregado correctamente");
     }
     
     //Metodo eliminar producto
     public void modificar(){
+        int errores=0;
+        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") ||  txt_sku.getText().equals("")){
+            errores = errores+1;
+        }
+        
+        if(errores>=1){
+        JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{        
         crud_pro = new CRUDproducto();
         Producto pro = new Producto();
         
@@ -71,6 +77,8 @@ public class vista_Productos extends javax.swing.JFrame {
         pro.setSku(txt_sku.getText());
         
         crud_pro.Modificar_Producto(pro);
+        JOptionPane.showMessageDialog(null, "El producto se a modificado correctamente");
+        }
     }
     
     //Metodo eliminar producto
@@ -81,6 +89,7 @@ public class vista_Productos extends javax.swing.JFrame {
         pro.setSku(txt_sku.getText());
         
         crud_pro.Eliminar_Producto(pro);
+        JOptionPane.showMessageDialog(null, "El producto se a eliminado correctamente");
     }
     
     public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
@@ -107,8 +116,7 @@ public class vista_Productos extends javax.swing.JFrame {
         }
     }
     
-    
-    public void listaCategorias(){
+     public void listaCategorias(){
          ArrayList<String> list = new ArrayList<String>();
               //  ArrayList<Object> list2 = new ArrayList<Object>();
 
@@ -170,6 +178,82 @@ public class vista_Productos extends javax.swing.JFrame {
        
     }
 
+     public int obtenerIdCategoriaConsumidor(String nombreCategoria) {
+        ArrayList<String> list = new ArrayList<String>();
+        int[] numCat = new int[1];
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+        Database cn = new Database();
+        String sql = "select id from categoria where tipo like '" + nombreCategoria + "'"; //scar numero
+        ResultSet lista = null;
+        PreparedStatement ps = null;
+        int idCat = 0;
+        try {
+            ps = cn.getConnection().prepareStatement(sql);
+            lista = ps.executeQuery();
+            while (lista.next()) {
+                numCat[0] = lista.getInt(1);
+                idCat = numCat[0];
+                list.add(lista.getString(1));
+                //idCom = lista.getInt(1);  //entrega el id
+                // System.out.println(idCom);
+                //cb_comuna.setSelectedIndex(idCom);
+                // list2.add(o);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                lista.close();
+                cn.desconectar();
+            } catch (Exception ex) {
+            }
+        }
+        System.out.println(idCat);
+        return idCat;
+    }
+     
+     public int obtenerIdMarca(String nombreMarca) {
+        ArrayList<String> list = new ArrayList<String>();
+        int[] numMarca = new int[1];
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+        Database cn = new Database();
+        String sql = "select id from marca where nombre like '" + nombreMarca + "'"; //scar numero
+        ResultSet lista = null;
+        PreparedStatement ps = null;
+        int idMar = 0;
+        try {
+            ps = cn.getConnection().prepareStatement(sql);
+            lista = ps.executeQuery();
+            while (lista.next()) {
+                numMarca[0] = lista.getInt(1);
+                idMar = numMarca[0];
+                list.add(lista.getString(1));
+                //idCom = lista.getInt(1);  //entrega el id
+                // System.out.println(idCom);
+                //cb_comuna.setSelectedIndex(idCom);
+                // list2.add(o);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                lista.close();
+                cn.desconectar();
+            } catch (Exception ex) {
+            }
+        }
+        System.out.println(idMar);
+        return idMar;
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,9 +317,26 @@ public class vista_Productos extends javax.swing.JFrame {
         lbl_desc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_desc.setText("Descripcion:");
 
+        txt_descripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_descripcionKeyTyped(evt);
+            }
+        });
+
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);
+            }
+        });
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
+
+        txt_sku.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_skuKeyTyped(evt);
             }
         });
 
@@ -342,8 +443,6 @@ public class vista_Productos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txt_categoria.getAccessibleContext().setAccessibleName("");
-
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,10 +482,24 @@ public class vista_Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        int errores=0;
+        
+        String categoria = txt_categoria.getSelectedItem()+"";
+        String marca = txt_marca.getSelectedItem()+"";
+        
+        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || categoria.equals("")
+           || marca.equals("") || txt_sku.getText().equals("")){
+            errores = errores+1;
+        }        
+        if(errores>=1){
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
         agregar();
         tp.visualizar_Producto(tab_producto);
         activa_boton(true,false,false,true);
         lim.limpiar_texto(panel);
+        }
+        
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -394,10 +507,18 @@ public class vista_Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+        int errores=0;
+        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || txt_sku.getText().equals("")){
+            errores = errores+1;
+        }        
+        if(errores>=1){
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
         modificar();
         tp.visualizar_Producto(tab_producto);
         activa_boton(true,false,false,false);
         lim.limpiar_texto(panel);
+        }
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
@@ -418,19 +539,19 @@ public class vista_Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void tab_productoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_productoMouseClicked
-        clic_tabla = this.tab_producto.rowAtPoint(evt.getPoint());
+          clic_tabla = this.tab_producto.rowAtPoint(evt.getPoint());
         
         String sku = ""+tab_producto.getValueAt(clic_tabla, 0);
         String nombre = ""+tab_producto.getValueAt(clic_tabla, 1);
         String descripcion = ""+tab_producto.getValueAt(clic_tabla, 2);
-        String categoria = ""+txt_categoria.getSelectedIndex()+1;
-        String marca = ""+txt_marca.getSelectedIndex()+1;
+        String categoria = ""+tab_producto.getValueAt(clic_tabla, 3);
+        String marca = ""+tab_producto.getValueAt(clic_tabla, 4);
         
         txt_sku.setText(sku);
         txt_nombre.setText(nombre);
         txt_descripcion.setText(descripcion);
-        txt_categoria.getSelectedIndex();
-        txt_marca.getSelectedIndex();
+        txt_categoria.setSelectedIndex(obtenerIdCategoriaConsumidor(categoria)-1);
+        txt_marca.setSelectedIndex(obtenerIdMarca(marca)-1);
         
         int column = tab_producto.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY()/tab_producto.getRowHeight();
@@ -461,6 +582,30 @@ public class vista_Productos extends javax.swing.JFrame {
         new vista_Admin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void txt_skuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_skuKeyTyped
+        int maximoCaracter = 14;
+        char validarCaracter=evt.getKeyChar();
+        if((txt_sku.getText().length()>=maximoCaracter) ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_skuKeyTyped
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        int maximoCaracter = 29;
+        char validarCaracter=evt.getKeyChar();
+        if((txt_nombre.getText().length()>=maximoCaracter) ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_descripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_descripcionKeyTyped
+        int maximoCaracter = 29;
+        char validarCaracter=evt.getKeyChar();
+        if((txt_descripcion.getText().length()>=maximoCaracter) ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_descripcionKeyTyped
 
     /**
      * @param args the command line arguments

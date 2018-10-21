@@ -5,41 +5,33 @@
  */
 package Clases;
 
+import Conexion.Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Conexion.Database;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Raul
  */
-public class CRUDproducto {
+public class CRUDretail {
     
-    public ArrayList<Producto> Listar_Producto(){
-        ArrayList<Producto> list = new ArrayList<Producto>();
-              //  ArrayList<Object> list2 = new ArrayList<Object>();
-
+    public ArrayList<Retail> Listar_Retail(){
+        ArrayList<Retail> list = new ArrayList<Retail>();
         Database cn = new Database();
-        String sql = "select p.sku,p.nombre,p.descripcion,c.id,m.id,c.tipo,m.nombre from producto \n" +
-"p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN marca m ON m.id = p.marca_id";
+        String sql = "SELECT * FROM retail";
         ResultSet lista = null;
         PreparedStatement ps = null;
         try{
-           ps = cn.getConnection().prepareStatement(sql);
+            ps = cn.getConnection().prepareStatement(sql);
             lista = ps.executeQuery();
             while(lista.next()){
-                Producto pro = new Producto();
-                pro.setSku(lista.getString(1));
-                pro.setNombre(lista.getString(2));
-                pro.setDescripcion(lista.getString(3));
-                pro.setCategoria_id(lista.getInt(4));
-                pro.setMarca_id(lista.getInt(5));
-                pro.setTipo_cat(lista.getString(6));
-                pro.setNombre_marca(lista.getString(7));
-                list.add(pro);
+                Retail rt = new Retail();
+                rt.setRut(lista.getString(1));
+                rt.setRazon_social(lista.getString(2));
+                list.add(rt);
             }
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
@@ -57,21 +49,19 @@ public class CRUDproducto {
 
 
 /*Metodo agregar*/
-    public void Agregar_Producto(Producto pro){
+    public void Agregar_Retail(Retail rt){
         Database cn = new Database();
-        String sql = "INSERT INTO producto (sku, nombre, descripcion, categoria_id, marca_id) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO retail (rut, razon_social) VALUES(?,?)";
         PreparedStatement ps = null;
         try{
             ps = cn.getConnection().prepareStatement(sql);
-            ps.setString(1, pro.getSku());
-            ps.setString(2, pro.getNombre());
-            ps.setString(3, pro.getDescripcion());
-            ps.setInt(4, pro.getCategoria_id());
-            ps.setInt(5, pro.getMarca_id());
+            ps.setString(1, rt.getRut());
+            ps.setString(2, rt.getRazon_social());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El Retail se a agregado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Producto ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El retail ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }finally{
@@ -84,18 +74,16 @@ public class CRUDproducto {
 
 
 /*Metodo Modificar*/
-    public void Modificar_Producto(Producto pro){
-       Database cn = new Database();
-        String sql = "UPDATE producto SET nombre = ?, descripcion = ?, categoria_id = ?, marca_id = ? WHERE sku = ?";
+    public void Modificar_Retail(Retail rt){
+        Database cn = new Database();
+        String sql = "UPDATE retail SET razon_social = ? WHERE rut = ?";
         PreparedStatement ps = null;
         try{
             ps = cn.getConnection().prepareStatement(sql);
-            ps.setString(1, pro.getNombre());
-            ps.setString(2, pro.getDescripcion());
-            ps.setInt(3, pro.getCategoria_id());
-            ps.setInt(4, pro.getMarca_id());
-            ps.setString(5, pro.sku);
+            ps.setString(1, rt.getRazon_social());
+            ps.setString(2, rt.getRut());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El Retail se a modificado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){
@@ -110,14 +98,15 @@ public class CRUDproducto {
 
 
 /*Metodo Eliminar*/
-    public void Eliminar_Producto(Producto pro){
+    public void Eliminar_Retail(Retail rt){
         Database cn = new Database();
-        String sql = "DELETE FROM producto WHERE sku = ?";
+        String sql = "DELETE FROM retail WHERE rut = ?";
         PreparedStatement ps = null;
         try{
             ps = cn.getConnection().prepareStatement(sql);
-            ps.setString(1, pro.getSku());
+            ps.setString(1, rt.getRut());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "El retail se a eliminado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){

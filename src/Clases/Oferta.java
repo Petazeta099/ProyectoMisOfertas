@@ -22,12 +22,13 @@ public class Oferta {
     private int precio_oferta;
     private int compra_min;
     private int compra_max;
-    private boolean activa;
+    private char activa;
+    private String rut_encargado;
 
     public Oferta() {
     }
 
-    public Oferta(int id, String titulo, String descripcion, Date fecha_inicio, Date fecha_termino, int precio_normal, int precio_oferta, int compra_min, int compra_max, boolean activa) {
+    public Oferta(int id, String titulo, String descripcion, Date fecha_inicio, Date fecha_termino, int precio_normal, int precio_oferta, int compra_min, int compra_max, char activa, String rut_encargado) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -38,6 +39,7 @@ public class Oferta {
         this.compra_min = compra_min;
         this.compra_max = compra_max;
         this.activa = activa;
+        this.rut_encargado = rut_encargado;
     }
 
     public int getId() {
@@ -76,8 +78,12 @@ public class Oferta {
         return compra_max;
     }
 
-    public boolean isActiva() {
+    public char getActiva() {
         return activa;
+    }
+    
+    public String getRut_encargado() {
+        return rut_encargado;
     }
 
     public void setId(int id) {
@@ -116,14 +122,19 @@ public class Oferta {
         this.compra_max = compra_max;
     }
 
-    public void setActiva(boolean activa) {
+    public void setActiva(char activa) {
         this.activa = activa;
+    }
+    
+    public void setRut_encargado(String rut_encargado) {
+        this.rut_encargado = rut_encargado;
     }
 
     @Override
     public String toString() {
-        return "Oferta{" + "id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", precio_normal=" + precio_normal + ", precio_oferta=" + precio_oferta + ", compra_min=" + compra_min + ", compra_max=" + compra_max + ", activa=" + activa + '}';
+        return "Oferta{" + "id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", precio_normal=" + precio_normal + ", precio_oferta=" + precio_oferta + ", compra_min=" + compra_min + ", compra_max=" + compra_max + ", activa=" + activa + ", rut_encargado=" + rut_encargado + '}';
     }
+
     
     
     

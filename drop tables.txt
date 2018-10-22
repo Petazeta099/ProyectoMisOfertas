@@ -1,0 +1,16 @@
+drop table administrador;
+drop table descuento;
+drop table encargado;
+drop table gerente;
+drop table oferta_producto;
+drop table producto;
+drop table sucursal;
+drop table valoracion;
+drop table marca;
+drop table evaluacion;
+drop table consumidor;
+drop table comuna;
+drop table categoria;
+drop table oferta;
+drop table region;
+drop table retail;

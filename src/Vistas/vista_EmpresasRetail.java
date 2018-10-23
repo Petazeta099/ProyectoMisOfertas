@@ -32,9 +32,9 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     public vista_EmpresasRetail() {
         initComponents();
         rt.visualizar_Retail(tab_retail);
-        cargarDatosComborut();
+
         //obtenerProductos();
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
     }
     
     public void agregar(){
@@ -50,7 +50,11 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             crud_rt = new CRUDretail();
         Retail rt = new Retail();
         
-        rt.setRut(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+         String rutFinal = rutsinDigito+"-"+rutDigito;
+        
+        rt.setRut(rutFinal);
         rt.setRazon_social(txt_razonSocial.getText());
         
         crud_rt.Agregar_Retail(rt);
@@ -72,8 +76,12 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         crud_rt = new CRUDretail();
         Retail rt = new Retail();
         
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+        String rutFinal = rutsinDigito+"-"+rutDigito;
+        
         rt.setRazon_social(txt_razonSocial.getText());
-        rt.setRut(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        rt.setRut(rutFinal);
         
         crud_rt.Modificar_Retail(rt);
         }
@@ -84,17 +92,19 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     public void eliminar(){
         crud_rt = new CRUDretail();
         Retail rt = new Retail();
-        
-        rt.setRut(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+        String rutFinal = rutsinDigito+"-"+rutDigito;
+        rt.setRut(rutFinal);
         crud_rt.Eliminar_Retail(rt);
     }
     
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4,boolean a5){
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
         txt_rut.setEnabled(a4);
-        cmbDigitoRut.setEnabled(a5);
+
     }
 
     /**
@@ -118,7 +128,6 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         btn_eliminar = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
         lbl_rutRetail = new javax.swing.JLabel();
-        cmbDigitoRut = new javax.swing.JComboBox<>();
         btn_salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -196,40 +205,39 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
-        cmbDigitoRut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_rut)
+                    .addComponent(lbl_razonSocial))
+                .addGap(10, 10, 10)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_razonSocial, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                        .addComponent(txt_rut)))
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addContainerGap(401, Short.MAX_VALUE)
+                        .addComponent(btn_salir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_rutRetail))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelLayout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn_modificar))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_eliminar))
-                                .addGroup(panelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_rut)
-                                        .addComponent(lbl_razonSocial))
-                                    .addGap(10, 10, 10)
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(panelLayout.createSequentialGroup()
-                                            .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(txt_razonSocial)))))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_modificar)
+                            .addComponent(btn_eliminar))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -241,33 +249,25 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                     .addComponent(lbl_rut)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_agregar)))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_razonSocial)
-                    .addComponent(txt_razonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_agregar)
-                    .addComponent(btn_eliminar))
+                    .addComponent(txt_razonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_modificar))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(lbl_rutRetail))
+                        .addGap(76, 76, 76)
+                        .addComponent(lbl_rutRetail)
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_limpiar)
-                            .addComponent(btn_modificar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_eliminar)
+                            .addComponent(btn_limpiar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_salir))))
         );
-
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,10 +278,6 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
                     .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_salir)
-                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,9 +286,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_salir)
-                .addContainerGap())
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -308,8 +302,8 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         String rutAcortado = rut.substring( 0, rut.indexOf("-"));
         String digitoRut = rut.substring(rut.length() - 1);
         
-        cmbDigitoRut.setSelectedItem(digitoRut);
-        txt_rut.setText(rutAcortado);
+
+        txt_rut.setText(rutAcortado+digitoRut);
         txt_razonSocial.setText(razon_social);
 
         int column = tab_retail.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -324,13 +318,13 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                 if(boton.getName().equals("mod")){
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false,false);
+                    activa_boton(true,true,false,false);
                 }
                 if(boton.getName().equals("eli")){
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,false,false);
+                    activa_boton(true,false,true,false);
                 }
             }
 
@@ -344,7 +338,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
@@ -353,7 +347,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         if(s == 0){
             eliminar();
             rt.visualizar_Retail(tab_retail);
-            activa_boton(true,false,false,true,true);
+            activa_boton(true,false,false,true);
             lim.limpiar_texto(panel);
         }
     }//GEN-LAST:event_btn_eliminarActionPerformed
@@ -361,7 +355,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         modificar();
         rt.visualizar_Retail(tab_retail);
-        activa_boton(true,false,false,false,true);
+        activa_boton(true,false,false,true);
         lim.limpiar_texto(panel);
     }//GEN-LAST:event_btn_modificarActionPerformed
 
@@ -372,7 +366,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         agregar();
         rt.visualizar_Retail(tab_retail);
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
         lim.limpiar_texto(panel);
     }//GEN-LAST:event_btn_agregarActionPerformed
 
@@ -389,7 +383,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                }
            }
            
-           if(Character.isLetter(validarCaracter) || txt_rut.getText().length()>=maximorut || errores > 0 ){
+           if((Character.isLetter(validarCaracter)&& validarCaracter != 'k') || txt_rut.getText().length()>=maximorut || errores > 0 ){
                evt.consume();
            }
     }//GEN-LAST:event_txt_rutKeyTyped
@@ -413,7 +407,6 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_modificar;
     private javax.swing.JButton btn_salir;
-    private javax.swing.JComboBox<String> cmbDigitoRut;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_razonSocial;
     private javax.swing.JLabel lbl_rut;
@@ -423,13 +416,6 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private javax.swing.JTextField txt_razonSocial;
     private javax.swing.JTextField txt_rut;
     // End of variables declaration//GEN-END:variables
-
-public void cargarDatosComborut(){
-    String[] estaciones={"1","2","3","4","5","6","7","8","9","k"};
-    DefaultComboBoxModel cmb = new DefaultComboBoxModel(estaciones);    
-    cmbDigitoRut.setModel(cmb);
-    
-    }
 
     private ArrayList<Character> retornarListaCaracteres(){
         ArrayList<Character> validaciones = new ArrayList<Character>();

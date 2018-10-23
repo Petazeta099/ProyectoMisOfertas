@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * @author vina
  */
 public class vista_crearOferta extends javax.swing.JFrame {
+
     static home home = new home();
     static login_Admin l_Admin = new login_Admin();
     String rut = login_Encargado.rut_encargado;
@@ -42,23 +43,22 @@ public class vista_crearOferta extends javax.swing.JFrame {
         reg = cn.getConnection();
 
     }
-    
-    public void mostrarProductos(){
+
+    public void mostrarProductos() {
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet rs = Database.crearConsulta("SELECT p.sku,p.nombre,p.descripcion,c.tipo,m.nombre FROM producto p INNER JOIN categoria c ON p.categoria_id = c.id INNER JOIN marca m ON p.marca_id = m.id");
-        modelo.setColumnIdentifiers(new Object[]{"SKU","NOMBRE","DESCRIPCION","CATEGORIA","MARCA"});
-        try{
-            while(rs.next()){
-                modelo.addRow(new Object[]{rs.getString("sku"),rs.getString("nombre"),rs.getString("descripcion"),rs.getString("tipo"),rs.getString(5)});
+        modelo.setColumnIdentifiers(new Object[]{"SKU", "NOMBRE", "DESCRIPCION", "CATEGORIA", "MARCA"});
+        try {
+            while (rs.next()) {
+                modelo.addRow(new Object[]{rs.getString("sku"), rs.getString("nombre"), rs.getString("descripcion"), rs.getString("tipo"), rs.getString(5)});
             }
             tblProductos.setModel(modelo);
-            
-        }catch(Exception e){
-            System.out.println("Error: "+e);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -297,7 +297,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearOfertaActionPerformed
-        
+
         /*
         int errores=0;
         if(tfTitulo.getText().equals("") || tfDescrip.getText().equals("") || dcOp1.equals("") || dcOp2.equals("")
@@ -310,93 +310,95 @@ public class vista_crearOferta extends javax.swing.JFrame {
         }else{
         
         }
-        */
-        int ultimoId =0;  
+         */
+        int ultimoId = 0;
+        ArrayList<Integer> idsOfertas = new ArrayList<Integer>();
         String fechaI = "";
         String fechaT = "";
-        Date dateI = null; 
+        Date dateI = null;
         Date dateT = null;
         String titulo = tfTitulo.getText();
         String descrip = tfDescrip.getText();
 
         int itemSeleccionado = tblProductos.getSelectedColumn();
-        if(itemSeleccionado<=0){
+        if (itemSeleccionado <= 0) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else if(tfTitulo.getText().equals("") || tfDescrip.getText().equals("") || dcOp1.equals("") || dcOp2.equals("")
-                || tfPrecioNor.getText().equals("") || tfPrecioOfer.getText().equals("") || tdCantiMin.getText().equals("") || tfCantMax.getText().equals("")){
+        } else if (tfTitulo.getText().equals("") || tfDescrip.getText().equals("") || dcOp1.equals("") || dcOp2.equals("")
+                || tfPrecioNor.getText().equals("") || tfPrecioOfer.getText().equals("") || tdCantiMin.getText().equals("") || tfCantMax.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese informacion en el formulario.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-        try {
-        dateI = dcOp1.getDate(); 
-        dateT = dcOp2.getDate(); 
-        fechaI = dateI.toString();
-        fechaT = dateT.toString();
-        String precioNormal = tfPrecioNor.getText();
-        String precioOferta = tfPrecioOfer.getText();
-        String cantMin = tdCantiMin.getText();
-        String cantMax = tfCantMax.getText();
-        String rut_encargado = login_Encargado.rut_encargado;
-        String idProducto = String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 0));
-        ArrayList<Object> ofertas = new ArrayList<Object>();
-        PreparedStatement pst=null;
-        PreparedStatement insOferProd=null;
-        PreparedStatement coleccionOfertas=null;
-        java.sql.Date sqlFechaInicio = new java.sql.Date(dateI.getTime());         
-        java.sql.Date sqlFechaTermino = new java.sql.Date(dateT.getTime());
-        coleccionOfertas=reg.prepareStatement("SELECT * FROM oferta");   
-                    ResultSet lista = coleccionOfertas.executeQuery();
-                    while (lista.next())  //recorre
-                    {
-                     ultimoId=lista.getInt(1);
+        } else {
+            try {
+                dateI = dcOp1.getDate();
+                dateT = dcOp2.getDate();
+                fechaI = dateI.toString();
+                fechaT = dateT.toString();
+                String precioNormal = tfPrecioNor.getText();
+                String precioOferta = tfPrecioOfer.getText();
+                String cantMin = tdCantiMin.getText();
+                String cantMax = tfCantMax.getText();
+                String rut_encargado = login_Encargado.rut_encargado;
+
+                String rutsinDigito = rut_encargado.substring(0, rut_encargado.length() - 1);
+                String rutDigito = rut_encargado.substring(rut_encargado.length() - 1);
+                String rutFinal = rutsinDigito + "-" + rutDigito;
+
+                String idProducto = String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 0));
+                ArrayList<Object> ofertas = new ArrayList<Object>();
+                PreparedStatement pst = null;
+                PreparedStatement insOferProd = null;
+                PreparedStatement coleccionOfertas = null;
+                java.sql.Date sqlFechaInicio = new java.sql.Date(dateI.getTime());
+                java.sql.Date sqlFechaTermino = new java.sql.Date(dateT.getTime());
+                coleccionOfertas = reg.prepareStatement("SELECT * FROM oferta");
+                ResultSet lista = coleccionOfertas.executeQuery();
+                while (lista.next()) //recorre
+                {
+                    if (ultimoId < lista.getInt(1)) {
+                        ultimoId = lista.getInt(1);
                     }
-                    ultimoId=ultimoId+1;
-                    
-                    
-                    pst=reg.prepareStatement("INSERT INTO oferta VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-                    if(ultimoId==0){
-                        ultimoId=1;
-                    }
-                    pst.setInt(1, ultimoId);
-                    pst.setString(2, titulo);   
-                    pst.setString(3, descrip);
-                    pst.setDate(4, sqlFechaInicio);
-                    pst.setDate(5, sqlFechaTermino);
-                    pst.setInt(6, Integer.parseInt(precioNormal));
-                    pst.setInt(7, Integer.parseInt(precioOferta));
-                    pst.setInt(8, Integer.parseInt(cantMin));
-                    pst.setInt(9, Integer.parseInt(cantMax));
-                    pst.setInt(10, 0);
-                    pst.setString(11, rut_encargado);
-                    int i=pst.executeUpdate();
-                    if(i>0){
-                        System.out.println("Se guardo correctamente");
-                        JOptionPane.showMessageDialog(this,"Oferta guardada correctamente.");
-                        tfTitulo.setText("");
-                        tfDescrip.setText("");
-                        dcOp1.setDate(null);
-                        dcOp2.setDate(null);
-                        tfPrecioNor.setText("");
-                        tfPrecioOfer.setText("");
-                        tdCantiMin.setText("");
-                        tfCantMax.setText("");
-                        
-                        insOferProd=reg.prepareStatement("INSERT INTO oferta_producto VALUES(?,?)");
-                        insOferProd.setString(1, idProducto);
-                        insOferProd.setInt(2, ultimoId);
-                        insOferProd.executeUpdate();
-                                       
-                    }else{
-                        System.out.println("No se guardo");
-                        JOptionPane.showMessageDialog(this, "Error al guardar datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
+                }
+                ultimoId = ultimoId + 1;
+                System.out.println(ultimoId);
+                System.out.println(rutFinal);
+
+                pst = reg.prepareStatement("INSERT INTO oferta VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+                if (ultimoId == 0) {
+                    ultimoId = 1;
+                }
+                pst.setInt(1, ultimoId);
+                pst.setString(2, titulo);
+                pst.setString(3, descrip);
+                pst.setDate(4, sqlFechaInicio);
+                pst.setDate(5, sqlFechaTermino);
+                pst.setInt(6, Integer.parseInt(precioNormal));
+                pst.setInt(7, Integer.parseInt(precioOferta));
+                pst.setInt(8, Integer.parseInt(cantMin));
+                pst.setInt(9, Integer.parseInt(cantMax));
+                pst.setInt(10, 0);
+                pst.setString(11, rutFinal);
+                pst.executeUpdate();
+                System.out.println("Se guardo correctamente");
+                JOptionPane.showMessageDialog(this, "Oferta guardada correctamente.");
+                tfTitulo.setText("");
+                tfDescrip.setText("");
+                dcOp1.setDate(null);
+                dcOp2.setDate(null);
+                tfPrecioNor.setText("");
+                tfPrecioOfer.setText("");
+                tdCantiMin.setText("");
+                tfCantMax.setText("");
+
+                insOferProd = reg.prepareStatement("INSERT INTO oferta_producto VALUES(?,?)");
+                insOferProd.setString(1, idProducto);
+                insOferProd.setInt(2, ultimoId);
+                insOferProd.executeUpdate();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Ingrese fecha valida." + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ingrese fecha valida.", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnCrearOfertaActionPerformed
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
@@ -411,84 +413,84 @@ public class vista_crearOferta extends javax.swing.JFrame {
 
     private void tfTituloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTituloKeyTyped
         int maximoCaracter = 29;
-        char validarCaracter=evt.getKeyChar();
-        if(tfTitulo.getText().length()>=maximoCaracter ){
+        char validarCaracter = evt.getKeyChar();
+        if (tfTitulo.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_tfTituloKeyTyped
 
     private void tfDescripKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDescripKeyTyped
         int maximoCaracter = 99;
-        char validarCaracter=evt.getKeyChar();
-        if(tfDescrip.getText().length()>=maximoCaracter ){
+        char validarCaracter = evt.getKeyChar();
+        if (tfDescrip.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_tfDescripKeyTyped
 
     private void tfPrecioNorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrecioNorKeyTyped
         int maximoPuntaje = 25;
-        ArrayList<Character> lista=retornarListaCaracteres();
-        int errores=0;
-        char validarCaracter=evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
         for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-        
-        if(Character.isLetter(validarCaracter) || errores > 0 || tfPrecioNor.getText().length()>=maximoPuntaje){
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if (Character.isLetter(validarCaracter) || errores > 0 || tfPrecioNor.getText().length() >= maximoPuntaje) {
             evt.consume();
         }
     }//GEN-LAST:event_tfPrecioNorKeyTyped
 
     private void tfPrecioOferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrecioOferKeyTyped
         int maximoPuntaje = 25;
-        ArrayList<Character> lista=retornarListaCaracteres();
-        int errores=0;
-        char validarCaracter=evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
         for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-        
-        if(Character.isLetter(validarCaracter) || errores > 0 || tfPrecioOfer.getText().length()>=maximoPuntaje){
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if (Character.isLetter(validarCaracter) || errores > 0 || tfPrecioOfer.getText().length() >= maximoPuntaje) {
             evt.consume();
         }
     }//GEN-LAST:event_tfPrecioOferKeyTyped
 
     private void tdCantiMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tdCantiMinKeyTyped
         int maximoPuntaje = 25;
-        ArrayList<Character> lista=retornarListaCaracteres();
-        int errores=0;
-        char validarCaracter=evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
         for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-        
-        if(Character.isLetter(validarCaracter) || errores > 0 || tdCantiMin.getText().length()>=maximoPuntaje){
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if (Character.isLetter(validarCaracter) || errores > 0 || tdCantiMin.getText().length() >= maximoPuntaje) {
             evt.consume();
         }
     }//GEN-LAST:event_tdCantiMinKeyTyped
 
     private void tfCantMaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCantMaxKeyTyped
         int maximoPuntaje = 25;
-        ArrayList<Character> lista=retornarListaCaracteres();
-        int errores=0;
-        char validarCaracter=evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
         for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-        
-        if(Character.isLetter(validarCaracter) || errores > 0 || tfCantMax.getText().length()>=maximoPuntaje){
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if (Character.isLetter(validarCaracter) || errores > 0 || tfCantMax.getText().length() >= maximoPuntaje) {
             evt.consume();
         }
     }//GEN-LAST:event_tfCantMaxKeyTyped
@@ -496,7 +498,6 @@ public class vista_crearOferta extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearOferta;
@@ -524,42 +525,39 @@ public class vista_crearOferta extends javax.swing.JFrame {
     private javax.swing.JLabel txtTitulo;
     // End of variables declaration//GEN-END:variables
 
- private ArrayList<Character> retornarListaCaracteres(){
+    private ArrayList<Character> retornarListaCaracteres() {
         ArrayList<Character> validaciones = new ArrayList<Character>();
-           validaciones.add('.');
-           validaciones.add('/');
-           validaciones.add('|');
-           validaciones.add('=');
-           validaciones.add('?');
-           validaciones.add('¿');
-           validaciones.add('´');
-           validaciones.add('¨');
-           validaciones.add('{');
-           validaciones.add('}');
-           validaciones.add(';');
-           validaciones.add(':');
-           validaciones.add('_');
-           validaciones.add('^');
-           validaciones.add('-');
-           validaciones.add('!');
-           validaciones.add('"');
-           validaciones.add('#');
-           validaciones.add('$');
-           validaciones.add('%');
-           validaciones.add('&');
-           validaciones.add('(');
-           validaciones.add(')');
-           validaciones.add('¡');
-           validaciones.add(']');
-           validaciones.add('*');
-           validaciones.add('[');
-           validaciones.add(',');
-           validaciones.add('°');
-           
-        return  validaciones;
-    }
-    
+        validaciones.add('.');
+        validaciones.add('/');
+        validaciones.add('|');
+        validaciones.add('=');
+        validaciones.add('?');
+        validaciones.add('¿');
+        validaciones.add('´');
+        validaciones.add('¨');
+        validaciones.add('{');
+        validaciones.add('}');
+        validaciones.add(';');
+        validaciones.add(':');
+        validaciones.add('_');
+        validaciones.add('^');
+        validaciones.add('-');
+        validaciones.add('!');
+        validaciones.add('"');
+        validaciones.add('#');
+        validaciones.add('$');
+        validaciones.add('%');
+        validaciones.add('&');
+        validaciones.add('(');
+        validaciones.add(')');
+        validaciones.add('¡');
+        validaciones.add(']');
+        validaciones.add('*');
+        validaciones.add('[');
+        validaciones.add(',');
+        validaciones.add('°');
 
-    
+        return validaciones;
+    }
 
 }

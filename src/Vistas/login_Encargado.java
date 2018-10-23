@@ -24,7 +24,8 @@ public class login_Encargado extends javax.swing.JFrame {
      */
     public login_Encargado() {
         initComponents();
-        cargarDatosComborut();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -37,21 +38,46 @@ public class login_Encargado extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        txtrut = new javax.swing.JTextField();
-        btningresar = new javax.swing.JButton();
-        lblenunciao = new javax.swing.JLabel();
-        txtpass = new javax.swing.JPasswordField();
         btn_volver = new javax.swing.JButton();
-        lblRutEncargado = new javax.swing.JLabel();
-        lblGuionRut = new javax.swing.JLabel();
-        cmbDigitoRut = new javax.swing.JComboBox<>();
+        btningresar = new javax.swing.JButton();
+        txtpass = new javax.swing.JPasswordField();
+        txtrut = new javax.swing.JTextField();
         lbPass = new javax.swing.JLabel();
+        lblRutEncargado = new javax.swing.JLabel();
+        lblenunciao = new javax.swing.JLabel();
+        lblfondoEnca = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de sesion: ENCARGADO");
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_volver.setBackground(new java.awt.Color(0, 153, 51));
+        btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 73, -1));
+
+        btningresar.setBackground(new java.awt.Color(0, 153, 51));
+        btningresar.setText("Ingresar");
+        btningresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btningresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 110, 30));
+
+        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtpassKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 140, 30));
 
         txtrut.setName(""); // NOI18N
         txtrut.addActionListener(new java.awt.event.ActionListener() {
@@ -64,106 +90,25 @@ public class login_Encargado extends javax.swing.JFrame {
                 txtrutKeyTyped(evt);
             }
         });
+        getContentPane().add(txtrut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
 
-        btningresar.setText("Ingresar");
-        btningresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btningresarActionPerformed(evt);
-            }
-        });
-
-        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        lblenunciao.setText("ENCARGADO");
-
-        txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpassKeyTyped(evt);
-            }
-        });
-
-        btn_volver.setText("Volver");
-        btn_volver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_volverActionPerformed(evt);
-            }
-        });
-
-        lblRutEncargado.setText("Ingrese Rut:");
-
-        lblGuionRut.setText("-");
-
-        cmbDigitoRut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+        lbPass.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbPass.setForeground(new java.awt.Color(255, 255, 255));
         lbPass.setText("Contraseña");
+        getContentPane().add(lbPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btningresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 84, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbPass)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblRutEncargado)
-                        .addComponent(txtpass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtrut, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblGuionRut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblRutEncargado)
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtrut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGuionRut)
-                    .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbPass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btningresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_volver)
-                .addContainerGap())
-        );
+        lblRutEncargado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRutEncargado.setForeground(new java.awt.Color(255, 255, 255));
+        lblRutEncargado.setText("Ingrese Rut:");
+        getContentPane().add(lblRutEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
+        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
+        lblenunciao.setText("Inicio de sesión Encargado");
+        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, -1));
+
+        lblfondoEnca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.jpg"))); // NOI18N
+        getContentPane().add(lblfondoEnca, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 420));
 
         pack();
         setLocationRelativeTo(null);
@@ -175,7 +120,7 @@ public class login_Encargado extends javax.swing.JFrame {
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
 
-        String rut = txtrut.getText()+"-"+cmbDigitoRut.getSelectedItem();
+        String rut = txtrut.getText();
         rut_encargado = rut;
         String clave = txtpass.getText();
         
@@ -190,8 +135,12 @@ public class login_Encargado extends javax.swing.JFrame {
 
             
             int coincidencia = 0;
+            
+            String rutsinDigito = rut.substring(0,rut.length()-1);
+            String rutDigito =rut.substring(rut.length()-1);  
+            String rutFinal = rutsinDigito+"-"+rutDigito;
 
-            ResultSet lista = Database.crearConsulta("SELECT * FROM encargado WHERE run='" + rut + "' and clave='" + clave + "'");
+            ResultSet lista = Database.crearConsulta("SELECT * FROM encargado WHERE run='" + rutFinal + "' and clave='" + clave + "'");
 
             while (lista.next()) {
                 coincidencia = coincidencia + 1;
@@ -221,7 +170,7 @@ public class login_Encargado extends javax.swing.JFrame {
 
     private void txtrutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyTyped
         // TODO add your handling code here:
-        int maximorut=8;
+        int maximorut=9;
            int errores=0;
            char validarCaracter=evt.getKeyChar();
            ArrayList<Character> lista=retornarListaCaracteres();
@@ -233,7 +182,7 @@ public class login_Encargado extends javax.swing.JFrame {
                }
            }
            
-           if(Character.isLetter(validarCaracter) || txtrut.getText().length()>=maximorut || errores > 0 ){
+           if((Character.isLetter(validarCaracter)&& validarCaracter != 'k') || txtrut.getText().length()>=maximorut || errores > 0 ){
                evt.consume();
            }
     }//GEN-LAST:event_txtrutKeyTyped
@@ -255,13 +204,11 @@ public class login_Encargado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_volver;
     private javax.swing.JButton btningresar;
-    private javax.swing.JComboBox<String> cmbDigitoRut;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbPass;
-    private javax.swing.JLabel lblGuionRut;
     private javax.swing.JLabel lblRutEncargado;
     private javax.swing.JLabel lblenunciao;
+    private javax.swing.JLabel lblfondoEnca;
     private javax.swing.JPasswordField txtpass;
     private javax.swing.JTextField txtrut;
     // End of variables declaration//GEN-END:variables
@@ -298,13 +245,7 @@ public class login_Encargado extends javax.swing.JFrame {
            validaciones.add('°');
         return  validaciones;
     }
-    
-    public void cargarDatosComborut(){
-    String[] estaciones={"1","2","3","4","5","6","7","8","9","k"};
-    DefaultComboBoxModel cmb = new DefaultComboBoxModel(estaciones);    
-    cmbDigitoRut.setModel(cmb);
-    
-    }
+
 
 
 

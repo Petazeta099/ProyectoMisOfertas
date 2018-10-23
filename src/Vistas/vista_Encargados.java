@@ -40,18 +40,20 @@ public class vista_Encargados extends javax.swing.JFrame {
     public vista_Encargados() {
         initComponents();
         te.visualizar_Encargado(tab_encargados);
-        cargarDatosComborut();
         Retail retail = new Retail();
         retail.mostrarRetail(cb_retail);
         txt_password.setText("");
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
     }
     
     public void agregar(){
         crud_enc = new CRUDencargado();
         Encargado enc = new Encargado();
         
-        enc.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+        String rutFinal = rutsinDigito+"-"+rutDigito;
+        enc.setRun(rutFinal);
         enc.setP_nombre(txt_nombre1.getText());
         enc.setS_nombre(txt_nombre2.getText());
         enc.setApellido_p(txt_apellido1.getText());
@@ -83,7 +85,10 @@ public class vista_Encargados extends javax.swing.JFrame {
             enc.setActivo('0');
         }
         enc.setRetail_rut(lbl_rutRetail.getText());
-        enc.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+        String rutFinal = rutsinDigito+"-"+rutDigito;
+        enc.setRun(rutFinal);
         
         crud_enc.Modificar_Encargado(enc);
     }
@@ -92,18 +97,19 @@ public class vista_Encargados extends javax.swing.JFrame {
     public void eliminar(){
         crud_enc = new CRUDencargado();
         Encargado enc = new Encargado();
-        
-        enc.setRun(txt_rut.getText()+"-"+cmbDigitoRut.getSelectedItem());
+        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
+        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
+        String rutFinal = rutsinDigito+"-"+rutDigito;
+        enc.setRun(rutFinal);
         
         crud_enc.Eliminar_Encargado(enc);
     }
     
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4,boolean a5){
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
         txt_rut.setEnabled(a4);
-        cmbDigitoRut.setEnabled(a5);
     }
     
     public String obtenerRutRetailEncargado(String nombreRetail){
@@ -217,7 +223,6 @@ public class vista_Encargados extends javax.swing.JFrame {
         lbl_retail = new javax.swing.JLabel();
         cb_retail = new javax.swing.JComboBox<>();
         lbl_rutRetail = new javax.swing.JLabel();
-        cmbDigitoRut = new javax.swing.JComboBox<>();
         txt_password = new javax.swing.JPasswordField();
         btn_salir = new javax.swing.JButton();
 
@@ -342,8 +347,6 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        cmbDigitoRut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         txt_password.setText("jPasswordField1");
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -364,14 +367,10 @@ public class vista_Encargados extends javax.swing.JFrame {
                             .addComponent(lbl_nombres))
                         .addGap(10, 10, 10)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(txt_nombre1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(txt_rut)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_rut)
+                            .addComponent(txt_nombre1))
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(btn_agregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -387,20 +386,18 @@ public class vista_Encargados extends javax.swing.JFrame {
                             .addComponent(lbl_retail))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_apellido1)
+                            .addComponent(txt_password)
+                            .addComponent(cb_retail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_apellido1)
-                                    .addComponent(txt_password))
+                                .addComponent(lbl_activo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(lbl_activo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(chk_activo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbl_rutRetail))))
-                            .addComponent(cb_retail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(chk_activo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbl_rutRetail)))))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -409,9 +406,7 @@ public class vista_Encargados extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_rut)
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbDigitoRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_nombres)
@@ -497,7 +492,7 @@ public class vista_Encargados extends javax.swing.JFrame {
         }else{
             agregar();
         te.visualizar_Encargado(tab_encargados);
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
         lim.limpiar_texto(panel);
         }
         
@@ -520,7 +515,7 @@ public class vista_Encargados extends javax.swing.JFrame {
         }else{
         modificar();
         te.visualizar_Encargado(tab_encargados);
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
         
         lim.limpiar_texto(panel);
         }
@@ -534,7 +529,7 @@ public class vista_Encargados extends javax.swing.JFrame {
         if(s == 0){
             eliminar();
             te.visualizar_Encargado(tab_encargados);
-            activa_boton(true,false,false,true,true);
+            activa_boton(true,false,false,true);
             lim.limpiar_texto(panel);
         }
 
@@ -542,7 +537,7 @@ public class vista_Encargados extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true,true);
+        activa_boton(true,false,false,true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void tab_encargadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_encargadosMouseClicked
@@ -572,8 +567,7 @@ public class vista_Encargados extends javax.swing.JFrame {
         
         
         
-        txt_rut.setText(rutAcortado);
-        cmbDigitoRut.setSelectedItem(digitoRut);
+        txt_rut.setText(rutAcortado+digitoRut);
         txt_nombre1.setText(p_nombre);
         txt_nombre2.setText(s_nombre);
         txt_apellido1.setText(apellido_p);
@@ -581,7 +575,6 @@ public class vista_Encargados extends javax.swing.JFrame {
         txt_password.setText(String.valueOf(clave));
             
         
-        cmbDigitoRut.setSelectedItem(digitoRut);
         if(activo == '1'){
             chk_activo.setSelected(true);
         }else {
@@ -607,13 +600,13 @@ public class vista_Encargados extends javax.swing.JFrame {
                 if(boton.getName().equals("mod")){
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false,false);
+                    activa_boton(true,true,false,false);
                 }
                 if(boton.getName().equals("eli")){
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,false,false);
+                    activa_boton(true,false,true,false);
                 }
             }
 
@@ -636,7 +629,7 @@ public class vista_Encargados extends javax.swing.JFrame {
 
     private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
         
-        int maximorut=8;
+        int maximorut=9;
            int errores=0;
            char validarCaracter=evt.getKeyChar();
            ArrayList<Character> lista=retornarListaCaracteres();
@@ -648,7 +641,7 @@ public class vista_Encargados extends javax.swing.JFrame {
                }
            }
            
-           if(Character.isLetter(validarCaracter) || txt_rut.getText().length()>=maximorut || errores > 0 ){
+           if((Character.isLetter(validarCaracter)&& validarCaracter != 'k') || txt_rut.getText().length()>=maximorut || errores > 0 ){
                evt.consume();
            }
         
@@ -709,7 +702,6 @@ public class vista_Encargados extends javax.swing.JFrame {
     private javax.swing.JButton btn_salir;
     private javax.swing.JComboBox<Retail> cb_retail;
     private javax.swing.JCheckBox chk_activo;
-    private javax.swing.JComboBox<String> cmbDigitoRut;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_activo;
     private javax.swing.JLabel lbl_apellidos;
@@ -763,12 +755,6 @@ private ArrayList<Character> retornarListaCaracteres(){
         return  validaciones;
     }
     
-public void cargarDatosComborut(){
-    String[] estaciones={"1","2","3","4","5","6","7","8","9","k"};
-    DefaultComboBoxModel cmb = new DefaultComboBoxModel(estaciones);    
-    cmbDigitoRut.setModel(cmb);
-    
-    }
 
 
 }

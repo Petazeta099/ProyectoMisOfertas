@@ -32,130 +32,90 @@ public class vista_Admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btnConsumidor = new javax.swing.JButton();
         lblenunciao = new javax.swing.JLabel();
-        btn_salir = new javax.swing.JButton();
+        btnConsumidor = new javax.swing.JButton();
         btnEncargados = new javax.swing.JButton();
         btnProductos = new javax.swing.JButton();
         btnEmpresasRetail = new javax.swing.JButton();
         btnEmpresasSucursal = new javax.swing.JButton();
+        btn_salir = new javax.swing.JButton();
+        fondoAdmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRADOR");
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
+        lblenunciao.setText("Menu Administración");
+        lblenunciao.setAlignmentX(0.5F);
+        lblenunciao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblenunciao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 300, 50));
+
+        btnConsumidor.setBackground(new java.awt.Color(204, 204, 204));
+        btnConsumidor.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btnConsumidor.setText("Consumidores");
         btnConsumidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsumidorActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConsumidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 265, 38));
 
-        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        lblenunciao.setText("  MENU ADMIN");
-        lblenunciao.setAlignmentX(0.5F);
-        lblenunciao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lblenunciao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
-            }
-        });
-
+        btnEncargados.setBackground(new java.awt.Color(204, 204, 204));
+        btnEncargados.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btnEncargados.setText("Encargados");
         btnEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncargadosActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEncargados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 265, 38));
 
+        btnProductos.setBackground(new java.awt.Color(204, 204, 204));
+        btnProductos.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btnProductos.setText("Productos");
         btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductosActionPerformed(evt);
             }
         });
+        getContentPane().add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 265, 40));
 
+        btnEmpresasRetail.setBackground(new java.awt.Color(204, 204, 204));
+        btnEmpresasRetail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btnEmpresasRetail.setText("Empresas: Retail");
         btnEmpresasRetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresasRetailActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEmpresasRetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 265, 40));
 
+        btnEmpresasSucursal.setBackground(new java.awt.Color(204, 204, 204));
+        btnEmpresasSucursal.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btnEmpresasSucursal.setText("Empresas: Sucursal");
         btnEmpresasSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresasSucursalActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEmpresasSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 265, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(btn_salir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConsumidor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEncargados, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                    .addComponent(btnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEmpresasRetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEmpresasSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblenunciao, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConsumidor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEncargados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEmpresasRetail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEmpresasSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(btn_salir)
-                .addGap(5, 5, 5))
-        );
+        btn_salir.setBackground(new java.awt.Color(255, 255, 255));
+        btn_salir.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 70, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
+        fondoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAdmin.jpg"))); // NOI18N
+        getContentPane().add(fondoAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 470));
 
         pack();
         setLocationRelativeTo(null);
@@ -202,7 +162,7 @@ public class vista_Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnEncargados;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btn_salir;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel fondoAdmin;
     private javax.swing.JLabel lblenunciao;
     // End of variables declaration//GEN-END:variables
 }

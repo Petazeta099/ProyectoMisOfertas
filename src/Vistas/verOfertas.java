@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,44 +24,50 @@ import javax.swing.table.DefaultTableModel;
  * @author Raul
  */
 public class verOfertas extends javax.swing.JFrame {
-    
+
     static home login = new home();
+
     /**
      * Creates new form verOfertas
      */
     public verOfertas() {
-        initComponents();        
+        initComponents();
         mostrarOfertas();
     }
 
-    public void mostrarOfertas(){
+    public void mostrarOfertas() {
         String encargado = login_Encargado.rut_encargado;
+
+        String rutsinDigito = encargado.substring(0, encargado.length() - 1);
+        String rutDigito = encargado.substring(encargado.length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
+
         DefaultTableModel modelo = new DefaultTableModel();
-        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta where encargado_run = '" + encargado + "'");
-        
-        modelo.setColumnIdentifiers(new Object[]{"ID","TITULO","DESCRIPCION","F. INICIO","F. TERMINO","P. NORMAL","P. OFERTA","C. MINIMA","C. MAXIMA","ACTIVA"});
-        
-        try{
-            
-            while(rs.next()){
-                String act="";
-                if(rs.getString("activa").equals("1")){
-                    act="Si";
-                }else{
-                    act="No";
+        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta where encargado_run = '" + rutFinal + "'");
+
+        modelo.setColumnIdentifiers(new Object[]{"ID", "TITULO", "DESCRIPCION", "F. INICIO", "F. TERMINO", "P. NORMAL", "P. OFERTA", "C. MINIMA", "C. MAXIMA", "ACTIVA"});
+
+        try {
+
+            while (rs.next()) {
+                String act = "";
+                if (rs.getString("activa").equals("1")) {
+                    act = "Si";
+                } else {
+                    act = "No";
                 }
-                modelo.addRow(new Object[]{rs.getString("id"),rs.getString("titulo"),rs.getString("descripcion"),rs.getString("fecha_inicio"),rs.getString("fecha_termino"),
-                rs.getString("precio_normal"),rs.getString("precio_oferta"),rs.getString("compra_min"),rs.getString("compra_max"), act});
-                
+                modelo.addRow(new Object[]{rs.getString("id"), rs.getString("titulo"), rs.getString("descripcion"), rs.getString("fecha_inicio"), rs.getString("fecha_termino"),
+                    rs.getString("precio_normal"), rs.getString("precio_oferta"), rs.getString("compra_min"), rs.getString("compra_max"), act});
+
             }
             tblOfertas.setModel(modelo);
-            
-        }catch(Exception e){
-            System.out.println("Error: "+e);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,46 +155,56 @@ public class verOfertas extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void tblOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOfertasMouseClicked
-        
+
     }//GEN-LAST:event_tblOfertasMouseClicked
 
     private void btn_PublicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PublicarActionPerformed
-        
-        int fila = tblOfertas.getSelectedRow();
-        int id = Integer.parseInt(tblOfertas.getValueAt(fila,0).toString());
-        String act = tblOfertas.getValueAt(fila, 9).toString();
-        char act2;
-        System.out.println("valor id: "+id+" valor de activo: "+act);
-        
-         if(act.equals("Si")){
-            act2 = '0';
-        }else{
-            act2 = '1';
+
+        int itemSeleccionado = tblOfertas.getSelectedColumn();
+        if (itemSeleccionado <= 0) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tblOfertas.getSelectedRow();
+            int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
+            String act = tblOfertas.getValueAt(fila, 9).toString();
+            char act2;
+            System.out.println("valor id: " + id + " valor de activo: " + act);
+
+            if (act.equals("Si")) {
+                act2 = '0';
+                
+                JOptionPane.showMessageDialog(this, "Oferta cambiada a NO PUBLICADA.");
+            } else {
+                act2 = '1';
+                JOptionPane.showMessageDialog(this, "Oferta publicada.");
+            }
+
+            System.out.println("NUEVOS -> valor id: " + id + " valor de activo: " + act);
+
+            Database cn = new Database();
+            String sql = "UPDATE oferta SET activa = ? WHERE id = ?";
+            PreparedStatement ps = null;
+            try {
+                ps = cn.getConnection().prepareStatement(sql);
+                ps.setString(1, String.valueOf(act2));
+                ps.setInt(2, id);
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                try {
+                    ps.close();
+                    cn = null;
+                } catch (Exception ex) {
+                }
+            }
+            
+            mostrarOfertas();
         }
-        
-                System.out.println("NUEVOS -> valor id: "+id+" valor de activo: "+act);
-        
-        Database cn = new Database();
-        String sql = "UPDATE oferta SET activa = ? WHERE id = ?";
-        PreparedStatement ps = null;
-        try{
-            ps = cn.getConnection().prepareStatement(sql);
-            ps.setString(1,String.valueOf(act2));
-            ps.setInt(2, id);
-            ps.executeUpdate();
-        }catch(SQLException ex){
-            System.out.println(ex.getMessage());
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-        }finally{
-            try{
-                ps.close();
-                cn = null;
-            }catch(Exception ex){}
-        }
-        
-        mostrarOfertas();
-        
+
+
     }//GEN-LAST:event_btn_PublicarActionPerformed
 
 
@@ -198,4 +215,3 @@ public class verOfertas extends javax.swing.JFrame {
     private javax.swing.JTable tblOfertas;
     // End of variables declaration//GEN-END:variables
 }
-

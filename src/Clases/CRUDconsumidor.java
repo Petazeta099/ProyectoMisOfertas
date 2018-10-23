@@ -77,7 +77,7 @@ public class CRUDconsumidor {
             ps.setString(10, String.valueOf(cons.getSuscrito()));
             ps.setInt(11, cons.getComuna_id());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "El consumidor se a agregado correctamente");
+            JOptionPane.showMessageDialog(null, "El usuario: "+cons.getP_nombre()+" "+cons.getApellido_p()+" ,se a agregado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Usuario ya existe en el sistema", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -111,7 +111,7 @@ public class CRUDconsumidor {
             ps.setInt(10, cons.getComuna_id());
             ps.setString(11, cons.getRun());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "El consumidor se a modificado correctamente");
+            JOptionPane.showMessageDialog(null, "El usuario "+cons.getP_nombre()+" "+cons.getApellido_p()+" se a modificado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){
@@ -133,8 +133,8 @@ public class CRUDconsumidor {
         try{
             ps = cn.getConnection().prepareStatement(sql);
             ps.setString(1, cons.getRun());
+            JOptionPane.showMessageDialog(null, "El usuario consumidor se a eliminado correctamente");
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "El consumidor se a eliminado correctamente");
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
         }catch(Exception ex){

@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -38,7 +40,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         initComponents();
         
         ts.visualizar_Sucursal(tab_sucursal);
-        
+        visibilidadModificacion(false,false,true);
         Comuna comuna = new Comuna();
         comuna.mostrarComuna(cb_comuna);
         Retail retail = new Retail();
@@ -232,6 +234,8 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         cb_comuna = new javax.swing.JComboBox<>();
         lbl_comuna_id = new javax.swing.JLabel();
         lbl_id = new javax.swing.JLabel();
+        lbIdMod = new javax.swing.JLabel();
+        txtIdMod = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_sucursal = new javax.swing.JTable();
         btn_salir = new javax.swing.JButton();
@@ -311,84 +315,99 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
+        lbIdMod.setText("Id de sucursal a modificar:");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(btn_agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(lbl_rutRetail)
-                                .addGap(34, 34, 34))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(lbl_id)
+                            .addComponent(lbl_apellidos)
+                            .addComponent(lbl_clave)
+                            .addComponent(lbl_retail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cb_retail, 0, 100, Short.MAX_VALUE)
+                                    .addComponent(cb_comuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_eliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_limpiar)
-                                .addContainerGap())))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_apellidos)
-                                    .addComponent(lbl_clave)
-                                    .addComponent(lbl_retail))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_retail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_comuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_direccion)))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(lbl_nombres)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_nombre)))
-                        .addContainerGap())))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                        .addComponent(lbl_rutRetail)
+                                        .addGap(34, 34, 34))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                        .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(lbl_id)
+                                        .addGap(176, 176, 176))))
+                            .addComponent(txt_direccion)))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(lbl_nombres)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_nombre)))
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_agregar)
+                    .addComponent(btn_modificar)
+                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_limpiar)
+                        .addComponent(btn_eliminar)))
+                .addGap(73, 73, 73))
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(lbIdMod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtIdMod, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(lbl_rutRetail))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(157, 157, 157)
+                                .addComponent(lbl_rutRetail))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(lbl_id)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addContainerGap(37, Short.MAX_VALUE)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbIdMod)
+                            .addComponent(txtIdMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_nombres)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_agregar))
                         .addGap(18, 18, 18)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_apellidos)
-                            .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_modificar))
                         .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_clave)
-                            .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_retail)
-                            .addComponent(cb_retail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_id)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btn_agregar)
-                                .addComponent(btn_modificar)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_clave)
+                                    .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_retail)
+                                    .addComponent(cb_retail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(btn_eliminar)
-                                .addComponent(btn_limpiar))
-                            .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_limpiar)))))
+                .addGap(34, 34, 34))
         );
 
         tab_sucursal.setModel(new javax.swing.table.DefaultTableModel(
@@ -423,14 +442,16 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(btn_salir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(276, 276, 276)
+                                .addComponent(btn_salir)))
+                        .addGap(0, 56, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,10 +470,25 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        agregar();
+        int errores=0;
+        if(txt_nombre.getText().equals("") || txt_direccion.getText().equals("")){
+            errores = errores+1;
+        }
+        
+        if(errores>=1){
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
+        try {
+                agregar();
+            } catch (Exception ex) {
+                Logger.getLogger(vista_Consumidores.class.getName()).log(Level.SEVERE, null, ex);
+            }
         ts.visualizar_Sucursal(tab_sucursal);
         activa_boton(true,false,false,true);
         lim.limpiar_texto(panel);
+        }
+        
+        
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -460,10 +496,27 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-        modificar();
+        int errores=0;
+        if(txt_nombre.getText().equals("") || txt_direccion.getText().equals("")){
+            errores = errores+1;
+        }
+        
+        if(errores>=1){
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
+        try {
+                modificar();
+            } catch (Exception ex) {
+                Logger.getLogger(vista_Consumidores.class.getName()).log(Level.SEVERE, null, ex);
+            }
         ts.visualizar_Sucursal(tab_sucursal);
         activa_boton(true,false,false,false);
         lim.limpiar_texto(panel);
+        visibilidadModificacion(false,false,false);
+        }
+        
+        
+        
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
@@ -474,6 +527,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             ts.visualizar_Sucursal(tab_sucursal);
             activa_boton(true,false,false,true);
             lim.limpiar_texto(panel);
+            visibilidadModificacion(false,false,false);
         }
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
@@ -505,6 +559,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         txt_direccion.setText(direccion);
         cb_comuna.setSelectedIndex(obtenerIdComunaConsumidor(comuna)-1);
         cb_retail.setSelectedIndex(entregarPosicionRetail(obtenerRutRetailEncargado(razon_social))-1);
+        txtIdMod.setText(Integer.toString(id));
         
         /*
         int id = (int)tab_sucursal.getValueAt(clic_tabla, 0);
@@ -536,12 +591,14 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
                     activa_boton(true,true,false,false);
+                    visibilidadModificacion(true,true,false);
                 }
                 if(boton.getName().equals("eli")){
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
                     activa_boton(true,false,true,true);
+                    visibilidadModificacion(true,true,false);
                 }
             }
 
@@ -576,6 +633,12 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_direccionKeyTyped
 
+    public void visibilidadModificacion(boolean visi1,boolean visi2,boolean visi3){
+    lbIdMod.setVisible(visi1);
+    txtIdMod.setVisible(visi2);
+    txtIdMod.setEnabled(visi3);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -589,6 +652,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
     private javax.swing.JComboBox<Comuna> cb_comuna;
     private javax.swing.JComboBox<Retail> cb_retail;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbIdMod;
     private javax.swing.JLabel lbl_apellidos;
     private javax.swing.JLabel lbl_clave;
     private javax.swing.JLabel lbl_comuna_id;
@@ -598,6 +662,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_rutRetail;
     private javax.swing.JPanel panel;
     private javax.swing.JTable tab_sucursal;
+    private javax.swing.JTextField txtIdMod;
     private javax.swing.JTextField txt_direccion;
     private javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables

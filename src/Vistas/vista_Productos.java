@@ -11,11 +11,13 @@ import Clases.Limpiar;
 import Clases.Producto;
 import Tablas.Tabla_Producto;
 import Tablas.Tabla_Producto;
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +32,7 @@ public class vista_Productos extends javax.swing.JFrame {
     Limpiar lim = new Limpiar();    
     CRUDproducto crud_pro;
     int clic_tabla = 0;
+    boolean skuCorrecto=false;
     
     /**
      * Creates new form listaProductos
@@ -40,6 +43,9 @@ public class vista_Productos extends javax.swing.JFrame {
         listaMarcas();
         tp.visualizar_Producto(tab_producto);
         //obtenerProductos();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
+        setResizable(false);
         activa_boton(true,false,false,true);
     }
     
@@ -334,6 +340,11 @@ public class vista_Productos extends javax.swing.JFrame {
             }
         });
 
+        txt_sku.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_skuFocusLost(evt);
+            }
+        });
         txt_sku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_skuKeyTyped(evt);
@@ -488,7 +499,7 @@ public class vista_Productos extends javax.swing.JFrame {
         String marca = txt_marca.getSelectedItem()+"";
         
         if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || categoria.equals("")
-           || marca.equals("") || txt_sku.getText().equals("")){
+           || marca.equals("") || txt_sku.getText().equals("") || skuCorrecto==false){
             errores = errores+1;
         }        
         if(errores>=1){
@@ -606,6 +617,18 @@ public class vista_Productos extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txt_descripcionKeyTyped
+
+    private void txt_skuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_skuFocusLost
+        int minimo=4;
+        if(txt_sku.getText().length()<minimo){
+            txt_sku.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese sku", "Aviso", JOptionPane.ERROR_MESSAGE);
+            skuCorrecto=false;
+        }else{
+            txt_sku.setForeground(Color.black);
+            skuCorrecto=true;
+        }
+    }//GEN-LAST:event_txt_skuFocusLost
 
     /**
      * @param args the command line arguments

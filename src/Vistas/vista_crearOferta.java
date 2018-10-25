@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import java.math.*;
 
 /**
  *
@@ -41,6 +42,9 @@ public class vista_crearOferta extends javax.swing.JFrame {
         mostrarProductos();
         cn = new Database();
         reg = cn.getConnection();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
+        setResizable(false);
 
     }
 
@@ -110,7 +114,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
 
         txtPrecioNormal.setText("Precio normal de la oferta");
 
-        txtPrecioOferta.setText("Precio de la oferta:");
+        txtPrecioOferta.setText("Descuento %");
 
         txtComMin.setText("Compra minima por producto");
 
@@ -328,12 +332,15 @@ public class vista_crearOferta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese informacion en el formulario.", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                dateI = dcOp1.getDate();
+                dateI = dcOp1.getDate();    
                 dateT = dcOp2.getDate();
                 fechaI = dateI.toString();
                 fechaT = dateT.toString();
-                String precioNormal = tfPrecioNor.getText();
+                String precioNormal = tfPrecioNor.getText();                
                 String precioOferta = tfPrecioOfer.getText();
+                float descuento = (Float.parseFloat(precioOferta) / 100);  //obtiene el % de descuento de la caja de texto
+                float pNormal = (float) Float.parseFloat(precioNormal);
+                int pOferta = (int)(pNormal - (pNormal*(descuento))); // 1000 - (1000 * (20/100)) = 1000 - 800
                 String cantMin = tdCantiMin.getText();
                 String cantMax = tfCantMax.getText();
                 String rut_encargado = login_Encargado.rut_encargado;
@@ -371,7 +378,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 pst.setDate(4, sqlFechaInicio);
                 pst.setDate(5, sqlFechaTermino);
                 pst.setInt(6, Integer.parseInt(precioNormal));
-                pst.setInt(7, Integer.parseInt(precioOferta));
+                pst.setInt(7, pOferta);
                 pst.setInt(8, Integer.parseInt(cantMin));
                 pst.setInt(9, Integer.parseInt(cantMax));
                 pst.setInt(10, 0);
@@ -428,7 +435,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDescripKeyTyped
 
     private void tfPrecioNorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrecioNorKeyTyped
-        int maximoPuntaje = 25;
+        int maximoPuntaje = 7;
         ArrayList<Character> lista = retornarListaCaracteres();
         int errores = 0;
         char validarCaracter = evt.getKeyChar();
@@ -445,7 +452,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPrecioNorKeyTyped
 
     private void tfPrecioOferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrecioOferKeyTyped
-        int maximoPuntaje = 25;
+        int maximoPuntaje = 2;
         ArrayList<Character> lista = retornarListaCaracteres();
         int errores = 0;
         char validarCaracter = evt.getKeyChar();
@@ -462,7 +469,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPrecioOferKeyTyped
 
     private void tdCantiMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tdCantiMinKeyTyped
-        int maximoPuntaje = 25;
+        int maximoPuntaje = 2;
         ArrayList<Character> lista = retornarListaCaracteres();
         int errores = 0;
         char validarCaracter = evt.getKeyChar();
@@ -479,7 +486,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_tdCantiMinKeyTyped
 
     private void tfCantMaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCantMaxKeyTyped
-        int maximoPuntaje = 25;
+        int maximoPuntaje = 2;
         ArrayList<Character> lista = retornarListaCaracteres();
         int errores = 0;
         char validarCaracter = evt.getKeyChar();

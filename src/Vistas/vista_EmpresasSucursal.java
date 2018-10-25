@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +39,9 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
      */
     public vista_EmpresasSucursal() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
         
+        setResizable(false);
         ts.visualizar_Sucursal(tab_sucursal);
         visibilidadModificacion(false,false,true);
         Comuna comuna = new Comuna();

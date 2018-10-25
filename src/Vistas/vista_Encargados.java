@@ -13,12 +13,14 @@ import Clases.Producto;
 import Clases.Retail;
 import Tablas.Tabla_Encargado;
 import Tablas.Tabla_Encargado;
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +35,8 @@ public class vista_Encargados extends javax.swing.JFrame {
     Limpiar lim = new Limpiar();    
     CRUDencargado crud_enc;
     int clic_tabla = 0;
-    
+    boolean rutCorrecto=false;
+    boolean contraCorrecta=false;
     /**
      * Creates new form listaProductos
      */
@@ -43,6 +46,9 @@ public class vista_Encargados extends javax.swing.JFrame {
         Retail retail = new Retail();
         retail.mostrarRetail(cb_retail);
         txt_password.setText("");
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
+        setResizable(false);
         activa_boton(true,false,false,true);
     }
     
@@ -278,6 +284,11 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
+        txt_rut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_rutFocusLost(evt);
+            }
+        });
         txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_rutKeyTyped(evt);
@@ -348,6 +359,11 @@ public class vista_Encargados extends javax.swing.JFrame {
         });
 
         txt_password.setText("jPasswordField1");
+        txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_passwordFocusLost(evt);
+            }
+        });
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_passwordKeyTyped(evt);
@@ -483,7 +499,7 @@ public class vista_Encargados extends javax.swing.JFrame {
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         int errores=0;
         if(txt_rut.getText().equals("") || txt_nombre1.getText().equals("") || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") ||
-                txt_apellido2.getText().equals("") || txt_password.getText().equals("")){
+                txt_apellido2.getText().equals("") || txt_password.getText().equals("") || rutCorrecto==false || contraCorrecta==false){
             errores = errores+1;
         }
         
@@ -688,6 +704,33 @@ public class vista_Encargados extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txt_passwordKeyTyped
+
+    private void txt_rutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_rutFocusLost
+        
+        
+        int minimo=8;
+        
+        if(txt_rut.getText().length()<minimo){
+            txt_rut.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
+            rutCorrecto=false;
+        }else{
+            txt_rut.setForeground(Color.black);
+            rutCorrecto=true;
+        }
+    }//GEN-LAST:event_txt_rutFocusLost
+
+    private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
+        int minimo=8;
+        if(txt_password.getText().length()<minimo){
+            txt_password.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Minimo de caracteres de clave es 8", "Aviso", JOptionPane.ERROR_MESSAGE);
+            contraCorrecta=false;
+        }else{
+            txt_password.setForeground(Color.black);
+            contraCorrecta=true;
+        }
+    }//GEN-LAST:event_txt_passwordFocusLost
 
     /**
      * @param args the command line arguments

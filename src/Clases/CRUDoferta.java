@@ -21,7 +21,7 @@ public class CRUDoferta {
     public ArrayList<Oferta> Listar_Oferta(){
         ArrayList<Oferta> list = new ArrayList<Oferta>();
         Database cn = new Database();
-        String sql = "SELECT * FROM oferta";
+        String sql = "SELECT * FROM oferta order by id asc";
         ResultSet lista = null;
         PreparedStatement ps = null;
         try{
@@ -29,7 +29,7 @@ public class CRUDoferta {
             lista = ps.executeQuery();
             while(lista.next()){
                 Oferta of = new Oferta();
-                of.setId(lista.getInt(1));
+                of.setId(lista.getInt(1));  
                 of.setTitulo(lista.getString(2));
                 of.setDescripcion(lista.getString(3));
                 of.setFecha_inicio(Date.valueOf(lista.getString(4)));
@@ -77,5 +77,29 @@ public class CRUDoferta {
             }catch(Exception ex){}
         }
     }
+    public void ActDescuento(int precioOferta,int idOferta){
+       Database cn = new Database();
+        String sql = "UPDATE oferta SET precio_oferta = ? WHERE id = ?";
+        PreparedStatement ps = null;
+        try{
+            ps = cn.getConnection().prepareStatement(sql);
+            ps.setInt(1, precioOferta);
+            ps.setInt(2, idOferta);
+            ps.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }finally{
+            try{
+                ps.close();
+                cn = null;
+            }catch(Exception ex){}
+        }
+    }
+    
+    
+    
+    
     
 }

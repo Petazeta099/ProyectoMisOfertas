@@ -11,12 +11,22 @@ import Clases.Limpiar;
 import Clases.Producto;
 import Tablas.Tabla_Producto;
 import Tablas.Tabla_Producto;
+import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,10 +36,15 @@ import javax.swing.table.DefaultTableModel;
 public class vista_Productos extends javax.swing.JFrame {
     static home login = new home();
     
+  
+   // 
     Tabla_Producto tp = new Tabla_Producto();    
     Limpiar lim = new Limpiar();    
     CRUDproducto crud_pro;
     int clic_tabla = 0;
+    boolean skuCorrecto=false;
+    //
+    
     
     /**
      * Creates new form listaProductos
@@ -40,8 +55,18 @@ public class vista_Productos extends javax.swing.JFrame {
         listaMarcas();
         tp.visualizar_Producto(tab_producto);
         //obtenerProductos();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
+        setResizable(false);
         activa_boton(true,false,false,true);
+        tab_producto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
+   
+    
+    
+    
+
+    
     
     public void agregar(){
         crud_pro = new CRUDproducto();
@@ -296,6 +321,7 @@ public class vista_Productos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tab_producto.getTableHeader().setReorderingAllowed(false);
         tab_producto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tab_productoMouseClicked(evt);
@@ -334,6 +360,11 @@ public class vista_Productos extends javax.swing.JFrame {
             }
         });
 
+        txt_sku.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_skuFocusLost(evt);
+            }
+        });
         txt_sku.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_skuKeyTyped(evt);
@@ -389,14 +420,6 @@ public class vista_Productos extends javax.swing.JFrame {
                             .addComponent(txt_sku)
                             .addComponent(txt_nombre)))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(btn_agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_limpiar))
-                    .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_desc)
                             .addComponent(lbl_categoria)
@@ -408,7 +431,16 @@ public class vista_Productos extends javax.swing.JFrame {
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(btn_agregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_eliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_limpiar)
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -434,7 +466,7 @@ public class vista_Productos extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_marca)
                     .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_agregar)
                     .addComponent(btn_modificar)
@@ -488,7 +520,7 @@ public class vista_Productos extends javax.swing.JFrame {
         String marca = txt_marca.getSelectedItem()+"";
         
         if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || categoria.equals("")
-           || marca.equals("") || txt_sku.getText().equals("")){
+           || marca.equals("") || txt_sku.getText().equals("") || skuCorrecto==false){
             errores = errores+1;
         }        
         if(errores>=1){
@@ -606,6 +638,18 @@ public class vista_Productos extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txt_descripcionKeyTyped
+
+    private void txt_skuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_skuFocusLost
+        int minimo=4;
+        if(txt_sku.getText().length()<minimo){
+            txt_sku.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese sku", "Aviso", JOptionPane.ERROR_MESSAGE);
+            skuCorrecto=false;
+        }else{
+            txt_sku.setForeground(Color.black);
+            skuCorrecto=true;
+        }
+    }//GEN-LAST:event_txt_skuFocusLost
 
     /**
      * @param args the command line arguments

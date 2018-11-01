@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -33,6 +35,9 @@ public class verOfertas extends javax.swing.JFrame {
     public verOfertas() {
         initComponents();
         mostrarOfertas();
+        habilitacionDeTextos(false);
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
     }
 
     public void mostrarOfertas() {
@@ -43,7 +48,7 @@ public class verOfertas extends javax.swing.JFrame {
         String rutFinal = rutsinDigito + "-" + rutDigito;
 
         DefaultTableModel modelo = new DefaultTableModel();
-        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta where encargado_run = '" + rutFinal + "'");
+        ResultSet rs = Database.crearConsulta("SELECT * FROM oferta where encargado_run = '" + rutFinal + "' order by id asc");
 
         modelo.setColumnIdentifiers(new Object[]{"ID", "TITULO", "DESCRIPCION", "F. INICIO", "F. TERMINO", "P. NORMAL", "P. OFERTA", "C. MINIMA", "C. MAXIMA", "ACTIVA"});
 
@@ -81,6 +86,31 @@ public class verOfertas extends javax.swing.JFrame {
         tblOfertas = new javax.swing.JTable();
         btn_salir = new javax.swing.JButton();
         btn_Publicar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnMantDesc = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblId = new javax.swing.JLabel();
+        lblIdM = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblTituloM = new javax.swing.JLabel();
+        lblDescrip = new javax.swing.JLabel();
+        lbldescripM = new javax.swing.JLabel();
+        lblFechaI = new javax.swing.JLabel();
+        lblFechaIM = new javax.swing.JLabel();
+        lblFechaT = new javax.swing.JLabel();
+        lblFechaTM = new javax.swing.JLabel();
+        lblPrecioN = new javax.swing.JLabel();
+        lblPrecioO = new javax.swing.JLabel();
+        lblCompaMin = new javax.swing.JLabel();
+        lblCompraMax = new javax.swing.JLabel();
+        lblActividad = new javax.swing.JLabel();
+        lblPrecioNM = new javax.swing.JLabel();
+        lblPrecioOM = new javax.swing.JLabel();
+        lblCompraMinM = new javax.swing.JLabel();
+        lblCompraMaxM = new javax.swing.JLabel();
+        lblActividadM = new javax.swing.JLabel();
+        lblTituloInicial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +124,15 @@ public class verOfertas extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblOfertas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblOfertasMouseClicked(evt);
@@ -109,40 +147,228 @@ public class verOfertas extends javax.swing.JFrame {
             }
         });
 
-        btn_Publicar.setText("PUBLICAR");
+        btn_Publicar.setText("PUBLICAR / BAJAR");
         btn_Publicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_PublicarActionPerformed(evt);
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Mantenedor de descuentos");
+
+        btnMantDesc.setText("IR");
+        btnMantDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMantDescActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMantDesc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btnMantDesc)
+                .addGap(23, 23, 23))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        lblId.setText("ID: ");
+
+        lblIdM.setText("idMuestra");
+
+        lblTitulo.setText("Titulo:");
+
+        lblTituloM.setText("TituloMuestra");
+
+        lblDescrip.setText("Descripción:");
+
+        lbldescripM.setText("descripMuestra");
+
+        lblFechaI.setText("Fecha Inicio:");
+
+        lblFechaIM.setText("jLabel2");
+
+        lblFechaT.setText("Fecha Termino:");
+
+        lblFechaTM.setText("jLabel3");
+
+        lblPrecioN.setText("Precio Normal:");
+
+        lblPrecioO.setText("Precio Oferta:");
+
+        lblCompaMin.setText("Compra Mínima:");
+
+        lblCompraMax.setText("Compra Máxima:");
+
+        lblActividad.setText("Se encuentra:");
+
+        lblPrecioNM.setText("jLabel2");
+
+        lblPrecioOM.setText("jLabel2");
+
+        lblCompraMinM.setText("jLabel2");
+
+        lblCompraMaxM.setText("jLabel2");
+
+        lblActividadM.setText("jLabel2");
+
+        lblTituloInicial.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTituloInicial.setText("Descripción de la oferta:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIdM)
+                        .addGap(182, 182, 182)
+                        .addComponent(lblTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTituloM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblDescrip)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbldescripM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblFechaI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFechaIM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblFechaT)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFechaTM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPrecioN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPrecioNM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPrecioO)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrecioOM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblCompaMin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCompraMinM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblCompraMax)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCompraMaxM))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblActividad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblActividadM))
+                    .addComponent(lblTituloInicial))
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTituloInicial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(lblIdM)
+                    .addComponent(lblTitulo)
+                    .addComponent(lblTituloM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescrip)
+                    .addComponent(lbldescripM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaI)
+                    .addComponent(lblFechaIM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaT)
+                    .addComponent(lblFechaTM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioN)
+                    .addComponent(lblPrecioNM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrecioO)
+                    .addComponent(lblPrecioOM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCompaMin)
+                    .addComponent(lblCompraMinM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCompraMax)
+                    .addComponent(lblCompraMaxM))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblActividad)
+                    .addComponent(lblActividadM))
+                .addGap(36, 36, 36))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_Publicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(btn_Publicar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 8, 8)))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Publicar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(btn_salir)
-                .addGap(4, 4, 4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(btn_Publicar)
+                        .addGap(31, 31, 31)
+                        .addComponent(btn_salir)
+                        .addGap(29, 29, 29)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,7 +381,22 @@ public class verOfertas extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void tblOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOfertasMouseClicked
-
+        int fila = tblOfertas.getSelectedRow();
+            int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
+            
+            String titulo=tblOfertas.getValueAt(fila, 1).toString();
+            String descrip=tblOfertas.getValueAt(fila, 2).toString();   
+            String fechaInicio=tblOfertas.getValueAt(fila, 3).toString();
+            String fechaTermino=tblOfertas.getValueAt(fila, 4).toString();
+            String precioNormal=tblOfertas.getValueAt(fila, 5).toString();
+            String precioOferta=tblOfertas.getValueAt(fila, 6).toString();
+            String compraMin=tblOfertas.getValueAt(fila, 7).toString();
+            String compraMax=tblOfertas.getValueAt(fila, 8).toString();   
+           
+                    
+            String act = tblOfertas.getValueAt(fila, 9).toString();
+            
+            mostrarDatos(id,titulo,descrip,fechaInicio,fechaTermino,precioNormal,precioOferta,compraMin,compraMax,act);
     }//GEN-LAST:event_tblOfertasMouseClicked
 
     private void btn_PublicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PublicarActionPerformed
@@ -166,7 +407,21 @@ public class verOfertas extends javax.swing.JFrame {
         } else {
             int fila = tblOfertas.getSelectedRow();
             int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
+            
+            String titulo=tblOfertas.getValueAt(fila, 1).toString();
+            String descrip=tblOfertas.getValueAt(fila, 2).toString();   
+            String fechaInicio=tblOfertas.getValueAt(fila, 3).toString();
+            String fechaTermino=tblOfertas.getValueAt(fila, 4).toString();
+            String precioNormal=tblOfertas.getValueAt(fila, 5).toString();
+            String precioOferta=tblOfertas.getValueAt(fila, 6).toString();
+            String compraMin=tblOfertas.getValueAt(fila, 7).toString();
+            String compraMax=tblOfertas.getValueAt(fila, 8).toString();   
+           
+                    
             String act = tblOfertas.getValueAt(fila, 9).toString();
+            
+            mostrarDatos(id,titulo,descrip,fechaInicio,fechaTermino,precioNormal,precioOferta,compraMin,compraMax,act);
+            
             char act2;
             System.out.println("valor id: " + id + " valor de activo: " + act);
 
@@ -207,11 +462,81 @@ public class verOfertas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_PublicarActionPerformed
 
+    private void btnMantDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantDescActionPerformed
+        this.dispose();
+        new MantenedorDescuentosOferta().setVisible(true);
+        
+    }//GEN-LAST:event_btnMantDescActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMantDesc;
     private javax.swing.JButton btn_Publicar;
     private javax.swing.JButton btn_salir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblActividad;
+    private javax.swing.JLabel lblActividadM;
+    private javax.swing.JLabel lblCompaMin;
+    private javax.swing.JLabel lblCompraMax;
+    private javax.swing.JLabel lblCompraMaxM;
+    private javax.swing.JLabel lblCompraMinM;
+    private javax.swing.JLabel lblDescrip;
+    private javax.swing.JLabel lblFechaI;
+    private javax.swing.JLabel lblFechaIM;
+    private javax.swing.JLabel lblFechaT;
+    private javax.swing.JLabel lblFechaTM;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblIdM;
+    private javax.swing.JLabel lblPrecioN;
+    private javax.swing.JLabel lblPrecioNM;
+    private javax.swing.JLabel lblPrecioO;
+    private javax.swing.JLabel lblPrecioOM;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTituloInicial;
+    private javax.swing.JLabel lblTituloM;
+    private javax.swing.JLabel lbldescripM;
     private javax.swing.JTable tblOfertas;
     // End of variables declaration//GEN-END:variables
+
+    public void habilitacionDeTextos(boolean habili ){
+        if(habili==false){
+        lblTituloInicial.setText("Seleccione oferta para ver descripción");
+        }else{
+        lblTituloInicial.setText("Descripción de la oferta");
+        
+        }
+        
+        lblId.setVisible(habili);lblIdM.setVisible(habili);lblTitulo.setVisible(habili);lblTituloM.setVisible(habili);
+        lblDescrip.setVisible(habili);lbldescripM.setVisible(habili);setVisible(habili);lblFechaI.setVisible(habili);lblFechaIM.setVisible(habili);lblFechaT.setVisible(habili);lblFechaTM.setVisible(habili);
+        lblPrecioN.setVisible(habili);lblPrecioNM.setVisible(habili);lblPrecioO.setVisible(habili);lblPrecioOM.setVisible(habili);lblCompaMin.setVisible(habili);
+        lblCompraMinM.setVisible(habili);lblCompraMax.setVisible(habili);lblCompraMaxM.setVisible(habili);lblActividad.setVisible(habili);
+        lblActividadM.setVisible(habili);
+        
+    }
+    
+    public void mostrarDatos(int id, String titulo,String descrip,String fechai,String fechaT,String precioNor,String precioO,String compMin
+    ,String compMax,String acti){
+        habilitacionDeTextos(true);
+        lblIdM.setText(Integer.toString(id));
+        lblTituloM.setText(titulo);
+        lbldescripM.setText(descrip);
+        lblFechaIM.setText(fechai);
+        lblFechaTM.setText(fechaT);
+        lblPrecioNM.setText(precioNor);
+        lblPrecioOM.setText(precioO);
+        lblCompraMinM.setText(compMin);
+        lblCompraMaxM.setText(compMax);
+        if(acti.equals("Si")){
+            lblActividadM.setText("Activa");
+        }else{
+            lblActividadM.setText("No activa");
+        }
+        
+    }
+    
+
+    
 }

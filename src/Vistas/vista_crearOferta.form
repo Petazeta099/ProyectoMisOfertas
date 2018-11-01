@@ -26,14 +26,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCrearOferta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_ofertas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btn_salir" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
@@ -48,42 +40,72 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtComMin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtComMax" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tdCantiMin" min="-2" pref="148" max="-2" attributes="0"/>
-                                          <Component id="tfCantMax" min="-2" pref="148" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtDescrip" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtInicioO" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtTerminoO" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="dcOp1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="dcOp2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfPrecioNor" min="-2" pref="148" max="-2" attributes="0"/>
-                                          <Component id="tfPrecioOfer" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                                          <Component id="tfTitulo" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                                          <Component id="tfDescrip" max="32767" attributes="0"/>
+                                          <Component id="tfDescrip" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="tfTitulo" min="-2" pref="148" max="-2" attributes="0"/>
+                                              <EmptySpace min="36" pref="133" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="dcOp1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                              <Component id="tdCantiMin" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
+                                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                                  <Component id="tfPrecioOfer" alignment="0" pref="64" max="32767" attributes="0"/>
+                                                                  <Component id="tfPrecioNor" alignment="0" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <Component id="tfCantMax" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                                      <Component id="btnCargarImg" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jTextField1" min="-2" pref="26" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="dcOp2" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jLabel1" min="-2" pref="174" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="txtTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrecioNormal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrecioOferta" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                                      <Component id="txtDatos" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtComMin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtComMax" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtPrecioNormal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtPrecioOferta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                                              <Component id="txtDatos" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCrearOferta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btn_ofertas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_salir" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -113,31 +135,43 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtInicioO" min="-2" max="-2" attributes="0"/>
                   <Component id="dcOp1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnCargarImg" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtTerminoO" min="-2" max="-2" attributes="0"/>
-                  <Component id="dcOp2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtPrecioNormal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfPrecioNor" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtPrecioOferta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfPrecioOfer" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtComMin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tdCantiMin" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtComMax" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfCantMax" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtTerminoO" min="-2" max="-2" attributes="0"/>
+                          <Component id="dcOp2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPrecioNormal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfPrecioNor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtPrecioOferta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfPrecioOfer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtComMin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tdCantiMin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtComMax" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfCantMax" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel1" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -145,7 +179,7 @@
                   <Component id="btn_salir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_ofertas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -188,7 +222,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="txtPrecioOferta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Precio de la oferta:"/>
+        <Property name="text" type="java.lang.String" value="Descuento %"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="txtComMin">
@@ -203,6 +237,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfTitulo">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfTituloFocusLost"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfTituloKeyTyped"/>
       </Events>
     </Component>
@@ -243,11 +278,20 @@
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dcOp1FocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dcOp1FocusLost"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dcOp1MouseClicked"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="dcOp1KeyTyped"/>
+      </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dcOp2">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dcOp2FocusLost"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -260,11 +304,11 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="sku" type="java.lang.Object"/>
-                <Column editable="true" title="nombre" type="java.lang.Object"/>
-                <Column editable="true" title="descripcion" type="java.lang.Object"/>
-                <Column editable="true" title="categoria_id" type="java.lang.Object"/>
-                <Column editable="true" title="marca_id" type="java.lang.Object"/>
+                <Column editable="false" title="sku" type="java.lang.Object"/>
+                <Column editable="false" title="nombre" type="java.lang.Object"/>
+                <Column editable="false" title="descripcion" type="java.lang.Object"/>
+                <Column editable="false" title="categoria_id" type="java.lang.Object"/>
+                <Column editable="false" title="marca_id" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -297,9 +341,15 @@
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblProductosMouseClicked"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tblProductos = new javax.swing.JTable(){&#xa;public boolean isCellEditable(int rowIndex, int columnIndex){&#xa;return false;&#xa;}&#xa;};"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -318,6 +368,18 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ofertasActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCargarImg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cargar foto"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCargarImgActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
     </Component>
   </SubComponents>
 </Form>

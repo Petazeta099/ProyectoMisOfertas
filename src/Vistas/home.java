@@ -54,7 +54,7 @@ public class home extends javax.swing.JFrame {
         lblenunciao.setText("<html><body align=center>BIENVENIDO A<br> MIS OFERTAS</body></html>");
         getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 315, 60));
 
-        btnAdmin.setBackground(new java.awt.Color(102, 255, 102));
+        btnAdmin.setBackground(new java.awt.Color(0, 153, 153));
         btnAdmin.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
         btnAdmin.setText("Administrador");
         btnAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -65,7 +65,7 @@ public class home extends javax.swing.JFrame {
         });
         getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 240, 38));
 
-        btnEncargado.setBackground(new java.awt.Color(102, 255, 102));
+        btnEncargado.setBackground(new java.awt.Color(0, 153, 153));
         btnEncargado.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
         btnEncargado.setText("Encargado");
         btnEncargado.addActionListener(new java.awt.event.ActionListener() {

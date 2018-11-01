@@ -5,7 +5,11 @@
  */
 package Conexion;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,6 +22,8 @@ public class Database {
     private static String pass="";
     private static String host="localhost:3306";
     private static String server="jdbc:mysql://"+host+"/"+db;
+    
+    Statement st;
     Connection cn = null;
     
     public Database(){
@@ -34,6 +40,24 @@ public class Database {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
+    }
+    
+    public Database(String n1){
+        try{
+//        Class.forName("com.mysql.jdbc.Driver");
+//        cn = DriverManager.getConnection(server,user,pass);
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            cn = DriverManager.getConnection("jdbc:oracle:thin:@misofertas.cdmhdbuxofjj.us-east-2.rds.amazonaws.com:1521:XE","misofertas","misofertas");
+            st = cn.createStatement();
+        if (cn!=null){
+            System.out.println("Conexión a base de datos "+db+" OK\n");
+        }
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+       
     }
     
     public Connection getConnection(){
@@ -72,5 +96,7 @@ public class Database {
         }
         return lista;
     }
+    
+   
     
 }

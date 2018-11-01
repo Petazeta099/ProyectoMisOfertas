@@ -51,10 +51,10 @@ public class login_Admin extends javax.swing.JFrame {
 
         lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
-        lblenunciao.setText("Inicio de sesión Adminstración");
-        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 400, 40));
+        lblenunciao.setText("Inicio de sesión Administración");
+        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 410, 40));
 
-        btn_volver.setBackground(new java.awt.Color(0, 153, 51));
+        btn_volver.setBackground(new java.awt.Color(255, 255, 255));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +63,7 @@ public class login_Admin extends javax.swing.JFrame {
         });
         getContentPane().add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 73, -1));
 
-        btningresar.setBackground(new java.awt.Color(0, 153, 51));
+        btningresar.setBackground(new java.awt.Color(0, 153, 153));
         btningresar.setText("Ingresar");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,13 +131,6 @@ public class login_Admin extends javax.swing.JFrame {
             String rutsinDigito = rut.substring(0,rut.length()-1);
             String rutDigito =rut.substring(rut.length()-1);  
             String rutFinal = rutsinDigito+"-"+rutDigito;
-            //System.out.println(rutsinDigito);
-            //System.out.println(rutDigito);
-                System.out.println(rutFinal);
-            
-            
-            
-            System.out.println("Rut: "+rutFinal+" || Clave: "+clave);
             
             int coincidencia = 0;
             

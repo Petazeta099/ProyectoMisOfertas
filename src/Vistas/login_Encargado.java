@@ -54,7 +54,7 @@ public class login_Encargado extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_volver.setBackground(new java.awt.Color(0, 153, 51));
+        btn_volver.setBackground(new java.awt.Color(255, 255, 255));
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +63,7 @@ public class login_Encargado extends javax.swing.JFrame {
         });
         getContentPane().add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 73, -1));
 
-        btningresar.setBackground(new java.awt.Color(0, 153, 51));
+        btningresar.setBackground(new java.awt.Color(0, 153, 153));
         btningresar.setText("Ingresar");
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

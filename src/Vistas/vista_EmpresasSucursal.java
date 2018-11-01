@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -38,7 +40,9 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
      */
     public vista_EmpresasSucursal() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
         
+        setResizable(false);
         ts.visualizar_Sucursal(tab_sucursal);
         visibilidadModificacion(false,false,true);
         Comuna comuna = new Comuna();
@@ -47,6 +51,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         retail.mostrarRetail(cb_retail);
                 
         activa_boton(true,false,false,true);
+        tab_sucursal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     public void agregar(){
@@ -421,6 +426,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tab_sucursal.getTableHeader().setReorderingAllowed(false);
         tab_sucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tab_sucursalMouseClicked(evt);

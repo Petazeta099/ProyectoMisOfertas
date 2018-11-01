@@ -6,7 +6,7 @@
 package Vistas;
 
 import Clases.CRUDoferta;
-import Clases.Oferta;
+import Clases.Oferta; 
 import Conexion.Database;
 import Tablas.Tabla_Ofertas;
 import java.awt.Color;

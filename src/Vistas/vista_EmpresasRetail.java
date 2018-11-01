@@ -9,10 +9,13 @@ import Clases.CRUDretail;
 import Clases.Limpiar;
 import Clases.Retail;
 import Tablas.Tabla_Retail;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -26,21 +29,25 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     Limpiar lim = new Limpiar();    
     CRUDretail crud_rt;
     int clic_tabla = 0;
+    boolean rutCorrecto=false;
     /**
      * Creates new form vista_Empresas
      */
     public vista_EmpresasRetail() {
         initComponents();
         rt.visualizar_Retail(tab_retail);
-
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        
+        setResizable(false);
         //obtenerProductos();
         activa_boton(true,false,false,true);
+        tab_retail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     public void agregar(){
         
         int errores=0;
-        if(txt_rut.getText().equals("") || txt_razonSocial.getText().equals("")){
+        if(txt_rut.getText().equals("") || txt_razonSocial.getText().equals("") || rutCorrecto==false){
             errores = errores+1;
         }
         
@@ -143,6 +150,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tab_retail.getTableHeader().setReorderingAllowed(false);
         tab_retail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tab_retailMouseClicked(evt);
@@ -169,6 +177,11 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
+        txt_rut.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_rutFocusLost(evt);
+            }
+        });
         txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_rutKeyTyped(evt);
@@ -396,6 +409,18 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_txt_razonSocialKeyTyped
+
+    private void txt_rutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_rutFocusLost
+        int minimo=9;
+        if(txt_rut.getText().length()<minimo){
+            txt_rut.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
+            rutCorrecto=false;
+        }else{
+            txt_rut.setForeground(Color.black);
+            rutCorrecto=true;
+        }
+    }//GEN-LAST:event_txt_rutFocusLost
 
     /**
      * @param args the command line arguments

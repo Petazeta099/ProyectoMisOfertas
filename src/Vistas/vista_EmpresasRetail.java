@@ -24,12 +24,13 @@ import javax.swing.ListSelectionModel;
 public class vista_EmpresasRetail extends javax.swing.JFrame {
 
     static home login = new home();
-    
-    Tabla_Retail rt = new Tabla_Retail();    
-    Limpiar lim = new Limpiar();    
+
+    Tabla_Retail rt = new Tabla_Retail();
+    Limpiar lim = new Limpiar();
     CRUDretail crud_rt;
     int clic_tabla = 0;
-    boolean rutCorrecto=false;
+    boolean rutCorrecto = false;
+
     /**
      * Creates new form vista_Empresas
      */
@@ -37,76 +38,75 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         initComponents();
         rt.visualizar_Retail(tab_retail);
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        
+
         setResizable(false);
         //obtenerProductos();
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
         tab_retail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
-    public void agregar(){
-        
-        int errores=0;
-        if(txt_rut.getText().equals("") || txt_razonSocial.getText().equals("") || rutCorrecto==false){
-            errores = errores+1;
+
+    public void agregar() {
+
+        int errores = 0;
+        if (txt_rut.getText().equals("") || txt_razonSocial.getText().equals("") || rutCorrecto == false) {
+            errores = errores + 1;
         }
-        
-        if(errores>=1){
+
+        if (errores >= 1) {
             JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             crud_rt = new CRUDretail();
-        Retail rt = new Retail();
-        
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-         String rutFinal = rutsinDigito+"-"+rutDigito;
-        
-        rt.setRut(rutFinal);
-        rt.setRazon_social(txt_razonSocial.getText());
-        
-        crud_rt.Agregar_Retail(rt);
+            Retail rt = new Retail();
+
+            String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+            String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+            String rutFinal = rutsinDigito + "-" + rutDigito;
+
+            rt.setRut(rutFinal);
+            rt.setRazon_social(txt_razonSocial.getText());
+
+            crud_rt.Agregar_Retail(rt);
         }
-        
-        
+
     }
-    
+
     //Metodo eliminar producto
-    public void modificar(){
-        int errores=0;
-        if(txt_rut.getText().equals("") || txt_razonSocial.getText().equals("")){
-            errores = errores+1;
+    public void modificar() {
+        int errores = 0;
+        if (txt_rut.getText().equals("") || txt_razonSocial.getText().equals("")) {
+            errores = errores + 1;
         }
-        
-        if(errores>=1){
+
+        if (errores >= 1) {
             JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
-        crud_rt = new CRUDretail();
-        Retail rt = new Retail();
-        
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-        String rutFinal = rutsinDigito+"-"+rutDigito;
-        
-        rt.setRazon_social(txt_razonSocial.getText());
-        rt.setRut(rutFinal);
-        
-        crud_rt.Modificar_Retail(rt);
+        } else {
+            crud_rt = new CRUDretail();
+            Retail rt = new Retail();
+
+            String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+            String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+            String rutFinal = rutsinDigito + "-" + rutDigito;
+
+            rt.setRazon_social(txt_razonSocial.getText());
+            rt.setRut(rutFinal);
+
+            crud_rt.Modificar_Retail(rt);
         }
-        
+
     }
-    
+
     //Metodo eliminar producto
-    public void eliminar(){
+    public void eliminar() {
         crud_rt = new CRUDretail();
         Retail rt = new Retail();
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-        String rutFinal = rutsinDigito+"-"+rutDigito;
+        String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+        String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
         rt.setRut(rutFinal);
         crud_rt.Eliminar_Retail(rt);
     }
-    
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
+
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4) {
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
@@ -139,6 +139,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tab_retail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tab_retail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -157,6 +158,9 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tab_retail);
+
+        panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_agregar.setText("Agregar");
@@ -238,20 +242,18 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_razonSocial, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                        .addComponent(txt_rut)))
+                        .addComponent(txt_razonSocial)
+                        .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(btn_salir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_rutRetail))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_modificar)
-                            .addComponent(btn_eliminar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(34, 34, 34))
+                    .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_modificar)
+                    .addComponent(btn_eliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_rutRetail)
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -268,28 +270,29 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                     .addComponent(lbl_razonSocial)
                     .addComponent(txt_razonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_modificar))
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_eliminar)
+                    .addComponent(btn_limpiar))
+                .addGap(35, 35, 35)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
                         .addComponent(lbl_rutRetail)
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_eliminar)
-                            .addComponent(btn_limpiar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_salir))))
+                        .addComponent(btn_salir)
+                        .addGap(0, 43, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
-                    .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -297,9 +300,9 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -309,35 +312,34 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private void tab_retailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_retailMouseClicked
         clic_tabla = this.tab_retail.rowAtPoint(evt.getPoint());
 
-        String rut = ""+tab_retail.getValueAt(clic_tabla, 0);
-        String razon_social = ""+tab_retail.getValueAt(clic_tabla, 1);
+        String rut = "" + tab_retail.getValueAt(clic_tabla, 0);
+        String razon_social = "" + tab_retail.getValueAt(clic_tabla, 1);
 
-        String rutAcortado = rut.substring( 0, rut.indexOf("-"));
+        String rutAcortado = rut.substring(0, rut.indexOf("-"));
         String digitoRut = rut.substring(rut.length() - 1);
-        
 
-        txt_rut.setText(rutAcortado+digitoRut);
+        txt_rut.setText(rutAcortado + digitoRut);
         txt_razonSocial.setText(razon_social);
 
         int column = tab_retail.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tab_retail.getRowHeight();
+        int row = evt.getY() / tab_retail.getRowHeight();
 
-        if(row < tab_retail.getRowCount() && row >= 0 && column < tab_retail.getColumnCount() && column >= 0){
+        if (row < tab_retail.getRowCount() && row >= 0 && column < tab_retail.getColumnCount() && column >= 0) {
             Object value = tab_retail.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
                 JButton boton = (JButton) value;
 
-                if(boton.getName().equals("mod")){
+                if (boton.getName().equals("mod")) {
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false);
+                    activa_boton(true, true, false, false);
                 }
-                if(boton.getName().equals("eli")){
+                if (boton.getName().equals("eli")) {
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,false);
+                    activa_boton(true, false, true, false);
                 }
             }
 
@@ -351,16 +353,16 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
 
-        int s = JOptionPane.showConfirmDialog(null, "Eliminar retail","Si/no",JOptionPane.YES_NO_OPTION);
-        if(s == 0){
+        int s = JOptionPane.showConfirmDialog(null, "Eliminar retail", "Si/no", JOptionPane.YES_NO_OPTION);
+        if (s == 0) {
             eliminar();
             rt.visualizar_Retail(tab_retail);
-            activa_boton(true,false,false,true);
+            activa_boton(true, false, false, true);
             lim.limpiar_texto(panel);
         }
     }//GEN-LAST:event_btn_eliminarActionPerformed
@@ -368,7 +370,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         modificar();
         rt.visualizar_Retail(tab_retail);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
         lim.limpiar_texto(panel);
     }//GEN-LAST:event_btn_modificarActionPerformed
 
@@ -379,47 +381,50 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         agregar();
         rt.visualizar_Retail(tab_retail);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
         lim.limpiar_texto(panel);
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
-        int maximorut=8;
-           int errores=0;
-           char validarCaracter=evt.getKeyChar();
-           ArrayList<Character> lista=retornarListaCaracteres();
-           
-           for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-           
-           if((Character.isLetter(validarCaracter)&& validarCaracter != 'k') || txt_rut.getText().length()>=maximorut || errores > 0 ){
-               evt.consume();
-           }
+        int maximorut = 8;
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+
+        for (int i = 0; i < lista.size(); i++) {
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if ((Character.isLetter(validarCaracter) && validarCaracter != 'k') || txt_rut.getText().length() >= maximorut || errores > 0) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txt_rutKeyTyped
 
     private void txt_razonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_razonSocialKeyTyped
         int maximoCaracter = 29;
-        char validarCaracter=evt.getKeyChar();
-        if(txt_razonSocial.getText().length()>=maximoCaracter ){
+        char validarCaracter = evt.getKeyChar();
+        if (txt_razonSocial.getText().length() >= maximoCaracter) {
             evt.consume();
-            
+
         }
     }//GEN-LAST:event_txt_razonSocialKeyTyped
 
     private void txt_rutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_rutFocusLost
-        int minimo=9;
-        if(txt_rut.getText().length()<minimo){
-            txt_rut.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
-            rutCorrecto=false;
-        }else{
-            txt_rut.setForeground(Color.black);
-            rutCorrecto=true;
+        int minimo = 7;
+        if (txt_rut.getText().length() > 0) {
+            if (txt_rut.getText().length() < minimo) {
+                txt_rut.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
+                rutCorrecto = false;
+            } else {
+                txt_rut.setForeground(Color.black);
+                rutCorrecto = true;
+            }
         }
+
     }//GEN-LAST:event_txt_rutFocusLost
 
     /**
@@ -442,40 +447,39 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
     private javax.swing.JTextField txt_rut;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Character> retornarListaCaracteres(){
+    private ArrayList<Character> retornarListaCaracteres() {
         ArrayList<Character> validaciones = new ArrayList<Character>();
-           validaciones.add('.');
-           validaciones.add('/');
-           validaciones.add('|');
-           validaciones.add('=');
-           validaciones.add('?');
-           validaciones.add('¿');
-           validaciones.add('´');
-           validaciones.add('¨');
-           validaciones.add('{');
-           validaciones.add('}');
-           validaciones.add(';');
-           validaciones.add(':');
-           validaciones.add('_');
-           validaciones.add('^');
-           validaciones.add('-');
-           validaciones.add('!');
-           validaciones.add('"');
-           validaciones.add('#');
-           validaciones.add('$');
-           validaciones.add('%');
-           validaciones.add('&');
-           validaciones.add('(');
-           validaciones.add(')');
-           validaciones.add('¡');
-           validaciones.add(']');
-           validaciones.add('*');
-           validaciones.add('[');
-           validaciones.add(',');
-           validaciones.add('°');
-           
-        return  validaciones;
+        validaciones.add('.');
+        validaciones.add('/');
+        validaciones.add('|');
+        validaciones.add('=');
+        validaciones.add('?');
+        validaciones.add('¿');
+        validaciones.add('´');
+        validaciones.add('¨');
+        validaciones.add('{');
+        validaciones.add('}');
+        validaciones.add(';');
+        validaciones.add(':');
+        validaciones.add('_');
+        validaciones.add('^');
+        validaciones.add('-');
+        validaciones.add('!');
+        validaciones.add('"');
+        validaciones.add('#');
+        validaciones.add('$');
+        validaciones.add('%');
+        validaciones.add('&');
+        validaciones.add('(');
+        validaciones.add(')');
+        validaciones.add('¡');
+        validaciones.add(']');
+        validaciones.add('*');
+        validaciones.add('[');
+        validaciones.add(',');
+        validaciones.add('°');
+
+        return validaciones;
     }
-    
 
 }

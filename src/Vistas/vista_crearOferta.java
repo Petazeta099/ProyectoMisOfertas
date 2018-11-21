@@ -44,6 +44,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
     Database cn;
     Connection reg;
+    
     //
     Connection conexion;
     Statement st;
@@ -52,6 +53,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     int contador = 0;
     boolean fechaPrimera = false;
     boolean fechaSegunda = false;
+    int clic_tabla = 0;
 
     /**
      * Creates new form agregarOferta
@@ -59,6 +61,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     public vista_crearOferta() {
         initComponents();
         jTextField1.hide();
+        txtSKU.hide();
         jLabel1.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
         mostrarProductos();
         cn = new Database();
@@ -122,6 +125,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
         btnCargarImg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        txtSKU = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CREAR OFERTA");
@@ -299,9 +303,6 @@ public class vista_crearOferta extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfDescrip)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(36, 133, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +321,12 @@ public class vista_crearOferta extends javax.swing.JFrame {
                                                         .addComponent(dcOp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGap(0, 10, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txtSKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(30, 30, 30))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtComMin)
@@ -354,7 +360,8 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTitulo)
-                    .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSKU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescrip)
@@ -396,7 +403,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                     .addComponent(btnCrearOferta)
                     .addComponent(btn_salir)
                     .addComponent(btn_ofertas))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -419,6 +426,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
         }
          */
         int ultimoId = 0;
+         int ultimoId2 =0; 
         ArrayList<Integer> idsOfertas = new ArrayList<Integer>();
         String fechaI = "";
         String fechaT = "";
@@ -457,6 +465,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 fis = new FileInputStream(file);
 
                 //-------------------------------
+                
                 dateI = dcOp1.getDate();
                 dateT = dcOp2.getDate();
 
@@ -480,6 +489,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 PreparedStatement pst = null;
                 PreparedStatement insOferProd = null;
                 PreparedStatement coleccionOfertas = null;
+                PreparedStatement coleccionOFPROD = null;  //----------------------------
                 java.sql.Date sqlFechaInicio = new java.sql.Date(dateI.getTime());
                 java.sql.Date sqlFechaTermino = new java.sql.Date(dateT.getTime());
                 coleccionOfertas = reg.prepareStatement("SELECT * FROM oferta");
@@ -494,7 +504,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 System.out.println(ultimoId);
                 System.out.println(rutFinal);
 
-                pst = reg.prepareStatement("INSERT INTO oferta VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+                pst = reg.prepareStatement("INSERT INTO oferta VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 if (ultimoId == 0) {
                     ultimoId = 1;
                 }
@@ -510,6 +520,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 pst.setInt(10, 0);
                 pst.setString(11, rutFinal);
                 pst.setBinaryStream(12, fis, (int) file.length());
+                pst.setString(13,idProducto);
                 pst.executeUpdate();
                 System.out.println("Se guardo correctamente");
                 JOptionPane.showMessageDialog(this, "Oferta guardada correctamente.");
@@ -524,11 +535,27 @@ public class vista_crearOferta extends javax.swing.JFrame {
                 jTextField1.setText("");
                 jLabel1.setIcon(null);
                 jLabel1.setText("");
-
-                insOferProd = reg.prepareStatement("INSERT INTO oferta_producto VALUES(?,?)");
+                txtSKU.setText("");
+                
+                    //////////////////////////////
+                    /*coleccionOFPROD=reg.prepareStatement("SELECT * FROM oferta_producto");   
+                    ResultSet lista2 = coleccionOFPROD.executeQuery();
+                    while (lista2.next())  //recorre
+                    {
+                     ultimoId2=lista2.getInt(3);
+                    }
+                    ultimoId2=ultimoId2+1;
+                    if(ultimoId2==0){
+                        ultimoId2=1;
+                    } /*
+                    
+                        /////////////////////////
+                        /*
+                insOferProd = reg.prepareStatement("INSERT INTO oferta_producto VALUES(?,?,?)");
                 insOferProd.setString(1, idProducto);
                 insOferProd.setInt(2, ultimoId);
-                insOferProd.executeUpdate();
+                insOferProd.setInt(3, ultimoId2);
+                insOferProd.executeUpdate(); */
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Ingrese fecha valida." + e, "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -674,7 +701,9 @@ public class vista_crearOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_dcOp1FocusGained
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        // TODO add your handling code here:
+        clic_tabla = this.tblProductos.rowAtPoint(evt.getPoint());
+                String sku_producto = "" + tblProductos.getValueAt(clic_tabla, 1);
+                txtSKU.setText(sku_producto);
     }//GEN-LAST:event_tblProductosMouseClicked
 
     /**
@@ -705,6 +734,7 @@ public class vista_crearOferta extends javax.swing.JFrame {
     private javax.swing.JLabel txtInicioO;
     private javax.swing.JLabel txtPrecioNormal;
     private javax.swing.JLabel txtPrecioOferta;
+    private javax.swing.JTextField txtSKU;
     private javax.swing.JLabel txtTerminoO;
     private javax.swing.JLabel txtTexto1;
     private javax.swing.JLabel txtTitulo;

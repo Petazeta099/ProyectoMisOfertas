@@ -24,7 +24,7 @@ public class home extends javax.swing.JFrame {
     public home() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
         
     }
 

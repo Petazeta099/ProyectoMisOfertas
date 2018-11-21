@@ -30,14 +30,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Raul
  */
 public class vista_Encargados extends javax.swing.JFrame {
+
     static home login = new home();
-    
-    Tabla_Encargado te = new Tabla_Encargado();    
-    Limpiar lim = new Limpiar();    
+
+    Tabla_Encargado te = new Tabla_Encargado();
+    Limpiar lim = new Limpiar();
     CRUDencargado crud_enc;
     int clic_tabla = 0;
-    boolean rutCorrecto=false;
-    boolean contraCorrecta=false;
+    boolean rutCorrecto = false;
+    boolean contraCorrecta = false;
+
     /**
      * Creates new form listaProductos
      */
@@ -48,158 +50,159 @@ public class vista_Encargados extends javax.swing.JFrame {
         retail.mostrarRetail(cb_retail);
         txt_password.setText("");
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        
+
         setResizable(false);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
         tab_encargados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
-    public void agregar(){
+
+    public void agregar() {
         crud_enc = new CRUDencargado();
         Encargado enc = new Encargado();
-        
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-        String rutFinal = rutsinDigito+"-"+rutDigito;
+
+        String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+        String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
         enc.setRun(rutFinal);
         enc.setP_nombre(txt_nombre1.getText());
         enc.setS_nombre(txt_nombre2.getText());
         enc.setApellido_p(txt_apellido1.getText());
         enc.setApellido_m(txt_apellido2.getText());
         enc.setClave(txt_password.getText());
-        if(chk_activo.isSelected()){
+        if (chk_activo.isSelected()) {
             enc.setActivo('1');
-        } else{
+        } else {
             enc.setActivo('0');
         }
         enc.setRetail_rut(lbl_rutRetail.getText());
-        
+
         crud_enc.Agregar_Encargado(enc);
     }
-    
+
     //Metodo eliminar producto
-    public void modificar(){
+    public void modificar() {
         crud_enc = new CRUDencargado();
         Encargado enc = new Encargado();
-        
+
         enc.setP_nombre(txt_nombre1.getText());
         enc.setS_nombre(txt_nombre2.getText());
         enc.setApellido_p(txt_apellido1.getText());
         enc.setApellido_m(txt_apellido2.getText());
         enc.setClave(txt_password.getText());
-        if(chk_activo.isSelected()){
+        if (chk_activo.isSelected()) {
             enc.setActivo('1');
-        } else{
+        } else {
             enc.setActivo('0');
         }
         enc.setRetail_rut(lbl_rutRetail.getText());
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-        String rutFinal = rutsinDigito+"-"+rutDigito;
+        String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+        String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
         enc.setRun(rutFinal);
-        
+
         crud_enc.Modificar_Encargado(enc);
     }
-    
+
     //Metodo eliminar producto
-    public void eliminar(){
+    public void eliminar() {
         crud_enc = new CRUDencargado();
         Encargado enc = new Encargado();
-        String rutsinDigito = txt_rut.getText().substring(0,txt_rut.getText().length()-1);
-        String rutDigito =txt_rut.getText().substring(txt_rut.getText().length()-1);  
-        String rutFinal = rutsinDigito+"-"+rutDigito;
+        String rutsinDigito = txt_rut.getText().substring(0, txt_rut.getText().length() - 1);
+        String rutDigito = txt_rut.getText().substring(txt_rut.getText().length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
         enc.setRun(rutFinal);
-        
+
         crud_enc.Eliminar_Encargado(enc);
     }
-    
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
+
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4) {
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
         txt_rut.setEnabled(a4);
     }
-    
-    public String obtenerRutRetailEncargado(String nombreRetail){
-         ArrayList<String> list = new ArrayList<String>();
-         String[] rrtl = new String[1];
-              //  ArrayList<Object> list2 = new ArrayList<Object>();
-        
+
+    public String obtenerRutRetailEncargado(String nombreRetail) {
+        ArrayList<String> list = new ArrayList<String>();
+        String[] rrtl = new String[1];
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
+
         Database cn = new Database();
         String sql = "select rut from retail where razon_social like '" + nombreRetail + "'"; //scar numero
         ResultSet lista = null;
         PreparedStatement ps = null;
-        String rutRet="";
-        try{
+        String rutRet = "";
+        try {
             ps = cn.getConnection().prepareStatement(sql);
             lista = ps.executeQuery();
-            while(lista.next()){
-                rrtl[0]=lista.getString("rut");
+            while (lista.next()) {
+                rrtl[0] = lista.getString("rut");
                 rutRet = rrtl[0];
                 //idCom = lista.getInt(1);  //entrega el id
                 // System.out.println(idCom);
                 //cb_comuna.setSelectedIndex(idCom);
-               // list2.add(o);
+                // list2.add(o);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }finally{
-            try{
+        } finally {
+            try {
                 ps.close();
                 lista.close();
                 cn.desconectar();
-            }catch(Exception ex){}
-        }       
-       // System.out.println(rutRet);
-       return rutRet;
+            } catch (Exception ex) {
+            }
+        }
+        // System.out.println(rutRet);
+        return rutRet;
     }
-    
-     public int entregarPosicionRetail(String rutRetail){
-         
+
+    public int entregarPosicionRetail(String rutRetail) {
+
         ArrayList<String> list = new ArrayList<String>();
-         String[] rrtl = new String[1];
-              //  ArrayList<Object> list2 = new ArrayList<Object>();
-        
+        String[] rrtl = new String[1];
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
+
         Database cn = new Database();
         String sql = "select rut from retail order by razon_social asc"; //selecciona todos los registros
         ResultSet lista = null;
         PreparedStatement ps = null;
         int posicion = 1;
         int prtl = 0;
-        String nombre="";
-        try{
+        String nombre = "";
+        try {
             ps = cn.getConnection().prepareStatement(sql);
             lista = ps.executeQuery();
-            while(lista.next()){
-                nombre=lista.getString("rut");
-                if(nombre.equals(rutRetail)){
-                    prtl = prtl+posicion;
-                }else{
-                    prtl = prtl+0;
+            while (lista.next()) {
+                nombre = lista.getString("rut");
+                if (nombre.equals(rutRetail)) {
+                    prtl = prtl + posicion;
+                } else {
+                    prtl = prtl + 0;
                 }
                 posicion++;
                 //idCom = lista.getInt(1);  //entrega el id
                 System.out.println(prtl);
                 //cb_comuna.setSelectedIndex(idCom);
-               // list2.add(o);
+                // list2.add(o);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }finally{
-            try{
+        } finally {
+            try {
                 ps.close();
                 lista.close();
                 cn.desconectar();
-            }catch(Exception ex){}
-        }       
-       // System.out.println(rutRet);
-       return prtl;
+            } catch (Exception ex) {
+            }
+        }
+        // System.out.println(rutRet);
+        return prtl;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -255,6 +258,9 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tab_encargados);
+
+        panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_agregar.setText("Agregar");
@@ -478,7 +484,7 @@ public class vista_Encargados extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_salir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -500,22 +506,22 @@ public class vista_Encargados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        int errores=0;
-        if(txt_rut.getText().equals("") || txt_nombre1.getText().equals("") || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") ||
-                txt_apellido2.getText().equals("") || txt_password.getText().equals("") || rutCorrecto==false || contraCorrecta==false){
-            errores = errores+1;
+        int errores = 0;
+        if (txt_rut.getText().equals("") || txt_nombre1.getText().equals("") || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("")
+                || txt_apellido2.getText().equals("") || txt_password.getText().equals("") || rutCorrecto == false || contraCorrecta == false) {
+            errores = errores + 1;
         }
-        
-        if(errores>=1){
+
+        if (errores >= 1) {
             JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             agregar();
-        te.visualizar_Encargado(tab_encargados);
-        activa_boton(true,false,false,true);
-        lim.limpiar_texto(panel);
+            te.visualizar_Encargado(tab_encargados);
+            activa_boton(true, false, false, true);
+            lim.limpiar_texto(panel);
         }
-        
-        
+
+
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre1ActionPerformed
@@ -523,32 +529,32 @@ public class vista_Encargados extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombre1ActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-        int errores=0;
-        if(txt_rut.getText().equals("") || txt_nombre1.getText().equals("") || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") ||
-                txt_apellido2.getText().equals("") || txt_password.getText().equals("")){
-            errores = errores+1;
+        int errores = 0;
+        if (txt_rut.getText().equals("") || txt_nombre1.getText().equals("") || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("")
+                || txt_apellido2.getText().equals("") || txt_password.getText().equals("")) {
+            errores = errores + 1;
         }
-        
-        if(errores>=1){
+
+        if (errores >= 1) {
             JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
-        modificar();
-        te.visualizar_Encargado(tab_encargados);
-        activa_boton(true,false,false,true);
-        
-        lim.limpiar_texto(panel);
+        } else {
+            modificar();
+            te.visualizar_Encargado(tab_encargados);
+            activa_boton(true, false, false, true);
+
+            lim.limpiar_texto(panel);
         }
-        
-        
+
+
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
 
-        int s = JOptionPane.showConfirmDialog(null, "Eliminar encargado","Si/no",JOptionPane.YES_NO_OPTION);
-        if(s == 0){
+        int s = JOptionPane.showConfirmDialog(null, "Eliminar encargado", "Si/no", JOptionPane.YES_NO_OPTION);
+        if (s == 0) {
             eliminar();
             te.visualizar_Encargado(tab_encargados);
-            activa_boton(true,false,false,true);
+            activa_boton(true, false, false, true);
             lim.limpiar_texto(panel);
         }
 
@@ -556,75 +562,70 @@ public class vista_Encargados extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void tab_encargadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_encargadosMouseClicked
         clic_tabla = this.tab_encargados.rowAtPoint(evt.getPoint());
-        
-        String run = ""+tab_encargados.getValueAt(clic_tabla, 0);
-        String p_nombre = ""+tab_encargados.getValueAt(clic_tabla, 1);
-        String s_nombre = ""+tab_encargados.getValueAt(clic_tabla, 2);
-        String apellido_p = ""+tab_encargados.getValueAt(clic_tabla, 3);
-        String apellido_m = ""+tab_encargados.getValueAt(clic_tabla, 4);
-        String clave = ""+tab_encargados.getValueAt(clic_tabla, 5);
-        
-         String activoStr = ""+tab_encargados.getValueAt(clic_tabla, 6);
+
+        String run = "" + tab_encargados.getValueAt(clic_tabla, 0);
+        String p_nombre = "" + tab_encargados.getValueAt(clic_tabla, 1);
+        String s_nombre = "" + tab_encargados.getValueAt(clic_tabla, 2);
+        String apellido_p = "" + tab_encargados.getValueAt(clic_tabla, 3);
+        String apellido_m = "" + tab_encargados.getValueAt(clic_tabla, 4);
+        String clave = "" + tab_encargados.getValueAt(clic_tabla, 5);
+
+        String activoStr = "" + tab_encargados.getValueAt(clic_tabla, 6);
         char activo;
-        if(activoStr.equals("Si")){
+        if (activoStr.equals("Si")) {
             activo = '1';
-        }else{
+        } else {
             activo = '0';
         }
-        
-        String retail_rut = ""+tab_encargados.getValueAt(clic_tabla, 7);
-        
+
+        String retail_rut = "" + tab_encargados.getValueAt(clic_tabla, 7);
+
         //String rutAcortado = run.substring(0,8);
-        String rutAcortado = run.substring( 0, run.indexOf("-"));
+        String rutAcortado = run.substring(0, run.indexOf("-"));
         String digitoRut = run.substring(run.length() - 1);
-        
-        
-        
-        
-        txt_rut.setText(rutAcortado+digitoRut);
+
+        txt_rut.setText(rutAcortado + digitoRut);
         txt_nombre1.setText(p_nombre);
         txt_nombre2.setText(s_nombre);
         txt_apellido1.setText(apellido_p);
         txt_apellido2.setText(apellido_m);
         txt_password.setText(String.valueOf(clave));
-            
-        
-        if(activo == '1'){
+
+        if (activo == '1') {
             chk_activo.setSelected(true);
-        }else {
+        } else {
             chk_activo.setSelected(false);
         }
-        
+
         int ene = entregarPosicionRetail(obtenerRutRetailEncargado(retail_rut));
 
         //System.out.println(entregarPosicionRetail(obtenerRutRetailEncargado(retail_rut)));
-        cb_retail.setSelectedIndex(entregarPosicionRetail(obtenerRutRetailEncargado(retail_rut))-1);
-        
-        
+        cb_retail.setSelectedIndex(entregarPosicionRetail(obtenerRutRetailEncargado(retail_rut)) - 1);
+
         int column = tab_encargados.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tab_encargados.getRowHeight();
-        
-        if(row < tab_encargados.getRowCount() && row >= 0 && column < tab_encargados.getColumnCount() && column >= 0){
+        int row = evt.getY() / tab_encargados.getRowHeight();
+
+        if (row < tab_encargados.getRowCount() && row >= 0 && column < tab_encargados.getColumnCount() && column >= 0) {
             Object value = tab_encargados.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
                 JButton boton = (JButton) value;
 
-                if(boton.getName().equals("mod")){
+                if (boton.getName().equals("mod")) {
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false);
+                    activa_boton(true, true, false, false);
                 }
-                if(boton.getName().equals("eli")){
+                if (boton.getName().equals("eli")) {
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,false);
+                    activa_boton(true, false, true, false);
                 }
             }
 
@@ -646,98 +647,101 @@ public class vista_Encargados extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_retailActionPerformed
 
     private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
-        
-        int maximorut=9;
-           int errores=0;
-           char validarCaracter=evt.getKeyChar();
-           ArrayList<Character> lista=retornarListaCaracteres();
-           
-           for (int i = 0; i < lista.size(); i++) {
-               char caracter = lista.get(i);
-               if(validarCaracter==caracter ){
-               errores= errores+1;
-               }
-           }
-           
-           if((Character.isLetter(validarCaracter)&& validarCaracter != 'k') || txt_rut.getText().length()>=maximorut || errores > 0 ){
-               evt.consume();
-           }
-        
+
+        int maximorut = 9;
+        int errores = 0;
+        char validarCaracter = evt.getKeyChar();
+        ArrayList<Character> lista = retornarListaCaracteres();
+
+        for (int i = 0; i < lista.size(); i++) {
+            char caracter = lista.get(i);
+            if (validarCaracter == caracter) {
+                errores = errores + 1;
+            }
+        }
+
+        if ((Character.isLetter(validarCaracter) && validarCaracter != 'k') || txt_rut.getText().length() >= maximorut || errores > 0) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txt_rutKeyTyped
 
     private void txt_nombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre1KeyTyped
-        
+
         int maximoCaracter = 15;
-        char validarCaracter=evt.getKeyChar();
-        if((validarCaracter<'a' || validarCaracter>'z') && (validarCaracter<'A' || validarCaracter>'Z') || txt_nombre1.getText().length()>=maximoCaracter ){
+        char validarCaracter = evt.getKeyChar();
+        if ((validarCaracter < 'a' || validarCaracter > 'z') && (validarCaracter < 'A' || validarCaracter > 'Z') || txt_nombre1.getText().length() >= maximoCaracter) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txt_nombre1KeyTyped
 
     private void txt_nombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre2KeyTyped
         int maximoCaracter = 15;
-        char c=evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A' || c>'Z') || txt_nombre2.getText().length()>=maximoCaracter ){
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') || txt_nombre2.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_nombre2KeyTyped
 
     private void txt_apellido1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellido1KeyTyped
         int maximoCaracter = 15;
-        char c=evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A' || c>'Z') || txt_apellido1.getText().length()>=maximoCaracter ){
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') || txt_apellido1.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_apellido1KeyTyped
 
     private void txt_apellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellido2KeyTyped
         int maximoCaracter = 15;
-        char c=evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A' || c>'Z') || txt_apellido2.getText().length()>=maximoCaracter ){
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') || txt_apellido2.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_apellido2KeyTyped
 
     private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
         int maximoCaracter = 24;
-        char c=evt.getKeyChar();
-        if(txt_password.getText().length()>=maximoCaracter ){
+        char c = evt.getKeyChar();
+        if (txt_password.getText().length() >= maximoCaracter) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_passwordKeyTyped
 
     private void txt_rutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_rutFocusLost
-        
-        
-        int minimo=8;
-        
-        if(txt_rut.getText().length()<minimo){
-            txt_rut.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
-            rutCorrecto=false;
-        }else{
-            txt_rut.setForeground(Color.black);
-            rutCorrecto=true;
+
+        int minimo = 7;
+        if (txt_rut.getText().length() > 0) {
+            if (txt_rut.getText().length() < minimo) {
+                txt_rut.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
+                rutCorrecto = false;
+            } else {
+                txt_rut.setForeground(Color.black);
+                rutCorrecto = true;
+            }
         }
+
     }//GEN-LAST:event_txt_rutFocusLost
 
     private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
-        int minimo=8;
-        if(txt_password.getText().length()<minimo){
-            txt_password.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Minimo de caracteres de clave es 8", "Aviso", JOptionPane.ERROR_MESSAGE);
-            contraCorrecta=false;
-        }else{
-            txt_password.setForeground(Color.black);
-            contraCorrecta=true;
+        int minimo = 8;
+        if (txt_password.getText().length() > 0) {
+            if (txt_password.getText().length() < minimo) {
+                txt_password.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Minimo de caracteres de clave es 8", "Aviso", JOptionPane.ERROR_MESSAGE);
+                contraCorrecta = false;
+            } else {
+                txt_password.setForeground(Color.black);
+                contraCorrecta = true;
+            }
         }
+
     }//GEN-LAST:event_txt_passwordFocusLost
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
@@ -765,41 +769,39 @@ public class vista_Encargados extends javax.swing.JFrame {
     private javax.swing.JTextField txt_rut;
     // End of variables declaration//GEN-END:variables
 
-private ArrayList<Character> retornarListaCaracteres(){
+    private ArrayList<Character> retornarListaCaracteres() {
         ArrayList<Character> validaciones = new ArrayList<Character>();
-           validaciones.add('.');
-           validaciones.add('/');
-           validaciones.add('|');
-           validaciones.add('=');
-           validaciones.add('?');
-           validaciones.add('¿');
-           validaciones.add('´');
-           validaciones.add('¨');
-           validaciones.add('{');
-           validaciones.add('}');
-           validaciones.add(';');
-           validaciones.add(':');
-           validaciones.add('_');
-           validaciones.add('^');
-           validaciones.add('-');
-           validaciones.add('!');
-           validaciones.add('"');
-           validaciones.add('#');
-           validaciones.add('$');
-           validaciones.add('%');
-           validaciones.add('&');
-           validaciones.add('(');
-           validaciones.add(')');
-           validaciones.add('¡');
-           validaciones.add(']');
-           validaciones.add('*');
-           validaciones.add('[');
-           validaciones.add(',');
-           validaciones.add('°');
-           
-        return  validaciones;
-    }
-    
+        validaciones.add('.');
+        validaciones.add('/');
+        validaciones.add('|');
+        validaciones.add('=');
+        validaciones.add('?');
+        validaciones.add('¿');
+        validaciones.add('´');
+        validaciones.add('¨');
+        validaciones.add('{');
+        validaciones.add('}');
+        validaciones.add(';');
+        validaciones.add(':');
+        validaciones.add('_');
+        validaciones.add('^');
+        validaciones.add('-');
+        validaciones.add('!');
+        validaciones.add('"');
+        validaciones.add('#');
+        validaciones.add('$');
+        validaciones.add('%');
+        validaciones.add('&');
+        validaciones.add('(');
+        validaciones.add(')');
+        validaciones.add('¡');
+        validaciones.add(']');
+        validaciones.add('*');
+        validaciones.add('[');
+        validaciones.add(',');
+        validaciones.add('°');
 
+        return validaciones;
+    }
 
 }

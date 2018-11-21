@@ -5,8 +5,13 @@
  */
 package Vistas;
 
+import Clases.GeneradorMail;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.mail.*;
 
 /**
  *
@@ -38,6 +43,7 @@ public class vista_Admin extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnEmpresasRetail = new javax.swing.JButton();
         btnEmpresasSucursal = new javax.swing.JButton();
+        btnMail = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
         fondoAdmin = new javax.swing.JLabel();
 
@@ -104,6 +110,14 @@ public class vista_Admin extends javax.swing.JFrame {
         });
         getContentPane().add(btnEmpresasSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 265, 40));
 
+        btnMail.setText("Enviar correos");
+        btnMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+
         btn_salir.setBackground(new java.awt.Color(255, 255, 255));
         btn_salir.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
         btn_salir.setText("Salir");
@@ -112,7 +126,7 @@ public class vista_Admin extends javax.swing.JFrame {
                 btn_salirActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 70, -1));
+        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 70, -1));
 
         fondoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAdmin.jpg"))); // NOI18N
         getContentPane().add(fondoAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 470));
@@ -151,6 +165,17 @@ public class vista_Admin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnEmpresasSucursalActionPerformed
 
+    private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
+        
+            GeneradorMail gm = new GeneradorMail();
+        try {
+            gm.EnviarEmail();
+        } catch (IOException ex) {
+            Logger.getLogger(vista_Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+    }//GEN-LAST:event_btnMailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -160,6 +185,7 @@ public class vista_Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnEmpresasRetail;
     private javax.swing.JButton btnEmpresasSucursal;
     private javax.swing.JButton btnEncargados;
+    private javax.swing.JButton btnMail;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel fondoAdmin;

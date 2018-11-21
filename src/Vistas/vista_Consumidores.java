@@ -46,11 +46,11 @@ public class vista_Consumidores extends javax.swing.JFrame {
      */
     public vista_Consumidores() {
         initComponents();
-        
+
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        
+
         setResizable(false);
-        
+
         txt_password.setText("");
         mensajePanelInfo(false);
         tc.visualizar_Consumidor(tab_consumidores);
@@ -139,7 +139,6 @@ public class vista_Consumidores extends javax.swing.JFrame {
             cons.setRun(rutFinal);
             crud_cons.Modificar_Consumidor(cons);
             txt_rut.setEnabled(true);
-            
 
         }
 
@@ -157,7 +156,6 @@ public class vista_Consumidores extends javax.swing.JFrame {
         cons.setRun(rutFinal);
 
         crud_cons.Eliminar_Consumidor(cons);
-        
 
     }
 
@@ -218,26 +216,8 @@ public class vista_Consumidores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_consumidores = new javax.swing.JTable();
-        pInfo = new javax.swing.JPanel();
-        lblInfo = new javax.swing.JLabel();
-        lblmostrarNomreCom = new javax.swing.JLabel();
-        lblnombreCompleto = new javax.swing.JLabel();
-        lblMostrarContra = new javax.swing.JLabel();
-        lblContra = new javax.swing.JLabel();
-        lnlmostrarCoomuna = new javax.swing.JLabel();
-        lblInfoConsumi = new javax.swing.JLabel();
-        lblComuna = new javax.swing.JLabel();
-        lblActividad = new javax.swing.JLabel();
-        lblmostrarSubcrip = new javax.swing.JLabel();
-        lblSuscrito = new javax.swing.JLabel();
-        lblApellidoscom = new javax.swing.JLabel();
-        lblRutMostrar = new javax.swing.JLabel();
-        lblRut = new javax.swing.JLabel();
-        lblMostraremail = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         btn_agregar = new javax.swing.JButton();
         lbl_clave = new javax.swing.JLabel();
@@ -265,16 +245,33 @@ public class vista_Consumidores extends javax.swing.JFrame {
         btn_modificar = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
+        pInfo = new javax.swing.JPanel();
+        lblInfo = new javax.swing.JLabel();
+        lblmostrarNomreCom = new javax.swing.JLabel();
+        lblnombreCompleto = new javax.swing.JLabel();
+        lblMostrarContra = new javax.swing.JLabel();
+        lblContra = new javax.swing.JLabel();
+        lnlmostrarCoomuna = new javax.swing.JLabel();
+        lblInfoConsumi = new javax.swing.JLabel();
+        lblComuna = new javax.swing.JLabel();
+        lblActividad = new javax.swing.JLabel();
+        lblmostrarSubcrip = new javax.swing.JLabel();
+        lblSuscrito = new javax.swing.JLabel();
+        lblApellidoscom = new javax.swing.JLabel();
+        lblRutMostrar = new javax.swing.JLabel();
+        lblRut = new javax.swing.JLabel();
+        lblMostraremail = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblMostrarPuntaje = new javax.swing.JLabel();
+        lblpuntaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consumidores");
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-
         tab_consumidores.setBackground(new java.awt.Color(204, 204, 204));
-        tab_consumidores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
+        tab_consumidores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tab_consumidores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -294,135 +291,10 @@ public class vista_Consumidores extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_consumidores);
 
-        pInfo.setBackground(new java.awt.Color(204, 204, 204));
-        pInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
-
-        lblInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblInfo.setText("Informacion detallada del consumidor:");
-
-        lblmostrarNomreCom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblmostrarNomreCom.setText("Nombre completo:");
-
-        lblnombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblnombreCompleto.setText("NombresCompleto");
-
-        lblMostrarContra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblMostrarContra.setText("Contraseña:");
-
-        lblContra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblContra.setText("Contraseña");
-
-        lnlmostrarCoomuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lnlmostrarCoomuna.setText("Comuna:");
-
-        lblInfoConsumi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblInfoConsumi.setText("El consumidor se encuentra");
-
-        lblComuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblComuna.setText("comuna");
-
-        lblActividad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblActividad.setText("actividad");
-
-        lblmostrarSubcrip.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblmostrarSubcrip.setText("y");
-
-        lblSuscrito.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblSuscrito.setText("Subcrip");
-
-        lblApellidoscom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblApellidoscom.setText("ApellidosCompleto");
-
-        lblRutMostrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblRutMostrar.setText("Rut:");
-
-        lblRut.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblRut.setText("rutConsu");
-
-        lblMostraremail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblMostraremail.setText("Email:");
-
-        lblEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblEmail.setText("EmailMostrar");
-
-        javax.swing.GroupLayout pInfoLayout = new javax.swing.GroupLayout(pInfo);
-        pInfo.setLayout(pInfoLayout);
-        pInfoLayout.setHorizontalGroup(
-            pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pInfoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lblRutMostrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblRut))
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lblInfoConsumi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblActividad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblmostrarSubcrip)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSuscrito))
-                    .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lnlmostrarCoomuna)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblComuna))
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lblMostrarContra)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblContra))
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lblMostraremail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEmail))
-                    .addGroup(pInfoLayout.createSequentialGroup()
-                        .addComponent(lblmostrarNomreCom)
-                        .addGap(18, 18, 18)
-                        .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblApellidoscom)
-                            .addComponent(lblnombreCompleto))))
-                .addContainerGap(110, Short.MAX_VALUE))
-        );
-        pInfoLayout.setVerticalGroup(
-            pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRutMostrar)
-                    .addComponent(lblRut))
-                .addGap(18, 18, 18)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblmostrarNomreCom)
-                    .addComponent(lblnombreCompleto))
-                .addGap(18, 18, 18)
-                .addComponent(lblApellidoscom)
-                .addGap(15, 15, 15)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMostraremail)
-                    .addComponent(lblEmail))
-                .addGap(20, 20, 20)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMostrarContra)
-                    .addComponent(lblContra))
-                .addGap(18, 18, 18)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lnlmostrarCoomuna)
-                    .addComponent(lblComuna))
-                .addGap(18, 18, 18)
-                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblInfoConsumi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblActividad)
-                    .addComponent(lblmostrarSubcrip)
-                    .addComponent(lblSuscrito))
-                .addGap(55, 55, 55))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1190, 304));
 
         panel.setBackground(new java.awt.Color(204, 204, 204));
-        panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 204)));
+        panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btn_agregar.setBackground(new java.awt.Color(34, 144, 34));
         btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -714,33 +586,149 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 .addComponent(lbl_comuna_id))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+        getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 562, 326));
+
+        pInfo.setBackground(new java.awt.Color(204, 204, 204));
+        pInfo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblInfo.setText("Informacion detallada del consumidor:");
+
+        lblmostrarNomreCom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblmostrarNomreCom.setText("Nombre completo:");
+
+        lblnombreCompleto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblnombreCompleto.setText("NombresCompleto");
+
+        lblMostrarContra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblMostrarContra.setText("Contraseña:");
+
+        lblContra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblContra.setText("Contraseña");
+
+        lnlmostrarCoomuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lnlmostrarCoomuna.setText("Comuna:");
+
+        lblInfoConsumi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblInfoConsumi.setText("El consumidor se encuentra");
+
+        lblComuna.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblComuna.setText("comuna");
+
+        lblActividad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblActividad.setText("actividad");
+
+        lblmostrarSubcrip.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblmostrarSubcrip.setText("y");
+
+        lblSuscrito.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSuscrito.setText("Subcrip");
+
+        lblApellidoscom.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblApellidoscom.setText("ApellidosCompleto");
+
+        lblRutMostrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRutMostrar.setText("Rut:");
+
+        lblRut.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRut.setText("rutConsu");
+
+        lblMostraremail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblMostraremail.setText("Email:");
+
+        lblEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblEmail.setText("EmailMostrar");
+
+        lblMostrarPuntaje.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblMostrarPuntaje.setText("Puntaje:");
+
+        lblpuntaje.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblpuntaje.setText("puntaje");
+
+        javax.swing.GroupLayout pInfoLayout = new javax.swing.GroupLayout(pInfo);
+        pInfo.setLayout(pInfoLayout);
+        pInfoLayout.setHorizontalGroup(
+            pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInfoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblMostrarPuntaje)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblpuntaje))
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblRutMostrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblRut))
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblInfoConsumi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(lblActividad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblmostrarSubcrip)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSuscrito))
+                    .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lnlmostrarCoomuna)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblComuna))
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblMostrarContra)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblContra))
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblMostraremail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEmail))
+                    .addGroup(pInfoLayout.createSequentialGroup()
+                        .addComponent(lblmostrarNomreCom)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblnombreCompleto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblApellidoscom)))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pInfoLayout.setVerticalGroup(
+            pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pInfoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(lblInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRutMostrar)
+                    .addComponent(lblRut))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblmostrarNomreCom)
+                    .addComponent(lblnombreCompleto)
+                    .addComponent(lblApellidoscom))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMostrarPuntaje)
+                    .addComponent(lblpuntaje))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMostraremail)
+                    .addComponent(lblEmail))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMostrarContra)
+                    .addComponent(lblContra))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lnlmostrarCoomuna)
+                    .addComponent(lblComuna))
+                .addGap(18, 18, 18)
+                .addGroup(pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInfoConsumi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblActividad)
+                    .addComponent(lblmostrarSubcrip)
+                    .addComponent(lblSuscrito))
+                .addGap(55, 55, 55))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 670));
+        getContentPane().add(pInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 620, 326));
 
         pack();
         setLocationRelativeTo(null);
@@ -904,8 +892,8 @@ public class vista_Consumidores extends javax.swing.JFrame {
 
         int errores = 0;
         if (txt_rut.getText().equals("") || txt_puntaje.getText().equals("") || txt_nombre1.getText().equals("")
-            || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") || txt_apellido2.getText().equals("")
-            || txt_email.getText().equals("") || txt_password.getText().equals("") || rutCorrecto==false || contraCorrecta==false) {
+                || txt_nombre2.getText().equals("") || txt_apellido1.getText().equals("") || txt_apellido2.getText().equals("")
+                || txt_email.getText().equals("") || txt_password.getText().equals("") || rutCorrecto == false || contraCorrecta == false) {
             errores = errores + 1;
         }
 
@@ -957,7 +945,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
         System.out.println(comuna_id);
         String rutAcortado = run.substring(0, run.indexOf("-"));
         String digitoRut = run.substring(run.length() - 1);
-        String rutFinal=rutAcortado + digitoRut;
+        String rutFinal = rutAcortado + digitoRut;
 
         // int comuna = comuna_id;
         txt_rut.setText(rutFinal);
@@ -971,7 +959,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
 
         String comuna = String.valueOf(cb_comuna.getSelectedItem());
 
-        mostrarInfoDetallada(rutFinal,p_nombre,s_nombre,apellido_p,apellido_m,clave,comuna,activo,suscrito,email);
+        mostrarInfoDetallada(rutFinal, p_nombre, s_nombre, apellido_p, apellido_m, clave, comuna, activo, suscrito, email, puntaje);
 
         if (activo == '1') {
             chk_activo.setSelected(true);
@@ -1012,27 +1000,33 @@ public class vista_Consumidores extends javax.swing.JFrame {
     }//GEN-LAST:event_tab_consumidoresMouseClicked
 
     private void txt_rutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_rutFocusLost
-        int minimo=9;
-        if(txt_rut.getText().length()<minimo){
-            txt_rut.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
-            rutCorrecto=false;
-        }else{
-            txt_rut.setForeground(Color.black);
-            rutCorrecto=true;
+        int minimo = 7;
+        if (txt_rut.getText().length() > 0) {
+            if (txt_rut.getText().length() < minimo) {
+                txt_rut.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Ingrese rut con su maximo de caracteres correcto EJ:(123456781)", "Aviso", JOptionPane.ERROR_MESSAGE);
+                rutCorrecto = false;
+            } else {
+                txt_rut.setForeground(Color.black);
+                rutCorrecto = true;
+            }
         }
+
     }//GEN-LAST:event_txt_rutFocusLost
 
     private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
-        int minimo=8;
-        if(txt_password.getText().length()<minimo){
-            txt_password.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Minimo de caracteres de la contraseña es 8", "Aviso", JOptionPane.ERROR_MESSAGE);
-            contraCorrecta=false;
-        }else{
-            txt_password.setForeground(Color.black);
-            contraCorrecta=true;
+        int minimo = 8;
+        if (txt_password.getText().length() > 0) {
+            if (txt_password.getText().length() < minimo) {
+                txt_password.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Minimo de caracteres de la contraseña es 8", "Aviso", JOptionPane.ERROR_MESSAGE);
+                contraCorrecta = false;
+            } else {
+                txt_password.setForeground(Color.black);
+                contraCorrecta = true;
+            }
         }
+
     }//GEN-LAST:event_txt_passwordFocusLost
 
     public boolean isEmail(String correo) {
@@ -1049,7 +1043,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
 
     }
 
-    public void mostrarInfoDetallada(String rut, String nombre1, String nombre2, String apellido1, String apellido2, String contra, String comuna, char activo, char suscri,String email) {
+    public void mostrarInfoDetallada(String rut, String nombre1, String nombre2, String apellido1, String apellido2, String contra, String comuna, char activo, char suscri, String email, int puntaje) {
         mensajePanelInfo(true);
         lblRut.setText(rut);
         lblnombreCompleto.setText(nombre1 + " " + nombre2);
@@ -1057,6 +1051,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
         lblContra.setText(contra);
         lblComuna.setText(comuna);
         lblEmail.setText(email);
+        lblpuntaje.setText(Integer.toString(puntaje));
         if (activo == '1') {
             lblActividad.setText("Activo");
         } else {
@@ -1069,43 +1064,47 @@ public class vista_Consumidores extends javax.swing.JFrame {
         }
     }
 
-    public void mensajePanelInfo(boolean vali){
-        if(vali==false){
-        lblInfo.setText("Seleccione item para visualizar");
-        lblRutMostrar.setVisible(false);
-        lblRut.setVisible(false);
-        lblmostrarNomreCom.setVisible(false);
-        lblnombreCompleto.setVisible(false);
-        lblApellidoscom.setVisible(false);
-        lblMostraremail.setVisible(false);
-        lblEmail.setVisible(false);
-        lblMostrarContra.setVisible(false);
-        lblContra.setVisible(false);
-        lnlmostrarCoomuna.setVisible(false);
-        lblComuna.setVisible(false);
-        lblInfoConsumi.setVisible(false);
-        lblActividad.setVisible(false);
-        lblmostrarSubcrip.setVisible(false);
-        lblSuscrito.setVisible(false);       
-        }else{
-        lblInfo.setText("Informacion detallada del consumidor:");
-        lblRutMostrar.setVisible(true);
-        lblRut.setVisible(true);
-        lblmostrarNomreCom.setVisible(true);
-        lblnombreCompleto.setVisible(true);
-        lblApellidoscom.setVisible(true);
-        lblMostraremail.setVisible(true);
-        lblEmail.setVisible(true);
-        lblMostrarContra.setVisible(true);
-        lblContra.setVisible(true);
-        lnlmostrarCoomuna.setVisible(true);
-        lblComuna.setVisible(true);
-        lblInfoConsumi.setVisible(true);
-        lblActividad.setVisible(true);
-        lblmostrarSubcrip.setVisible(true);
-        lblSuscrito.setVisible(true);       
+    public void mensajePanelInfo(boolean vali) {
+        if (vali == false) {
+            lblInfo.setText("Seleccione item para visualizar");
+            lblRutMostrar.setVisible(false);
+            lblRut.setVisible(false);
+            lblmostrarNomreCom.setVisible(false);
+            lblnombreCompleto.setVisible(false);
+            lblApellidoscom.setVisible(false);
+            lblMostraremail.setVisible(false);
+            lblEmail.setVisible(false);
+            lblMostrarContra.setVisible(false);
+            lblContra.setVisible(false);
+            lnlmostrarCoomuna.setVisible(false);
+            lblComuna.setVisible(false);
+            lblInfoConsumi.setVisible(false);
+            lblActividad.setVisible(false);
+            lblmostrarSubcrip.setVisible(false);
+            lblSuscrito.setVisible(false);
+            lblMostrarPuntaje.setVisible(false);
+            lblpuntaje.setVisible(false);
+        } else {
+            lblInfo.setText("Informacion detallada del consumidor:");
+            lblRutMostrar.setVisible(true);
+            lblRut.setVisible(true);
+            lblmostrarNomreCom.setVisible(true);
+            lblnombreCompleto.setVisible(true);
+            lblApellidoscom.setVisible(true);
+            lblMostraremail.setVisible(true);
+            lblEmail.setVisible(true);
+            lblMostrarContra.setVisible(true);
+            lblContra.setVisible(true);
+            lnlmostrarCoomuna.setVisible(true);
+            lblComuna.setVisible(true);
+            lblInfoConsumi.setVisible(true);
+            lblActividad.setVisible(true);
+            lblmostrarSubcrip.setVisible(true);
+            lblSuscrito.setVisible(true);
+            lblMostrarPuntaje.setVisible(true);
+            lblpuntaje.setVisible(true);
         }
-        
+
     }
     /**
      * @param args the command line arguments
@@ -1120,7 +1119,6 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private javax.swing.JComboBox<Comuna> cb_comuna;
     private javax.swing.JCheckBox chk_activo;
     private javax.swing.JCheckBox chk_suscrito;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblActividad;
     private javax.swing.JLabel lblApellidoscom;
@@ -1130,6 +1128,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblInfoConsumi;
     private javax.swing.JLabel lblMostrarContra;
+    private javax.swing.JLabel lblMostrarPuntaje;
     private javax.swing.JLabel lblMostraremail;
     private javax.swing.JLabel lblRut;
     private javax.swing.JLabel lblRutMostrar;
@@ -1147,6 +1146,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
     private javax.swing.JLabel lblmostrarNomreCom;
     private javax.swing.JLabel lblmostrarSubcrip;
     private javax.swing.JLabel lblnombreCompleto;
+    private javax.swing.JLabel lblpuntaje;
     private javax.swing.JLabel lnlmostrarCoomuna;
     private javax.swing.JPanel pInfo;
     private javax.swing.JPanel panel;

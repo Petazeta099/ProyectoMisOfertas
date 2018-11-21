@@ -29,7 +29,7 @@ public class CRUDoferta {
             lista = ps.executeQuery();
             while(lista.next()){
                 Oferta of = new Oferta();
-                of.setId(lista.getInt(1));  
+                of.setId(lista.getInt(1));
                 of.setTitulo(lista.getString(2));
                 of.setDescripcion(lista.getString(3));
                 of.setFecha_inicio(Date.valueOf(lista.getString(4)));

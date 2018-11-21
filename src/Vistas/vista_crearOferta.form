@@ -48,10 +48,6 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="tfDescrip" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
-                                              <Component id="tfTitulo" min="-2" pref="148" max="-2" attributes="0"/>
-                                              <EmptySpace min="36" pref="133" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -76,7 +72,13 @@
                                                       <Component id="jLabel1" min="-2" pref="174" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="tfTitulo" min="-2" pref="148" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="txtSKU" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -125,6 +127,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtTitulo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfTitulo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSKU" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -179,7 +182,7 @@
                   <Component id="btn_salir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_ofertas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -380,6 +383,8 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSKU">
     </Component>
   </SubComponents>
 </Form>

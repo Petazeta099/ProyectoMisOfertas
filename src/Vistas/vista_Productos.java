@@ -34,176 +34,169 @@ import javax.swing.table.DefaultTableModel;
  * @author Raul
  */
 public class vista_Productos extends javax.swing.JFrame {
+
     static home login = new home();
-    
-  
-   // 
-    Tabla_Producto tp = new Tabla_Producto();    
-    Limpiar lim = new Limpiar();    
+
+    // 
+    Tabla_Producto tp = new Tabla_Producto();
+    Limpiar lim = new Limpiar();
     CRUDproducto crud_pro;
     int clic_tabla = 0;
-    boolean skuCorrecto=false;
+    boolean skuCorrecto = false;
     //
-    
-    
+
     /**
      * Creates new form listaProductos
      */
     public vista_Productos() {
         initComponents();
-         listaCategorias();
+        listaCategorias();
         listaMarcas();
         tp.visualizar_Producto(tab_producto);
         //obtenerProductos();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
-        
+
         setResizable(false);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
         tab_producto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-   
-    
-    
-    
 
-    
-    
-    public void agregar(){
+    public void agregar() {
         crud_pro = new CRUDproducto();
         Producto pro = new Producto();
-        
+
         pro.setSku(txt_sku.getText());
         pro.setNombre(txt_nombre.getText());
         pro.setDescripcion(txt_descripcion.getText());
-        pro.setCategoria_id(txt_categoria.getSelectedIndex()+1);
-        pro.setMarca_id(txt_marca.getSelectedIndex()+1);
-        
+        pro.setCategoria_id(txt_categoria.getSelectedIndex() + 1);
+        pro.setMarca_id(txt_marca.getSelectedIndex() + 1);
+
         crud_pro.Agregar_Producto(pro);
         JOptionPane.showMessageDialog(null, "El producto se a agregado correctamente");
     }
-    
+
     //Metodo eliminar producto
-    public void modificar(){
-        int errores=0;
-        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") ||  txt_sku.getText().equals("")){
-            errores = errores+1;
+    public void modificar() {
+        int errores = 0;
+        if (txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || txt_sku.getText().equals("")) {
+            errores = errores + 1;
         }
-        
-        if(errores>=1){
-        JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{        
-        crud_pro = new CRUDproducto();
-        Producto pro = new Producto();
-        
-        pro.setNombre(txt_nombre.getText());
-        pro.setDescripcion(txt_descripcion.getText());
-        pro.setCategoria_id(txt_categoria.getSelectedIndex()+1);
-        pro.setMarca_id(txt_marca.getSelectedIndex()+1);
-        pro.setSku(txt_sku.getText());
-        
-        crud_pro.Modificar_Producto(pro);
-        JOptionPane.showMessageDialog(null, "El producto se a modificado correctamente");
+
+        if (errores >= 1) {
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        } else {
+            crud_pro = new CRUDproducto();
+            Producto pro = new Producto();
+
+            pro.setNombre(txt_nombre.getText());
+            pro.setDescripcion(txt_descripcion.getText());
+            pro.setCategoria_id(txt_categoria.getSelectedIndex() + 1);
+            pro.setMarca_id(txt_marca.getSelectedIndex() + 1);
+            pro.setSku(txt_sku.getText());
+
+            crud_pro.Modificar_Producto(pro);
+            JOptionPane.showMessageDialog(null, "El producto se a modificado correctamente");
         }
     }
-    
+
     //Metodo eliminar producto
-    public void eliminar(){
+    public void eliminar() {
         crud_pro = new CRUDproducto();
         Producto pro = new Producto();
-        
+
         pro.setSku(txt_sku.getText());
-        
+
         crud_pro.Eliminar_Producto(pro);
         JOptionPane.showMessageDialog(null, "El producto se a eliminado correctamente");
     }
-    
-    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4){
+
+    public void activa_boton(boolean a1, boolean a2, boolean a3, boolean a4) {
         btn_agregar.setEnabled(a1);
         btn_modificar.setEnabled(a2);
         btn_eliminar.setEnabled(a3);
         txt_sku.setEnabled(a4);
     }
-    
-    
-    public void obtenerProductos(){
+
+    public void obtenerProductos() {
         DefaultTableModel modelo = new DefaultTableModel();
         ResultSet lista = Database.crearConsulta("SELECT * FROM PRODUCTO");
-        modelo.setColumnIdentifiers(new Object[]{"SKU","NOMBRE","DESCRIPCION","CATEGORIA","MARCA"});
-        
-        try{
-            while(lista.next()){
-                modelo.addRow(new Object[]{lista.getString("sku"),lista.getString("nombre"),lista.getString("descripcion"),lista.getInt("categoria_id"),lista.getInt("marca_id")});
+        modelo.setColumnIdentifiers(new Object[]{"SKU", "NOMBRE", "DESCRIPCION", "CATEGORIA", "MARCA"});
+
+        try {
+            while (lista.next()) {
+                modelo.addRow(new Object[]{lista.getString("sku"), lista.getString("nombre"), lista.getString("descripcion"), lista.getInt("categoria_id"), lista.getInt("marca_id")});
             }
             tab_producto.setModel(modelo);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
-     public void listaCategorias(){
-         ArrayList<String> list = new ArrayList<String>();
-              //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+    public void listaCategorias() {
+        ArrayList<String> list = new ArrayList<String>();
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
 
         Database cn = new Database();
         String sql = "select tipo from categoria";
         ResultSet lista = null;
         PreparedStatement ps = null;
-        try{
+        try {
             ps = cn.getConnection().prepareStatement(sql);
             lista = ps.executeQuery();
-            while(lista.next()){
+            while (lista.next()) {
                 list.add(lista.getString(1));
                 String n = lista.getString("tipo");
                 txt_categoria.addItem(lista.getString(1));
-               // list2.add(o);
+                // list2.add(o);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }finally{
-            try{
+        } finally {
+            try {
                 ps.close();
                 lista.close();
                 cn.desconectar();
-            }catch(Exception ex){}
-        }       
-       
+            } catch (Exception ex) {
+            }
+        }
+
     }
-    
-        public void listaMarcas(){
-         ArrayList<String> list = new ArrayList<String>();
-              //  ArrayList<Object> list2 = new ArrayList<Object>();
+
+    public void listaMarcas() {
+        ArrayList<String> list = new ArrayList<String>();
+        //  ArrayList<Object> list2 = new ArrayList<Object>();
 
         Database cn = new Database();
         String sql = "select nombre from marca";
         ResultSet lista = null;
         PreparedStatement ps = null;
-        try{
+        try {
             ps = cn.getConnection().prepareStatement(sql);
             lista = ps.executeQuery();
-            while(lista.next()){
+            while (lista.next()) {
                 list.add(lista.getString(1));
                 String n = lista.getString("nombre");
                 txt_marca.addItem(lista.getString(1));
-               // list2.add(o);
+                // list2.add(o);
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }finally{
-            try{
+        } finally {
+            try {
                 ps.close();
                 lista.close();
                 cn.desconectar();
-            }catch(Exception ex){}
-        }       
-       
+            } catch (Exception ex) {
+            }
+        }
+
     }
 
-     public int obtenerIdCategoriaConsumidor(String nombreCategoria) {
+    public int obtenerIdCategoriaConsumidor(String nombreCategoria) {
         ArrayList<String> list = new ArrayList<String>();
         int[] numCat = new int[1];
         //  ArrayList<Object> list2 = new ArrayList<Object>();
@@ -240,8 +233,8 @@ public class vista_Productos extends javax.swing.JFrame {
         System.out.println(idCat);
         return idCat;
     }
-     
-     public int obtenerIdMarca(String nombreMarca) {
+
+    public int obtenerIdMarca(String nombreMarca) {
         ArrayList<String> list = new ArrayList<String>();
         int[] numMarca = new int[1];
         //  ArrayList<Object> list2 = new ArrayList<Object>();
@@ -278,7 +271,7 @@ public class vista_Productos extends javax.swing.JFrame {
         System.out.println(idMar);
         return idMar;
     }
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -514,24 +507,24 @@ public class vista_Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        int errores=0;
-        
-        String categoria = txt_categoria.getSelectedItem()+"";
-        String marca = txt_marca.getSelectedItem()+"";
-        
-        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || categoria.equals("")
-           || marca.equals("") || txt_sku.getText().equals("") || skuCorrecto==false){
-            errores = errores+1;
-        }        
-        if(errores>=1){
-            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
-        agregar();
-        tp.visualizar_Producto(tab_producto);
-        activa_boton(true,false,false,true);
-        lim.limpiar_texto(panel);
+        int errores = 0;
+
+        String categoria = txt_categoria.getSelectedItem() + "";
+        String marca = txt_marca.getSelectedItem() + "";
+
+        if (txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || categoria.equals("")
+                || marca.equals("") || txt_sku.getText().equals("") || skuCorrecto == false) {
+            errores = errores + 1;
         }
-        
+        if (errores >= 1) {
+            JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
+        } else {
+            agregar();
+            tp.visualizar_Producto(tab_producto);
+            activa_boton(true, false, false, true);
+            lim.limpiar_texto(panel);
+        }
+
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -539,27 +532,27 @@ public class vista_Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-        int errores=0;
-        if(txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || txt_sku.getText().equals("")){
-            errores = errores+1;
-        }        
-        if(errores>=1){
+        int errores = 0;
+        if (txt_nombre.getText().equals("") || txt_descripcion.getText().equals("") || txt_sku.getText().equals("")) {
+            errores = errores + 1;
+        }
+        if (errores >= 1) {
             JOptionPane.showMessageDialog(null, "Ingrese informacion faltante en el formulario", "Aviso", JOptionPane.ERROR_MESSAGE);
-        }else{
-        modificar();
-        tp.visualizar_Producto(tab_producto);
-        activa_boton(true,false,false,false);
-        lim.limpiar_texto(panel);
+        } else {
+            modificar();
+            tp.visualizar_Producto(tab_producto);
+            activa_boton(true, false, false, false);
+            lim.limpiar_texto(panel);
         }
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
 
-        int s = JOptionPane.showConfirmDialog(null, "Eliminar producto","Si/no",JOptionPane.YES_NO_OPTION);
-        if(s == 0){
+        int s = JOptionPane.showConfirmDialog(null, "Eliminar producto", "Si/no", JOptionPane.YES_NO_OPTION);
+        if (s == 0) {
             eliminar();
             tp.visualizar_Producto(tab_producto);
-            activa_boton(true,false,false,true);
+            activa_boton(true, false, false, true);
             lim.limpiar_texto(panel);
         }
 
@@ -567,43 +560,43 @@ public class vista_Productos extends javax.swing.JFrame {
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         lim.limpiar_texto(panel);
-        activa_boton(true,false,false,true);
+        activa_boton(true, false, false, true);
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void tab_productoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab_productoMouseClicked
-          clic_tabla = this.tab_producto.rowAtPoint(evt.getPoint());
-        
-        String sku = ""+tab_producto.getValueAt(clic_tabla, 0);
-        String nombre = ""+tab_producto.getValueAt(clic_tabla, 1);
-        String descripcion = ""+tab_producto.getValueAt(clic_tabla, 2);
-        String categoria = ""+tab_producto.getValueAt(clic_tabla, 3);
-        String marca = ""+tab_producto.getValueAt(clic_tabla, 4);
-        
+        clic_tabla = this.tab_producto.rowAtPoint(evt.getPoint());
+
+        String sku = "" + tab_producto.getValueAt(clic_tabla, 0);
+        String nombre = "" + tab_producto.getValueAt(clic_tabla, 1);
+        String descripcion = "" + tab_producto.getValueAt(clic_tabla, 2);
+        String categoria = "" + tab_producto.getValueAt(clic_tabla, 3);
+        String marca = "" + tab_producto.getValueAt(clic_tabla, 4);
+
         txt_sku.setText(sku);
         txt_nombre.setText(nombre);
         txt_descripcion.setText(descripcion);
-        txt_categoria.setSelectedIndex(obtenerIdCategoriaConsumidor(categoria)-1);
-        txt_marca.setSelectedIndex(obtenerIdMarca(marca)-1);
-        
+        txt_categoria.setSelectedIndex(obtenerIdCategoriaConsumidor(categoria) - 1);
+        txt_marca.setSelectedIndex(obtenerIdMarca(marca) - 1);
+
         int column = tab_producto.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tab_producto.getRowHeight();
-        
-        if(row < tab_producto.getRowCount() && row >= 0 && column < tab_producto.getColumnCount() && column >= 0){
+        int row = evt.getY() / tab_producto.getRowHeight();
+
+        if (row < tab_producto.getRowCount() && row >= 0 && column < tab_producto.getColumnCount() && column >= 0) {
             Object value = tab_producto.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
                 JButton boton = (JButton) value;
 
-                if(boton.getName().equals("mod")){
+                if (boton.getName().equals("mod")) {
                     System.out.println("Click en el boton modificar");
                     //EVENTOS MODIFICAR
-                    activa_boton(true,true,false,false);
+                    activa_boton(true, true, false, false);
                 }
-                if(boton.getName().equals("eli")){
+                if (boton.getName().equals("eli")) {
                     //JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
                     System.out.println("Click en el boton eliminar");
                     //EVENTOS ELIMINAR
-                    activa_boton(true,false,true,true);
+                    activa_boton(true, false, true, true);
                 }
             }
 
@@ -617,44 +610,46 @@ public class vista_Productos extends javax.swing.JFrame {
 
     private void txt_skuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_skuKeyTyped
         int maximoCaracter = 14;
-        char validarCaracter=evt.getKeyChar();
-        if((txt_sku.getText().length()>=maximoCaracter) ){
+        char validarCaracter = evt.getKeyChar();
+        if ((txt_sku.getText().length() >= maximoCaracter)) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_skuKeyTyped
 
     private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
         int maximoCaracter = 29;
-        char validarCaracter=evt.getKeyChar();
-        if((txt_nombre.getText().length()>=maximoCaracter) ){
+        char validarCaracter = evt.getKeyChar();
+        if ((txt_nombre.getText().length() >= maximoCaracter)) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_nombreKeyTyped
 
     private void txt_descripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_descripcionKeyTyped
         int maximoCaracter = 29;
-        char validarCaracter=evt.getKeyChar();
-        if((txt_descripcion.getText().length()>=maximoCaracter) ){
+        char validarCaracter = evt.getKeyChar();
+        if ((txt_descripcion.getText().length() >= maximoCaracter)) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_descripcionKeyTyped
 
     private void txt_skuFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_skuFocusLost
-        int minimo=4;
-        if(txt_sku.getText().length()<minimo){
-            txt_sku.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Ingrese sku", "Aviso", JOptionPane.ERROR_MESSAGE);
-            skuCorrecto=false;
-        }else{
-            txt_sku.setForeground(Color.black);
-            skuCorrecto=true;
+        int minimo = 4;
+        if (txt_sku.getText().length() > 0) {
+            if (txt_sku.getText().length() < minimo) {
+                txt_sku.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Ingrese sku", "Aviso", JOptionPane.ERROR_MESSAGE);
+                skuCorrecto = false;
+            } else {
+                txt_sku.setForeground(Color.black);
+                skuCorrecto = true;
+            }
         }
+
     }//GEN-LAST:event_txt_skuFocusLost
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;

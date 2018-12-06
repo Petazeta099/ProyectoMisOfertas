@@ -24,7 +24,7 @@ public class home extends javax.swing.JFrame {
     public home() {
         initComponents();
         this.setLocationRelativeTo(null);
-        System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
+        
         
     }
 
@@ -40,6 +40,7 @@ public class home extends javax.swing.JFrame {
         lblenunciao = new javax.swing.JLabel();
         btnAdmin = new javax.swing.JButton();
         btnEncargado = new javax.swing.JButton();
+        btnGerente = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
@@ -75,6 +76,16 @@ public class home extends javax.swing.JFrame {
         });
         getContentPane().add(btnEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, 38));
 
+        btnGerente.setBackground(new java.awt.Color(0, 153, 153));
+        btnGerente.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
+        btnGerente.setText("Gerente");
+        btnGerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerenteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 240, 40));
+
         btn_salir.setBackground(new java.awt.Color(255, 255, 255));
         btn_salir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btn_salir.setText("Salir");
@@ -83,7 +94,7 @@ public class home extends javax.swing.JFrame {
                 btn_salirActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, -1));
+        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, -1));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 473));
@@ -105,6 +116,11 @@ public class home extends javax.swing.JFrame {
         new login_Encargado().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEncargadoActionPerformed
+
+    private void btnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenteActionPerformed
+        new login_Gerente().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGerenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +163,7 @@ public class home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnEncargado;
+    private javax.swing.JButton btnGerente;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblenunciao;

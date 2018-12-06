@@ -9,8 +9,22 @@ import Clases.CRUDoferta;
 import Clases.Oferta;
 import Conexion.Database;
 import Tablas.Tabla_Ofertas;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.FontSelector;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +57,7 @@ public class verOfertas extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setResizable(false);
         
+
     }
 
     public void mostrarOfertas() {
@@ -117,6 +132,9 @@ public class verOfertas extends javax.swing.JFrame {
         lblCompraMaxM = new javax.swing.JLabel();
         lblActividadM = new javax.swing.JLabel();
         lblTituloInicial = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jlReportes = new javax.swing.JLabel();
+        btnObtenerReportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ofertas hechas por usted");
@@ -335,6 +353,41 @@ public class verOfertas extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+
+        jlReportes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlReportes.setText("Obtención de reportes");
+
+        btnObtenerReportes.setText("IR");
+        btnObtenerReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObtenerReportesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnObtenerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlReportes)
+                .addGap(18, 18, 18)
+                .addComponent(btnObtenerReportes)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -347,34 +400,36 @@ public class verOfertas extends javax.swing.JFrame {
                         .addGap(0, 8, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(btn_Publicar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77))))
+                                .addComponent(btn_Publicar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(35, 35, 35))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(btn_Publicar)
-                        .addGap(31, 31, 31)
-                        .addComponent(btn_salir)
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Publicar)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_salir)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -389,22 +444,21 @@ public class verOfertas extends javax.swing.JFrame {
     private void tblOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOfertasMouseClicked
         int fila = tblOfertas.getSelectedRow();
         lblIdM.setVisible(false);
-            int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
-            
-            String titulo=tblOfertas.getValueAt(fila, 1).toString();
-            String descrip=tblOfertas.getValueAt(fila, 2).toString();   
-            String fechaInicio=tblOfertas.getValueAt(fila, 3).toString();
-            String fechaTermino=tblOfertas.getValueAt(fila, 4).toString();
-            String precioNormal=tblOfertas.getValueAt(fila, 5).toString();
-            String precioOferta=tblOfertas.getValueAt(fila, 6).toString();
-            String compraMin=tblOfertas.getValueAt(fila, 7).toString();
-            String compraMax=tblOfertas.getValueAt(fila, 8).toString();   
-           
-                    
-            String act = tblOfertas.getValueAt(fila, 9).toString();
-            
+        int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
+
+        String titulo = tblOfertas.getValueAt(fila, 1).toString();
+        String descrip = tblOfertas.getValueAt(fila, 2).toString();
+        String fechaInicio = tblOfertas.getValueAt(fila, 3).toString();
+        String fechaTermino = tblOfertas.getValueAt(fila, 4).toString();
+        String precioNormal = tblOfertas.getValueAt(fila, 5).toString();
+        String precioOferta = tblOfertas.getValueAt(fila, 6).toString();
+        String compraMin = tblOfertas.getValueAt(fila, 7).toString();
+        String compraMax = tblOfertas.getValueAt(fila, 8).toString();
+
+        String act = tblOfertas.getValueAt(fila, 9).toString();
+
         try {
-            mostrarDatos(id,titulo,descrip,fechaInicio,fechaTermino,precioNormal,precioOferta,compraMin,compraMax,act);
+            mostrarDatos(id, titulo, descrip, fechaInicio, fechaTermino, precioNormal, precioOferta, compraMin, compraMax, act);
         } catch (ParseException ex) {
             Logger.getLogger(verOfertas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -418,31 +472,30 @@ public class verOfertas extends javax.swing.JFrame {
         } else {
             int fila = tblOfertas.getSelectedRow();
             int id = Integer.parseInt(tblOfertas.getValueAt(fila, 0).toString());
-            
-            String titulo=tblOfertas.getValueAt(fila, 1).toString();
-            String descrip=tblOfertas.getValueAt(fila, 2).toString();   
-            String fechaInicio=tblOfertas.getValueAt(fila, 3).toString();
-            String fechaTermino=tblOfertas.getValueAt(fila, 4).toString();
-            String precioNormal=tblOfertas.getValueAt(fila, 5).toString();
-            String precioOferta=tblOfertas.getValueAt(fila, 6).toString();
-            String compraMin=tblOfertas.getValueAt(fila, 7).toString();
-            String compraMax=tblOfertas.getValueAt(fila, 8).toString();   
-           
-                    
+
+            String titulo = tblOfertas.getValueAt(fila, 1).toString();
+            String descrip = tblOfertas.getValueAt(fila, 2).toString();
+            String fechaInicio = tblOfertas.getValueAt(fila, 3).toString();
+            String fechaTermino = tblOfertas.getValueAt(fila, 4).toString();
+            String precioNormal = tblOfertas.getValueAt(fila, 5).toString();
+            String precioOferta = tblOfertas.getValueAt(fila, 6).toString();
+            String compraMin = tblOfertas.getValueAt(fila, 7).toString();
+            String compraMax = tblOfertas.getValueAt(fila, 8).toString();
+
             String act = tblOfertas.getValueAt(fila, 9).toString();
-            
+
             try {
-                mostrarDatos(id,titulo,descrip,fechaInicio,fechaTermino,precioNormal,precioOferta,compraMin,compraMax,act);
+                mostrarDatos(id, titulo, descrip, fechaInicio, fechaTermino, precioNormal, precioOferta, compraMin, compraMax, act);
             } catch (ParseException ex) {
                 Logger.getLogger(verOfertas.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             char act2;
             System.out.println("valor id: " + id + " valor de activo: " + act);
 
             if (act.equals("Si")) {
                 act2 = '0';
-                
+
                 JOptionPane.showMessageDialog(this, "Oferta cambiada a NO PUBLICADA.");
             } else {
                 act2 = '1';
@@ -470,7 +523,7 @@ public class verOfertas extends javax.swing.JFrame {
                 } catch (Exception ex) {
                 }
             }
-            
+
             mostrarOfertas();
         }
 
@@ -480,18 +533,31 @@ public class verOfertas extends javax.swing.JFrame {
     private void btnMantDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantDescActionPerformed
         this.dispose();
         new MantenedorDescuentosOferta().setVisible(true);
-        
+
     }//GEN-LAST:event_btnMantDescActionPerformed
+
+    private void btnObtenerReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerReportesActionPerformed
+        try {
+            crearReporte();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(verOfertas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(verOfertas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnObtenerReportesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMantDesc;
+    private javax.swing.JButton btnObtenerReportes;
     private javax.swing.JButton btn_Publicar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jlReportes;
     private javax.swing.JLabel lblActividad;
     private javax.swing.JLabel lblActividadM;
     private javax.swing.JLabel lblCompaMin;
@@ -516,52 +582,197 @@ public class verOfertas extends javax.swing.JFrame {
     private javax.swing.JTable tblOfertas;
     // End of variables declaration//GEN-END:variables
 
-    public void habilitacionDeTextos(boolean habili ){
-        if(habili==false){
-        lblTituloInicial.setText("Seleccione oferta para ver descripción");
-        }else{
-        lblTituloInicial.setText("Descripción de la oferta");
-        
+    public void habilitacionDeTextos(boolean habili) {
+        if (habili == false) {
+            lblTituloInicial.setText("Seleccione oferta para ver descripción");
+        } else {
+            lblTituloInicial.setText("Descripción de la oferta");
+
         }
-        
-        lblIdM.setVisible(habili);lblTitulo.setVisible(habili);lblTituloM.setVisible(habili);
-        lblDescrip.setVisible(habili);lbldescripM.setVisible(habili);setVisible(habili);lblFechaI.setVisible(habili);lblFechaIM.setVisible(habili);lblFechaT.setVisible(habili);lblFechaTM.setVisible(habili);
-        lblPrecioN.setVisible(habili);lblPrecioNM.setVisible(habili);lblPrecioO.setVisible(habili);lblPrecioOM.setVisible(habili);lblCompaMin.setVisible(habili);
-        lblCompraMinM.setVisible(habili);lblCompraMax.setVisible(habili);lblCompraMaxM.setVisible(habili);lblActividad.setVisible(habili);
+
+        lblIdM.setVisible(habili);
+        lblTitulo.setVisible(habili);
+        lblTituloM.setVisible(habili);
+        lblDescrip.setVisible(habili);
+        lbldescripM.setVisible(habili);
+        setVisible(habili);
+        lblFechaI.setVisible(habili);
+        lblFechaIM.setVisible(habili);
+        lblFechaT.setVisible(habili);
+        lblFechaTM.setVisible(habili);
+        lblPrecioN.setVisible(habili);
+        lblPrecioNM.setVisible(habili);
+        lblPrecioO.setVisible(habili);
+        lblPrecioOM.setVisible(habili);
+        lblCompaMin.setVisible(habili);
+        lblCompraMinM.setVisible(habili);
+        lblCompraMax.setVisible(habili);
+        lblCompraMaxM.setVisible(habili);
+        lblActividad.setVisible(habili);
         lblActividadM.setVisible(habili);
-        
+
     }
-    
-    public void mostrarDatos(int id, String titulo,String descrip,String fechai,String fechaT,String precioNor,String precioO,String compMin
-    ,String compMax,String acti) throws ParseException{
+
+    public void mostrarDatos(int id, String titulo, String descrip, String fechai, String fechaT, String precioNor, String precioO, String compMin,
+            String compMax, String acti) throws ParseException {
         habilitacionDeTextos(true);
         lblIdM.setText(Integer.toString(id));
         lblIdM.setVisible(false);
         lblTituloM.setText(titulo);
         lbldescripM.setText(descrip);
-        
+
         SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(fechai);
         SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
         lblFechaIM.setText(dt1.format(date));
-        
+
         SimpleDateFormat dt2 = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
         Date date2 = dt2.parse(fechaT);
         SimpleDateFormat dt21 = new SimpleDateFormat("dd-MM-yyyy");
         lblFechaTM.setText(dt21.format(date2));
-        
+
         lblPrecioNM.setText(precioNor);
         lblPrecioOM.setText(precioO);
         lblCompraMinM.setText(compMin);
         lblCompraMaxM.setText(compMax);
-        if(acti.equals("Si")){
+        if (acti.equals("Si")) {
             lblActividadM.setText("Activa");
-        }else{
+        } else {
             lblActividadM.setText("No activa");
         }
-        
-    }
-    
 
-    
+    }
+
+    private void crearReporte() throws FileNotFoundException, DocumentException {
+        String rutEncargadoSolicitante = login_Encargado.rut_encargado;
+        String rutsinDigito = rutEncargadoSolicitante.substring(0, rutEncargadoSolicitante.length() - 1);
+        String rutDigito = rutEncargadoSolicitante.substring(rutEncargadoSolicitante.length() - 1);
+        String rutFinal = rutsinDigito + "-" + rutDigito;
+
+        System.out.println(rutFinal);
+        Document documento = new Document();
+        
+        
+        File desktopDir = new File(System.getProperty("user.home"), "Desktop");
+        System.out.println(desktopDir.getPath() + " " + desktopDir.exists());
+        String pathToDesktop = desktopDir.getPath();
+        //FileOutputStream out =  new FileOutputStream(new File(pathToDesktop+System.getProperty("file.separator")+"pdf de prueba.pdf"));
+        PdfWriter.getInstance(documento, new FileOutputStream(new File(pathToDesktop+System.getProperty("file.separator")+"Reporte valorizaciones.pdf")));
+        
+        documento.open();
+        documento.add(new Paragraph("Descripción de valorizaciones"));
+        documento.add(new Paragraph("   "));
+
+        Database cnOfertas = new Database();
+        Database cnValoracion = new Database();
+        Database cnEvaluacion = new Database();
+        int contador = 0;
+
+        String sqlOfertas = "select * from oferta WHERE encargado_run = ?";
+        ResultSet listaOfertas = null;
+        PreparedStatement psOfertas = null;
+
+        String sqlValoracion = "select * from valoracion WHERE oferta_id = ?";
+        ResultSet listaValoracion = null;
+        PreparedStatement psValoracion = null;
+        
+        String sqlEvaluacion = "select * from evaluacion WHERE id = ?";
+        ResultSet listaEvaluacion = null;
+        PreparedStatement psEvaluacion = null;
+
+        try {
+
+            psOfertas = cnOfertas.getConnection().prepareStatement(sqlOfertas);
+            psOfertas.setString(1, rutFinal);
+
+            listaOfertas = psOfertas.executeQuery();
+            while (listaOfertas.next()) {
+
+                com.itextpdf.text.Font dataRedFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.RED);
+                com.itextpdf.text.Font dataBlueFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.BLUE);
+                com.itextpdf.text.Font dataBlackFont = FontFactory.getFont("Garamond", 13, BaseColor.BLACK);
+                com.itextpdf.text.Font dataBoldFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK);
+                
+                Paragraph p = new Paragraph();
+                Paragraph p1 = new Paragraph();
+                Paragraph p2 = new Paragraph();
+                Paragraph p3 = new Paragraph();
+
+                p.add(new Chunk("ID DE LA OFERTA: ", dataRedFont));
+                p.add(new Chunk(listaOfertas.getString(1), dataBlackFont));
+                documento.add(p);
+                p1.add(new Chunk("TITULO: ", dataRedFont));
+                p1.add(new Chunk(listaOfertas.getString(2), dataBlackFont));
+                documento.add(p1);
+                p2.add(new Chunk("DESCRIPCIÓN: ", dataRedFont));
+                p2.add(new Chunk(listaOfertas.getString(3), dataBlackFont));
+                documento.add(p2);
+                
+                
+                
+
+                /*
+                com.itextpdf.text.Font azul = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14);
+                azul.setColor(BaseColor.BLUE);
+                
+                Chunk id = new Chunk("ID DE LA OFERTA: " + listaOfertas.getString(1), azul);
+                Chunk titulo = new Chunk("TITULO: " + listaOfertas.getString(2), azul);
+                Chunk descripcion = new Chunk("DESCRIPCIÓN: " + listaOfertas.getString(3), azul);
+                
+                documento.add(new Paragraph(id));
+                documento.add(new Paragraph(titulo));
+                documento.add(new Paragraph(descripcion));
+                 */
+                psValoracion = cnValoracion.getConnection().prepareStatement(sqlValoracion);
+                psValoracion.setInt(1, Integer.parseInt(listaOfertas.getString(1)));
+                listaValoracion = psValoracion.executeQuery();
+
+                while (listaValoracion.next()) {
+                    contador = contador + 1;
+                    /*
+                    documento.add(new Paragraph("  "));
+                    documento.add(new Paragraph("   " + contador + ".- Valoracion id: " + listaValoracion.getString(1) + ", calificación: " + listaValoracion.getString(2)));
+                     */
+                    documento.add(new Paragraph("  "));
+                    p3.add(new Chunk("   " + contador, dataBlueFont));
+                    p3.add(new Chunk(".- Valoracion id: " + listaValoracion.getString(1) + ", calificación: " + listaValoracion.getString(2), dataBlackFont));
+                    documento.add(p3);
+                    
+                    psEvaluacion = cnEvaluacion.getConnection().prepareStatement(sqlEvaluacion);
+                    psEvaluacion.setInt(1, Integer.parseInt(listaValoracion.getString(1)));
+                    listaEvaluacion = psEvaluacion.executeQuery();
+                    
+                    while(listaEvaluacion.next()){
+                    documento.add(new Paragraph("   Comentario: "+listaEvaluacion.getString(4)));
+                    
+                    //String rutAcortado = run.substring(0, run.indexOf("-"));
+                    
+                    documento.add(new Paragraph("   Con fecha: "+listaEvaluacion.getString(2).substring(0,listaEvaluacion.getString(2).indexOf(" "))));
+                    documento.add(new Paragraph("  "));
+                    }
+
+                }
+                listaValoracion = psValoracion.executeQuery();
+                if (listaValoracion.next() !=true) {
+                    
+                    documento.add(new Paragraph("  "));
+                    documento.add(new Paragraph("No existen valoraciones",dataBoldFont));
+                }
+
+                documento.add(new Paragraph(" "));
+                contador = 0;
+            }
+
+            JOptionPane.showMessageDialog(this, "Documento creado en el escritorio con nombre *Reporte valorizaciones*.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al crear el documento.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al crear el documento.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+        }
+        documento.close();
+    }
+
 }

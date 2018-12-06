@@ -6,8 +6,21 @@
 package Vistas;
 
 import Clases.GeneradorMail;
+import Conexion.Database;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +56,7 @@ public class vista_Admin extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnEmpresasRetail = new javax.swing.JButton();
         btnEmpresasSucursal = new javax.swing.JButton();
+        btnReporteBI = new javax.swing.JButton();
         btnMail = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
         fondoAdmin = new javax.swing.JLabel();
@@ -110,13 +124,21 @@ public class vista_Admin extends javax.swing.JFrame {
         });
         getContentPane().add(btnEmpresasSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 265, 40));
 
+        btnReporteBI.setText("Obtener reporte");
+        btnReporteBI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteBIActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReporteBI, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
+
         btnMail.setText("Enviar correos");
         btnMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMailActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
+        getContentPane().add(btnMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
 
         btn_salir.setBackground(new java.awt.Color(255, 255, 255));
         btn_salir.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
@@ -126,7 +148,7 @@ public class vista_Admin extends javax.swing.JFrame {
                 btn_salirActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 70, -1));
+        getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 70, -1));
 
         fondoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAdmin.jpg"))); // NOI18N
         getContentPane().add(fondoAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 470));
@@ -176,9 +198,141 @@ public class vista_Admin extends javax.swing.JFrame {
            
     }//GEN-LAST:event_btnMailActionPerformed
 
+    private void btnReporteBIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteBIActionPerformed
+        try {
+            crearReporteBI();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(vista_Admin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DocumentException ex) {
+            Logger.getLogger(vista_Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnReporteBIActionPerformed
+
+    private void crearReporteBI() throws FileNotFoundException, DocumentException {
+        
+        Document documento = new Document();
+        
+        
+        File desktopDir = new File(System.getProperty("user.home"), "Desktop");
+        System.out.println(desktopDir.getPath() + " " + desktopDir.exists());
+        String pathToDesktop = desktopDir.getPath();
+        //FileOutputStream out =  new FileOutputStream(new File(pathToDesktop+System.getProperty("file.separator")+"pdf de prueba.pdf"));
+        PdfWriter.getInstance(documento, new FileOutputStream(new File(pathToDesktop+System.getProperty("file.separator")+"Reporte historial.pdf")));
+        
+        documento.open();
+        documento.add(new Paragraph("Descripción de actividad de los clientes"));
+        
+
+        Database cnOfertas = new Database();
+        Database cnConsumidor = new Database();
+        int contador = 0;
+
+        String sqlBI = "select * from comportamiento_bi where rut_consumidor like ?";
+        ResultSet listaBI = null;
+        PreparedStatement psBI = null;
+
+        String sqlConsu = "select run,p_nombre,apellido_p from consumidor";
+        ResultSet listaConsu = null;
+        PreparedStatement psConsu = null;
+        
+        String sqlOfertas = "select titulo from oferta WHERE id = ?";
+        ResultSet listaOfertas = null;
+        PreparedStatement psOfertas = null;
+        
+        /*
+        String sqlEvaluacion = "select * from evaluacion WHERE id = ?";
+        ResultSet listaEvaluacion = null;
+        PreparedStatement psEvaluacion = null;
+        */
+        String rut_consumidor="";
+        String nombreConsumidor="";
+        String info="Sin movimientos";
+        String info2="";
+    
+    
+    
     /**
      * @param args the command line arguments
      */
+        try {
+
+            psConsu = cnConsumidor.getConnection().prepareStatement(sqlConsu);
+            listaConsu = psConsu.executeQuery();
+
+            com.itextpdf.text.Font dataRedFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.RED);
+            Paragraph p = new Paragraph();
+
+            Paragraph p3 = new Paragraph();
+            documento.add(new Paragraph("--------------------------------------------------"));
+            documento.add(new Paragraph(" "));
+            documento.add(p);
+            com.itextpdf.text.Font dataBlackFont = FontFactory.getFont("Garamond", 13, BaseColor.BLACK);
+
+            while (listaConsu.next()) {
+
+                rut_consumidor = listaConsu.getString(1);  //obtener el rut de cada consumidor en el loop
+                nombreConsumidor = listaConsu.getString(2) + " " + listaConsu.getString(3);;
+
+                psBI = cnOfertas.getConnection().prepareStatement(sqlBI);
+                psBI.setString(1, rut_consumidor);
+                listaBI = psBI.executeQuery();
+
+                Paragraph p2 = new Paragraph();
+                p2.add(new Chunk(info, dataBlackFont));
+
+                Paragraph p1 = new Paragraph();
+                p1.add(new Chunk(rut_consumidor, dataBlackFont));
+
+                while (listaBI.next()) {
+
+                    String rutCons = listaBI.getString(3);
+
+                    com.itextpdf.text.Font dataBlueFont = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.BLUE);
+                    com.itextpdf.text.Font dataBoldFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 14, BaseColor.BLACK);
+
+                    psOfertas = cnOfertas.getConnection().prepareStatement(sqlOfertas);
+                    psOfertas.setInt(1, listaBI.getInt(2));
+
+                    listaOfertas = psOfertas.executeQuery();
+                    info2 = "";
+
+                    while (listaOfertas.next()) {
+                        if (info.equals("Sin movimientos")) {
+                            p2.clear();
+                        }
+
+                        info = listaOfertas.getString(1) + " visto " + listaBI.getInt(4) + " veces;";
+
+                    }
+                    if (!info.equals("Sin movimientos")) {
+                        p2.add(new Chunk(info, dataBlackFont));
+                    }
+
+                    p3.add(new Chunk("sin info", dataBlackFont));
+
+                    info2 = rutCons;
+
+                }
+                documento.add(p1);
+                documento.add(p2);
+
+                //     p2.clear();
+                info = "Sin movimientos";
+
+                documento.add(new Paragraph(" "));
+            }
+
+            JOptionPane.showMessageDialog(this, "Documento creado en el escritorio con nombre *Reporte historial*.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al crear el documento.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al crear el documento.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+        }
+        documento.close();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsumidor;
@@ -187,6 +341,7 @@ public class vista_Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnEncargados;
     private javax.swing.JButton btnMail;
     private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnReporteBI;
     private javax.swing.JButton btn_salir;
     private javax.swing.JLabel fondoAdmin;
     private javax.swing.JLabel lblenunciao;

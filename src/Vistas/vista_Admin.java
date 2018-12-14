@@ -66,17 +66,19 @@ public class vista_Admin extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        lblenunciao.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
         lblenunciao.setText("Menu Administración");
         lblenunciao.setAlignmentX(0.5F);
         lblenunciao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblenunciao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 300, 50));
+        getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 260, 50));
 
         btnConsumidor.setBackground(new java.awt.Color(204, 204, 204));
-        btnConsumidor.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btnConsumidor.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnConsumidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnConsumidor.setText("Consumidores");
+        btnConsumidor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConsumidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsumidorActionPerformed(evt);
@@ -85,8 +87,10 @@ public class vista_Admin extends javax.swing.JFrame {
         getContentPane().add(btnConsumidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 265, 38));
 
         btnEncargados.setBackground(new java.awt.Color(204, 204, 204));
-        btnEncargados.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btnEncargados.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEncargados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnEncargados.setText("Encargados");
+        btnEncargados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncargadosActionPerformed(evt);
@@ -95,8 +99,10 @@ public class vista_Admin extends javax.swing.JFrame {
         getContentPane().add(btnEncargados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 265, 38));
 
         btnProductos.setBackground(new java.awt.Color(204, 204, 204));
-        btnProductos.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btnProductos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnProductos.setText("Productos");
+        btnProductos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductosActionPerformed(evt);
@@ -105,8 +111,10 @@ public class vista_Admin extends javax.swing.JFrame {
         getContentPane().add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 265, 40));
 
         btnEmpresasRetail.setBackground(new java.awt.Color(204, 204, 204));
-        btnEmpresasRetail.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btnEmpresasRetail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEmpresasRetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnEmpresasRetail.setText("Empresas: Retail");
+        btnEmpresasRetail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEmpresasRetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresasRetailActionPerformed(evt);
@@ -115,8 +123,10 @@ public class vista_Admin extends javax.swing.JFrame {
         getContentPane().add(btnEmpresasRetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 265, 40));
 
         btnEmpresasSucursal.setBackground(new java.awt.Color(204, 204, 204));
-        btnEmpresasSucursal.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btnEmpresasSucursal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEmpresasSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnEmpresasSucursal.setText("Empresas: Sucursal");
+        btnEmpresasSucursal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEmpresasSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmpresasSucursalActionPerformed(evt);
@@ -124,24 +134,30 @@ public class vista_Admin extends javax.swing.JFrame {
         });
         getContentPane().add(btnEmpresasSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 265, 40));
 
+        btnReporteBI.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnReporteBI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnReporteBI.setText("Obtener reporte");
+        btnReporteBI.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnReporteBI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporteBIActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReporteBI, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
+        getContentPane().add(btnReporteBI, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 140, 30));
 
+        btnMail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnMail.setText("Enviar correos");
+        btnMail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMailActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        getContentPane().add(btnMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 120, 30));
 
         btn_salir.setBackground(new java.awt.Color(255, 255, 255));
-        btn_salir.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        btn_salir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +166,7 @@ public class vista_Admin extends javax.swing.JFrame {
         });
         getContentPane().add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 70, -1));
 
-        fondoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAdmin.jpg"))); // NOI18N
+        fondoAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/home.jpg"))); // NOI18N
         getContentPane().add(fondoAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 470));
 
         pack();

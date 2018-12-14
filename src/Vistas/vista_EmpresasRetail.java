@@ -139,7 +139,9 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tab_retail.setBackground(new java.awt.Color(153, 153, 153));
         tab_retail.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tab_retail.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         tab_retail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -159,10 +161,10 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_retail);
 
-        panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setBackground(new java.awt.Color(153, 153, 153));
         panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_agregar.setText("Agregar");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +172,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
+        txt_razonSocial.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_razonSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_razonSocialActionPerformed(evt);
@@ -181,6 +184,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
+        txt_rut.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_rut.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_rutFocusLost(evt);
@@ -192,13 +196,13 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
-        lbl_rut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_rut.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         lbl_rut.setText("RUT:");
 
-        lbl_razonSocial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_razonSocial.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_razonSocial.setText("Razon Social:");
 
-        btn_modificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_modificar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_modificar.setText("Modificar");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +210,7 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
-        btn_eliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_eliminar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_eliminar.setText("Eliminar");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,18 +218,11 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
             }
         });
 
-        btn_limpiar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_limpiar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_limpiar.setText("Limpiar");
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_limpiarActionPerformed(evt);
-            }
-        });
-
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
             }
         });
 
@@ -246,13 +243,10 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                         .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(btn_salir)
-                        .addGap(34, 34, 34))
                     .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_modificar)
                     .addComponent(btn_eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(lbl_rutRetail)
                 .addContainerGap())
         );
@@ -275,33 +269,40 @@ public class vista_EmpresasRetail extends javax.swing.JFrame {
                     .addComponent(btn_eliminar)
                     .addComponent(btn_limpiar))
                 .addGap(35, 35, 35)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(lbl_rutRetail)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(btn_salir)
-                        .addGap(0, 43, Short.MAX_VALUE))))
+                .addComponent(lbl_rutRetail)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
+
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

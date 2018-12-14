@@ -23,11 +23,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="640" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="panel" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="623" max="32767" attributes="0"/>
+                  <Component id="panel" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_salir" min="-2" pref="67" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -37,9 +39,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="238" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="panel" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="panel" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btn_salir" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -55,10 +62,16 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tab_retail">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
               </Border>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -81,7 +94,7 @@
     <Container class="javax.swing.JPanel" name="panel">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+          <Color blue="99" green="99" red="99" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
@@ -109,12 +122,11 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btn_salir" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_agregar" min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="btn_modificar" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_eliminar" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
                   <Component id="lbl_rutRetail" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -143,16 +155,8 @@
                       <Component id="btn_limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="lbl_rutRetail" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="btn_salir" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lbl_rutRetail" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="103" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -161,7 +165,7 @@
         <Component class="javax.swing.JButton" name="btn_agregar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
@@ -170,12 +174,22 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_razonSocial">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Nirmala UI" size="14" style="0"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_razonSocialActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_razonSocialKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_rut">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Nirmala UI" size="14" style="0"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_rutFocusLost"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_rutKeyTyped"/>
@@ -184,7 +198,7 @@
         <Component class="javax.swing.JLabel" name="lbl_rut">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="RUT:"/>
           </Properties>
@@ -192,7 +206,7 @@
         <Component class="javax.swing.JLabel" name="lbl_razonSocial">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Razon Social:"/>
           </Properties>
@@ -200,7 +214,7 @@
         <Component class="javax.swing.JButton" name="btn_modificar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
@@ -211,7 +225,7 @@
         <Component class="javax.swing.JButton" name="btn_eliminar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
@@ -222,7 +236,7 @@
         <Component class="javax.swing.JButton" name="btn_limpiar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
+              <Font name="Nirmala UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>
@@ -232,15 +246,15 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_rutRetail">
         </Component>
-        <Component class="javax.swing.JButton" name="btn_salir">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Salir"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salirActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btn_salir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_salirActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

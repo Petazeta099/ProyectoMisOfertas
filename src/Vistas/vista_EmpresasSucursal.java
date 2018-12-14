@@ -241,15 +241,15 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         lbl_id = new javax.swing.JLabel();
         lbIdMod = new javax.swing.JLabel();
         txtIdMod = new javax.swing.JTextField();
-        btn_salir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab_sucursal = new javax.swing.JTable();
+        btn_salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setBackground(new java.awt.Color(153, 153, 153));
 
-        btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_agregar.setText("Agregar");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,12 +257,13 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
-        lbl_clave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_clave.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_clave.setText("Comuna:");
 
-        lbl_apellidos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_apellidos.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_apellidos.setText("Direccion:");
 
+        txt_nombre.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);
@@ -274,10 +275,10 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
-        lbl_nombres.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_nombres.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_nombres.setText("Nombre:");
 
-        btn_modificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_modificar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_modificar.setText("Modificar");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +286,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
-        btn_eliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_eliminar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_eliminar.setText("Eliminar");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +294,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
-        btn_limpiar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_limpiar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_limpiar.setText("Limpiar");
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,35 +302,34 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             }
         });
 
+        txt_direccion.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_direccionKeyTyped(evt);
             }
         });
 
-        lbl_retail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_retail.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_retail.setText("Retail");
 
+        cb_retail.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         cb_retail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_retailActionPerformed(evt);
             }
         });
 
+        cb_comuna.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         cb_comuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_comunaActionPerformed(evt);
             }
         });
 
+        lbIdMod.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         lbIdMod.setText("Id de sucursal a modificar:");
 
-        btn_salir.setText("Salir");
-        btn_salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_salirActionPerformed(evt);
-            }
-        });
+        txtIdMod.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -338,7 +338,7 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addContainerGap(26, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(lbl_id)
@@ -347,8 +347,13 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(lbIdMod)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtIdMod, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
+                                    .addGroup(panelLayout.createSequentialGroup()
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbl_apellidos)
                                             .addComponent(lbl_clave)
@@ -356,31 +361,27 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(panelLayout.createSequentialGroup()
+                                                .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btn_modificar))
+                                            .addGroup(panelLayout.createSequentialGroup()
                                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(cb_retail, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(cb_comuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(259, 259, 259))
-                                            .addComponent(txt_direccion)))
+                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(panelLayout.createSequentialGroup()
+                                                        .addGap(198, 198, 198)
+                                                        .addComponent(btn_limpiar))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(btn_eliminar))))))
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addComponent(lbl_nombres)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txt_nombre))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_agregar)
-                                    .addComponent(btn_modificar)
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btn_limpiar)
-                                        .addComponent(btn_eliminar))))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(lbIdMod)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdMod, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_agregar)))
+                                .addGap(146, 146, 146)))))
                 .addComponent(lbl_rutRetail))
         );
         panelLayout.setVerticalGroup(
@@ -406,28 +407,23 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
                             .addComponent(txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_modificar))
                         .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_clave)
-                                    .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_retail)
-                                    .addComponent(cb_retail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(btn_eliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_limpiar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_clave)
+                            .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_eliminar))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_retail)
+                            .addComponent(cb_retail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_limpiar))
+                        .addGap(41, 41, 41)
                         .addComponent(lbl_id)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_comuna_id, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(btn_salir)
-                .addGap(25, 25, 25))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tab_sucursal.setBackground(new java.awt.Color(153, 153, 153));
         tab_sucursal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -447,25 +443,37 @@ public class vista_EmpresasSucursal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_sucursal);
 
+        btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();

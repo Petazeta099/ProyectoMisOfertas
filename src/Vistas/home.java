@@ -49,15 +49,17 @@ public class home extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblenunciao.setFont(new java.awt.Font("MS UI Gothic", 1, 24)); // NOI18N
+        lblenunciao.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
         lblenunciao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblenunciao.setText("<html><body align=center>BIENVENIDO A<br> MIS OFERTAS</body></html>");
         getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 315, 60));
 
         btnAdmin.setBackground(new java.awt.Color(0, 153, 153));
-        btnAdmin.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
+        btnAdmin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnAdmin.setText("Administrador");
+        btnAdmin.setBorder(null);
         btnAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,24 +69,30 @@ public class home extends javax.swing.JFrame {
         getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 240, 38));
 
         btnEncargado.setBackground(new java.awt.Color(0, 153, 153));
-        btnEncargado.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
+        btnEncargado.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEncargado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnEncargado.setText("Encargado");
+        btnEncargado.setBorder(null);
+        btnEncargado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEncargado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncargadoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 240, 38));
+        getContentPane().add(btnEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, 38));
 
         btnGerente.setBackground(new java.awt.Color(0, 153, 153));
-        btnGerente.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
+        btnGerente.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnGerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btnGerente.setText("Gerente");
+        btnGerente.setBorder(null);
+        btnGerente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerenteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 240, 40));
+        getContentPane().add(btnGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 240, 40));
 
         btn_salir.setBackground(new java.awt.Color(255, 255, 255));
         btn_salir.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -112,15 +120,15 @@ public class home extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAdminActionPerformed
 
-    private void btnEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncargadoActionPerformed
-        new login_Encargado().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnEncargadoActionPerformed
-
     private void btnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenteActionPerformed
         new login_Gerente().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGerenteActionPerformed
+
+    private void btnEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncargadoActionPerformed
+        new login_Encargado().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEncargadoActionPerformed
 
     /**
      * @param args the command line arguments

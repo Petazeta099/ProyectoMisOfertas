@@ -49,8 +49,8 @@ public class vista_Consumidores extends javax.swing.JFrame {
 
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
 
-        setResizable(false);
-
+        //setResizable(false);
+        //this.setLocationRelativeTo(null);
         txt_password.setText("");
         mensajePanelInfo(false);
         tc.visualizar_Consumidor(tab_consumidores);
@@ -268,10 +268,10 @@ public class vista_Consumidores extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consumidores");
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tab_consumidores.setBackground(new java.awt.Color(204, 204, 204));
-        tab_consumidores.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tab_consumidores.setBackground(new java.awt.Color(153, 153, 153));
+        tab_consumidores.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        tab_consumidores.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         tab_consumidores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -291,10 +291,8 @@ public class vista_Consumidores extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_consumidores);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1190, 304));
-
-        panel.setBackground(new java.awt.Color(204, 204, 204));
-        panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel.setBackground(new java.awt.Color(153, 153, 153));
+        panel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
 
         btn_agregar.setBackground(new java.awt.Color(34, 144, 34));
         btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -305,18 +303,20 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_clave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_clave.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_clave.setText("Clave:");
 
-        lbl_apellidos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_apellidos.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_apellidos.setText("Apellidos:");
 
+        txt_apellido2.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_apellido2KeyTyped(evt);
             }
         });
 
+        txt_nombre1.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombre1ActionPerformed(evt);
@@ -328,6 +328,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
+        txt_rut.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_rut.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_rutFocusLost(evt);
@@ -344,10 +345,10 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_rut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_rut.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
         lbl_rut.setText("RUT: ");
 
-        lbl_nombres.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_nombres.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_nombres.setText("Nombres:");
 
         btn_limpiar.setBackground(new java.awt.Color(255, 255, 255));
@@ -359,15 +360,17 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_activo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_activo.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         lbl_activo.setText("Activo:");
 
+        txt_nombre2.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_nombre2KeyTyped(evt);
             }
         });
 
+        txt_apellido1.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_apellido1KeyTyped(evt);
@@ -383,16 +386,17 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_comuna.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_comuna.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_comuna.setText("Comuna:");
 
+        cb_comuna.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         cb_comuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_comunaActionPerformed(evt);
             }
         });
 
-        lbl_suscrito.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_suscrito.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         lbl_suscrito.setText("Suscrito:");
 
         chk_suscrito.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -404,9 +408,10 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_email.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_email.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_email.setText("Email:");
 
+        txt_email.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_emailFocusLost(evt);
@@ -418,15 +423,17 @@ public class vista_Consumidores extends javax.swing.JFrame {
             }
         });
 
-        lbl_puntaje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_puntaje.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         lbl_puntaje.setText("Puntaje:");
 
+        txt_puntaje.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_puntaje.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_puntajeKeyTyped(evt);
             }
         });
 
+        txt_password.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
         txt_password.setText("jPasswordField1");
         txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -469,75 +476,71 @@ public class vista_Consumidores extends javax.swing.JFrame {
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_comuna_id)
-                .addGap(857, 857, 857))
-            .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_rut)
+                                    .addComponent(lbl_nombres)
+                                    .addComponent(lbl_clave))
+                                .addGap(20, 20, 20)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbl_puntaje)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_puntaje))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(txt_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbl_rut)
-                                            .addComponent(lbl_nombres))
-                                        .addGap(20, 20, 20))
+                                            .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(panelLayout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(txt_apellido2))
+                                            .addGroup(panelLayout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(lbl_activo)
+                                                    .addComponent(lbl_suscrito))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(chk_suscrito)
+                                                    .addComponent(chk_activo))
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                        .addComponent(lbl_comuna)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(panelLayout.createSequentialGroup()
-                                            .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(lbl_puntaje)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txt_puntaje))
-                                        .addGroup(panelLayout.createSequentialGroup()
-                                            .addComponent(txt_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(panelLayout.createSequentialGroup()
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(panelLayout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
-                                                    .addComponent(txt_apellido2))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                                            .addComponent(lbl_activo)
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(chk_activo))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                                            .addComponent(lbl_suscrito)
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(chk_suscrito))))
-                                                .addGroup(panelLayout.createSequentialGroup()
-                                                    .addGap(101, 101, 101)
-                                                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(185, 185, 185))))
                             .addComponent(lbl_apellidos)))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_email)
-                            .addComponent(lbl_clave)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(lbl_comuna)))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_comuna_id)
+                .addGap(857, 857, 857))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,38 +561,37 @@ public class vista_Consumidores extends javax.swing.JFrame {
                     .addComponent(lbl_apellidos)
                     .addComponent(txt_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_clave)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_activo)
                     .addComponent(chk_activo))
                 .addGap(18, 18, 18)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_email)
-                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_suscrito)
-                    .addComponent(chk_suscrito))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_comuna))
-                .addGap(14, 14, 14)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_salir)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_agregar)
-                        .addComponent(btn_modificar)
-                        .addComponent(btn_eliminar)))
-                .addGap(117, 117, 117)
+                        .addComponent(lbl_suscrito)
+                        .addComponent(chk_suscrito))
+                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_email))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_comuna)
+                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cb_comuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_agregar)
+                    .addComponent(btn_modificar)
+                    .addComponent(btn_eliminar)
+                    .addComponent(btn_salir))
+                .addGap(18, 18, 18)
                 .addComponent(lbl_comuna_id))
         );
 
-        getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 562, 326));
-
-        pInfo.setBackground(new java.awt.Color(204, 204, 204));
-        pInfo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pInfo.setBackground(new java.awt.Color(153, 153, 153));
+        pInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
 
         lblInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblInfo.setText("Informacion detallada del consumidor:");
@@ -664,7 +666,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
                         .addComponent(lblInfoConsumi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblActividad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblmostrarSubcrip)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSuscrito))
@@ -687,7 +689,7 @@ public class vista_Consumidores extends javax.swing.JFrame {
                         .addComponent(lblnombreCompleto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblApellidoscom)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         pInfoLayout.setVerticalGroup(
             pInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,7 +730,31 @@ public class vista_Consumidores extends javax.swing.JFrame {
                 .addGap(55, 55, 55))
         );
 
-        getContentPane().add(pInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 620, 326));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 562, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
+                        .addComponent(pInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         pack();
         setLocationRelativeTo(null);

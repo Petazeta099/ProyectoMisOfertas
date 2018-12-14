@@ -55,22 +55,27 @@ public class login_Encargado extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_volver.setBackground(new java.awt.Color(255, 255, 255));
+        btn_volver.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btn_volver.setText("Volver");
         btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_volverActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 73, -1));
+        getContentPane().add(btn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(263, 343, 80, 30));
 
         btningresar.setBackground(new java.awt.Color(0, 153, 153));
+        btningresar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btningresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bordeButton.png"))); // NOI18N
         btningresar.setText("Ingresar");
+        btningresar.setBorder(null);
+        btningresar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btningresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 110, 30));
+        getContentPane().add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 120, 30));
 
         txtpass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -92,17 +97,17 @@ public class login_Encargado extends javax.swing.JFrame {
         });
         getContentPane().add(txtrut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 30));
 
-        lbPass.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbPass.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbPass.setForeground(new java.awt.Color(255, 255, 255));
         lbPass.setText("Contraseña");
         getContentPane().add(lbPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        lblRutEncargado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRutEncargado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblRutEncargado.setForeground(new java.awt.Color(255, 255, 255));
         lblRutEncargado.setText("Ingrese Rut:");
         getContentPane().add(lblRutEncargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
-        lblenunciao.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        lblenunciao.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblenunciao.setForeground(new java.awt.Color(255, 255, 255));
         lblenunciao.setText("Inicio de sesión Encargado");
         getContentPane().add(lblenunciao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 340, -1));

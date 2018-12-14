@@ -240,6 +240,8 @@ public class vista_Encargados extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Encargados");
 
+        tab_encargados.setBackground(new java.awt.Color(153, 153, 153));
+        tab_encargados.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         tab_encargados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -259,10 +261,11 @@ public class vista_Encargados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tab_encargados);
 
-        panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setBackground(new java.awt.Color(153, 153, 153));
         panel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panel.setForeground(new java.awt.Color(153, 153, 153));
 
-        btn_agregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_agregar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_agregar.setText("Agregar");
         btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,18 +273,20 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        lbl_clave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_clave.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_clave.setText("Clave:");
 
-        lbl_apellidos.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_apellidos.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_apellidos.setText("Apellidos:");
 
+        txt_apellido2.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_apellido2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_apellido2KeyTyped(evt);
             }
         });
 
+        txt_nombre1.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombre1ActionPerformed(evt);
@@ -293,6 +298,7 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
+        txt_rut.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_rut.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txt_rutFocusLost(evt);
@@ -304,13 +310,13 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        lbl_rut.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_rut.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         lbl_rut.setText("RUT");
 
-        lbl_nombres.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_nombres.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_nombres.setText("Nombres:");
 
-        btn_modificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_modificar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_modificar.setText("Modificar");
         btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +324,7 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        btn_eliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_eliminar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_eliminar.setText("Eliminar");
         btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,7 +332,7 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        btn_limpiar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btn_limpiar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_limpiar.setText("Limpiar");
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,12 +343,14 @@ public class vista_Encargados extends javax.swing.JFrame {
         lbl_activo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbl_activo.setText("Activo:");
 
+        txt_nombre2.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_nombre2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_nombre2KeyTyped(evt);
             }
         });
 
+        txt_apellido1.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_apellido1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_apellido1KeyTyped(evt);
@@ -358,15 +366,17 @@ public class vista_Encargados extends javax.swing.JFrame {
             }
         });
 
-        lbl_retail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbl_retail.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         lbl_retail.setText("Retail");
 
+        cb_retail.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         cb_retail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_retailActionPerformed(evt);
             }
         });
 
+        txt_password.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         txt_password.setText("jPasswordField1");
         txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -392,15 +402,18 @@ public class vista_Encargados extends javax.swing.JFrame {
                             .addComponent(lbl_nombres))
                         .addGap(10, 10, 10)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_rut)
-                            .addComponent(txt_nombre1))
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(txt_rut)
+                                .addGap(152, 152, 152))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(txt_nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_nombre2))))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addComponent(btn_agregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_modificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(btn_eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_limpiar))
@@ -467,6 +480,7 @@ public class vista_Encargados extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btn_salir.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,27 +492,27 @@ public class vista_Encargados extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_salir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_salir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
